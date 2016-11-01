@@ -1,12 +1,31 @@
 <%- contentFor('body')%>  
 
-  <h2>Horizontal form</h2>
+   <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Delete
+                    <small>Subheading</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li class="active">delete</li>
+                </ol>
+            </div>
+        </div>
+
+  <h2>You can delete any content</h2>
   <form class="form-horizontal" role="form" method="post">
 
    <div class="form-group">
       <label class="control-label col-sm-2" for="id">ID:</label>
-      <div class="col-sm-10">
+       <div class="col-sm-10">
         <input type="id" class="form-control" id="id" name="id" placeholder="Enter ID">
+        </br>
+        <button type="button" class="btn btn-default" id="search" >Search</button>
+          
       </div>
     </div>
     <div class="form-group">
@@ -21,6 +40,7 @@
         <input type="title" class="form-control" id="title" name="title" placeholder="Enter Tittle">
       </div>
     </div>
+    <div>
     <label class="control-label col-sm-2" for="url">URL:</label>
       <div class="col-sm-10">
         <input type="url" class="form-control" id="url" name="url" placeholder="Enter URL">
@@ -41,26 +61,40 @@
   </form>
 </div>
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function() {
-$("#delete").click(function(){
+$("#search").click(function(){
        // alert("Email: " + $("#email").val());
 
-        var data = {"id":$("#id").val()};
+        var id  = $("#id").val();
+       //alert(id);
 
         $.ajax({
-          url: 'http://localhost:3000/admin/updateDelete',
-          type: 'delete',
+          url: 'http://localhost:3000/api/data/'+id,
+          type: 'get',
           dataType: 'json',
           //data: $("#email").val(),
-          data: JSON.stringify(data),
+          //data: JSON.stringify(data),
           headers: {
               'Content-Type': 'application/json;charset=utf-8'
+            },
+            success:function(data, textStatus, jQxhr){
+              if(data==null)
+           {
+            alert("NO data available with this id");
+           }
+            },
+            error:function(jqXhr, textStatus, errorThrown){
+            console.log(errorThrown);
             }
         })
         .done(function(reuslt) {
-          console.log("success");
-          alert("hello");
+          //console.log(reuslt);
+         // var data = JSON.stringify(reuslt);
+           $('#name').val(reuslt.name);
+           $('#title').val(reuslt.title);
+           $('#url').val(reuslt.url);
+          //alert(reuslt.name);
         })
         .fail(function() {
           console.log("error");
@@ -69,38 +103,38 @@ $("#delete").click(function(){
           console.log("complete");
         });
         
-    });
+     });
   });
 
-$(document).ready(function() {
-$("#update").click(function(){
-        var value = {"id":$("#id").val(),
-                     "name":$("#name").val(),
-                    "title":$("#title").val(),
-                    "url":$("#url").val(),
+// $(document).ready(function() {
+// $("#update").click(function(){
+//         var value = {"id":$("#id").val(),
+//                      "name":$("#name").val(),
+//                     "title":$("#title").val(),
+//                     "url":$("#url").val(),
                     
-                    };
+//                     };
 
-        $.ajax({
-          url: 'http://localhost:3000/admin/updateDelete',
-          type: 'put',
-          dataType: 'json',
-          //data: $("#email").val(),
-          data: JSON.stringify(value),
-          headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-            },
-            success:function(data){
-            document.location.href = 'http://localhost:3000/'
-            },
-            error:function(error){
-            alert(error)
-            }
-        });
+//         $.ajax({
+//           url: 'http://localhost:3000/admin/updateDelete',
+//           type: 'put',
+//           dataType: 'json',
+//           //data: $("#email").val(),
+//           data: JSON.stringify(value),
+//           headers: {
+//               'Content-Type': 'application/json;charset=utf-8'
+//             },
+//             success:function(data){
+//             document.location.href = 'http://localhost:3000/'
+//             },
+//             error:function(error){
+//             alert(error)
+//             }
+//         });
         
-    });
-  });
+//     });
+//   });
 
 
 
-</script> -->
+</script>

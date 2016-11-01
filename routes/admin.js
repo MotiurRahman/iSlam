@@ -114,7 +114,6 @@ console.log(data);
 
 router.get('/update', function(req, res, next) {
 res.render('admin/update');
-
 });
 
 router.post('/update', function(req, res, next) {

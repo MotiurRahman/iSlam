@@ -45,10 +45,48 @@ router.get('/', function(req, res, next) {
 
 router.get('/about', function(req, res, next) {
  
+
   res.render('about');
 
 
  });
+
+
+
+
+router.get('/api/data/:id', function(req, res, next) {
+ 
+
+ was.findOne({"_id":req.params.id}, function (err, docs) {
+  if(err)
+  {
+    res.json(err)
+          mongoose.connection.close();
+  }
+  else
+  {
+    
+    // res.render('index', {data: docs});
+     res.json(docs);
+     if(docs==null)
+     {
+      console.log("NO data available with this ID");
+     }
+   }
+
+
+ });
+
+});
+
+router.get('/contact', function(req, res, next) {
+ 
+
+res.render("contact");
+
+});
+
+
 
 
 

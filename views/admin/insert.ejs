@@ -1,7 +1,32 @@
 <%- contentFor('body')%>  
 
-  <h2>Insert You Data here</h2>
+ <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Insert
+                    <small>Subheading</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li class="active">Insert</li>
+                </ol>
+            </div>
+        </div>
+  <h2>Insert your Data Pere</h2>
   <form class="form-horizontal" role="form" method="post">
+  <div class="form-group">
+   <div class="col-sm-10">
+       <select id="ddlViewBy" onchange="run()">
+      <option >Abdur Razzak</option>
+      <option >Zakir Naik</option>
+      <option >Mozaffor</option>
+        </select>
+
+   </div>
+    </div>
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
@@ -14,6 +39,7 @@
         <input type="title" class="form-control" id="title" name="title" placeholder="Enter Tittle">
       </div>
     </div>
+    <div class="form-group">
     <label class="control-label col-sm-2" for="title">URL:</label>
       <div class="col-sm-10">
         <input type="title" class="form-control" id="url" name="url" placeholder="Enter URL">
@@ -35,12 +61,21 @@
       </div>
     </div>
   </form>
+  </div>
   
+<hr>
+
+<script type="text/javascript">
+ function run(){
+  var strUser = $("#ddlViewBy").val();
+  $('#name').val(strUser);
+
+ }
+ //$("#elementId :selected").text(); // The text content of the selected option
 
 
-<!-- <script type="text/javascript">
- $("#updateDelete").click(function(){
-  alert("click here");
- });
+//var e = document.getElementById("ddlViewBy");
+//var strUser = e.options[e.selectedIndex].value;
+//$('#name').val(strUser);
 
-</script>> -->
+</script>
