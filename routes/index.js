@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
-var EJS = require('ejs');
     
    
  mongoose.Promise = global.Promise;
@@ -32,8 +31,10 @@ router.get('/', function(req, res, next) {
   }
   else
   {
-  	//console.log(docs);
-  	//res.set('Content-Type', 'application/javascript');
+    // var data = [];
+    // for (var i = Things.length - 1; i >= 0; i--) {
+    //   Things[i]
+    // }
   	 res.render('index', {data: docs});
   
   }
@@ -41,6 +42,16 @@ router.get('/', function(req, res, next) {
 });
 
  });
+
+router.get('/about', function(req, res, next) {
+ 
+  res.render('about');
+
+
+ });
+
+
+
 
 //create a schema
 // var productSchema = new mongoose.Schema({

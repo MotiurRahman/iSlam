@@ -17,4 +17,4 @@ var mongoose = require('mongoose');
 
 
 
- module.exports = mongoose.model('moti', wasData);
+ module.exports = mongoose.model('motis', wasData);

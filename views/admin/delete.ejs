@@ -1,0 +1,106 @@
+<%- contentFor('body')%>  
+
+  <h2>Horizontal form</h2>
+  <form class="form-horizontal" role="form" method="post">
+
+   <div class="form-group">
+      <label class="control-label col-sm-2" for="id">ID:</label>
+      <div class="col-sm-10">
+        <input type="id" class="form-control" id="id" name="id" placeholder="Enter ID">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+      <div class="col-sm-10">
+        <input type="name" class="form-control" id="name" name="name" placeholder="Enter Name">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="title">Title:</label>
+      <div class="col-sm-10">
+        <input type="title" class="form-control" id="title" name="title" placeholder="Enter Tittle">
+      </div>
+    </div>
+    <label class="control-label col-sm-2" for="url">URL:</label>
+      <div class="col-sm-10">
+        <input type="url" class="form-control" id="url" name="url" placeholder="Enter URL">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label><input type="checkbox"> Remember me</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Delete</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- <script type="text/javascript">
+$(document).ready(function() {
+$("#delete").click(function(){
+       // alert("Email: " + $("#email").val());
+
+        var data = {"id":$("#id").val()};
+
+        $.ajax({
+          url: 'http://localhost:3000/admin/updateDelete',
+          type: 'delete',
+          dataType: 'json',
+          //data: $("#email").val(),
+          data: JSON.stringify(data),
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+        })
+        .done(function(reuslt) {
+          console.log("success");
+          alert("hello");
+        })
+        .fail(function() {
+          console.log("error");
+        })
+        .always(function() {
+          console.log("complete");
+        });
+        
+    });
+  });
+
+$(document).ready(function() {
+$("#update").click(function(){
+        var value = {"id":$("#id").val(),
+                     "name":$("#name").val(),
+                    "title":$("#title").val(),
+                    "url":$("#url").val(),
+                    
+                    };
+
+        $.ajax({
+          url: 'http://localhost:3000/admin/updateDelete',
+          type: 'put',
+          dataType: 'json',
+          //data: $("#email").val(),
+          data: JSON.stringify(value),
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            success:function(data){
+            document.location.href = 'http://localhost:3000/'
+            },
+            error:function(error){
+            alert(error)
+            }
+        });
+        
+    });
+  });
+
+
+
+</script> -->

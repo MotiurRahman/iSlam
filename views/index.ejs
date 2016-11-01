@@ -23,12 +23,14 @@
            </br>
       
 <ul>
-    <% for(var i=0; i<data.length; i++) { %>
+    <% for(var i=data.length-1; i>=0; i--) { %>
         <li>
             
                বক্তাঃ <%= data[i].name %>
                 </br>
                বিষয়ঃ <%= data[i].title %>
+                </br>
+               ID: <%= data[i].id %>
                 </br>
                <audio controls>
                 <source src="<%= data[i].url %>" type="audio/ogg">

@@ -82,6 +82,71 @@ router.post('/insert', function(req, res, next) {
 
    });
 
+router.get('/delete', function(req, res, next) {
+res.render('admin/delete');
+
+});
+
+router.post('/delete', function(req, res, next) {
+
+//mongoose.createConnection('mongodb://localhost:27017/test'); 
+var data = req.body.id;
+console.log(data);
+//res.json(data)
+//http://mongoosejs.com/docs/api.html#query_Query-remove
+
+  was.find({ "_id":data }).remove( function (error,success){
+
+    if (error) {
+      res.json(error)
+          mongoose.connection.close();
+        }else
+        {
+         console.log(success);
+          res.redirect('/')
+        }
+
+   });
+
+ 
+});
+
+
+router.get('/update', function(req, res, next) {
+res.render('admin/update');
+
+});
+
+router.post('/update', function(req, res, next) {
+
+//mongoose.createConnection('mongodb://localhost:27017/test'); 
+var id = req.body.id;
+ var name = req.body.name;
+ var title = req.body.title;
+ var url = req.body.url;
+
+var conditions = { "_id": id }
+  , update = { $set: {"name":name,"title":title,"url":url}}
+  , options = { multi: true };
+
+was.update(conditions, update, options, callback);
+
+function callback (err, numAffected) {
+  if (err) {
+    res.json(error)
+          mongoose.connection.close();
+  }
+  else{
+    console.log(numAffected);
+          res.redirect('/')
+  }
+};
+
+});
+ 
+
+
+
 
 
 module.exports = router;
