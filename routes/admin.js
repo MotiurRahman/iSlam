@@ -1,54 +1,76 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+//var session = require('express-session');
 
   mongoose.Promise = global.Promise;
 
   var was = require('./../libs/wasSchema');
 
-  //var was = mongoose.model('moti')
+ var checkAuthentication =  function(req, res, next) {
+  
+  console.log("before:"+req.session.value);
+     //req.session.value = false;
+  if(req.session.value) {
+     next();
+  } else {
+    res.redirect('/admin/login')
    
- mongoose.connect('mongodb://localhost:27017/test'); 
+  }
+}
 
+//router.use(checkAuthentication);
+   
+ mongoose.connect('mongodb://localhost:27017/test');
 
- // var wasData =  new mongoose.Schema({
- //     name: String,
- //     title:String,
- //     url: String
- //    });
-
- // var was  =  mongoose.model('moti', wasData);
 
 
 router.get('/login', function(req, res, next) {
- res.render('admin/login');
+ 
+ res.render('admin/login', {"userInfo":req.session.userInfo});
 
-});
+}).post('/login', function(req, res, next) {
 
-router.get('/insert', function(req, res, next) {
-res.render('admin/insert');
-
-});
-
-router.post('/login', function(req, res, next) {
-  var pass = req.body.password;
-  console.log(pass);
-
-  if(pass == "1")
+  var password = req.body.password;
+ 
+  if(password == "1")
   {
-res.redirect('/admin/insert')
-  }
+
+    req.session.value = true;
+  // loginValue = true;ß
+     req.session.userInfo = true;
+   console.log("sessionInisde:"+req.session.userInfo);
+    res.redirect('/admin/insert');
+  } 
+ 
   else
   {
-  	return res.status(401).json({
+    req.session.value = false;
+    req.session.userInfo = false;
+
+    return res.status(401).json({
         message: "please insert right password"
       });
   }
 
 });
 
+router.get('/logout', function(req, res, next) {
+ req.session.value = false;
 
-router.post('/insert', function(req, res, next) {
+ req.session.userInfo = false;
+  res.render('admin/login', {"userInfo":req.session.userInfo});
+
+
+ });
+
+
+
+router.get('/insert', checkAuthentication, function(req, res, next) {
+   console.log("InserPage:"+req.session.userInfo);
+res.render('admin/insert', {"userInfo":req.session.userInfo});
+
+}).post('/insert', function(req, res, next) {
 
   var name = req.body.name;
   var title = req.body.title;
@@ -82,12 +104,11 @@ router.post('/insert', function(req, res, next) {
 
    });
 
-router.get('/delete', function(req, res, next) {
-res.render('admin/delete');
+router.get('/delete', checkAuthentication, function(req, res, next) {
+  console.log("DeletePage:"+req.session.userInfo);
+res.render('admin/delete', {"userInfo":req.session.userInfo});
 
-});
-
-router.post('/delete', function(req, res, next) {
+}).post('/delete',function(req, res, next) {
 
 //mongoose.createConnection('mongodb://localhost:27017/test'); 
 var data = req.body.id;
@@ -112,11 +133,10 @@ console.log(data);
 });
 
 
-router.get('/update', function(req, res, next) {
-res.render('admin/update');
-});
-
-router.post('/update', function(req, res, next) {
+router.get('/update', checkAuthentication, function(req, res, next) {
+   console.log("Updatepage:"+req.session.userInfo);
+res.render('admin/update', {"userInfo":req.session.userInfo});
+}).post('/update',function(req, res, next) {
 
 //mongoose.createConnection('mongodb://localhost:27017/test'); 
 var id = req.body.id;
@@ -130,13 +150,13 @@ var conditions = { "_id": id }
 
 was.update(conditions, update, options, callback);
 
-function callback (err, numAffected) {
+function callback (err, updatdata) {
   if (err) {
     res.json(error)
           mongoose.connection.close();
   }
   else{
-    console.log(numAffected);
+    console.log(updatdata);
           res.redirect('/')
   }
 };
