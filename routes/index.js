@@ -1,44 +1,37 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-var authentication = require('express-authentication');
+//var authentication = require('express-authentication');
     
    
  mongoose.Promise = global.Promise;
    
 
-  var was = require('./../libs/wasSchema');
+   var was = require('./../libs/wasSchema');
   //var db = mongoose.createConnection('mongodb://localhost:27017/', 'test');
-   var db = mongoose.createConnection('mongodb://localhost:27017/test'); 
+
+//Calling dataBase
+var db = mongoose.createConnection('mongodb://localhost:27017/test'); 
 
 
 
-//var mongoose = require('mongoose');
-
-//var mongoDB = require('./../libs/database');
-//mongoose.createConnection('mongodb://localhost:27017/test'); 
-
-/* GET home page. */
-
+// Starting page  loading
 router.get('/', function(req, res, next) {
   //var data;
-  console.log("FirstPage:"+req.session.userInfo);
+  console.log("FirstPage:"+ req.session.userInfo);
   //req.session.userInfo = false;
-
-
 
   was.find({}, function (err, docs) {
   if(err)
   {
   	res.json(err)
           mongoose.connection.close();
+
   }
   else
   {
-  
-    res.render('index', {"userInfo":req.session.userInfo, "data" :docs});
- 
-     
+
+    res.render('index', {data:docs, userInfo:req.session.userInfo});
   	 
   }
   
@@ -46,17 +39,9 @@ router.get('/', function(req, res, next) {
 
  });
 
-router.get('/about', function(req, res, next) {
- 
-console.log("aboutPage:"+req.session.userInfo);
-res.render('about', {"userInfo":req.session.userInfo});
 
 
- });
-
-
-
-
+//Search Data using the user ID
 
 router.get('/content_id/:id', function(req, res, next) {
  
@@ -83,6 +68,8 @@ router.get('/content_id/:id', function(req, res, next) {
 });
 
 
+// Search Data using the speacher name
+
 router.get('/speaker/:name', function(req, res, next) {
  
  was.find({"name":req.params.name}, function (err, docs) {
@@ -94,7 +81,61 @@ router.get('/speaker/:name', function(req, res, next) {
   else
   {
     
-     res.render('index', {data: docs});
+     res.render('index', {data:docs, userInfo:req.session.userInfo});
+     //res.json(docs);     
+   }
+
+
+ });
+
+});
+
+
+
+
+
+
+
+// Search all audio data.
+
+router.get('/audio', function(req, res, next) {
+ 
+console.log("AudioSession:"+req.session.userInfo);
+  was.find({"wasType":"audio"}, function (err, docs) {
+  if(err)
+  {
+    res.json(err)
+          mongoose.connection.close();
+  }
+  else
+  {
+     
+     res.render('audio', {data:docs, userInfo:req.session.userInfo});
+  
+  }
+  
+});
+
+});
+
+
+
+
+
+// Search audio data using the speaker name
+
+router.get('/audio/speaker/:name', function(req, res, next) {
+ 
+ was.find({'name':req.params.name, 'wasType':"audio"}, function (err, docs) {
+  if(err)
+  {
+    res.json(err)
+          mongoose.connection.close();
+  }
+  else
+  {
+    
+     res.render('audio', {data:docs, userInfo:req.session.userInfo});
      //res.json(docs);
     
      
@@ -105,61 +146,82 @@ router.get('/speaker/:name', function(req, res, next) {
 
 });
 
+
+
+//Vide: Search all video data
+router.get('/videoWas', function(req, res, next) {
+ console.log("VideoPage:"+req.session.userInfo);
+
+  was.find({"wasType":"video"}, function (err, docs) {
+  if(err)
+  {
+    res.json(err)
+          mongoose.connection.close();
+  }
+  else
+  {
+  
+    res.render('videoWas', {data :docs, userInfo :req.session.userInfo});
+
+    // res.json(docs);
+  
+  }
+  
+});
+
+});
+
+
+
+
+// Search Vide data using the speaker name
+
+router.get('/videoWas/speaker/:name', function(req, res, next) {
+ 
+ was.find({'name':req.params.name, 'wasType':"video"}, function (err, docs) {
+  if(err)
+  {
+    res.json(err)
+          mongoose.connection.close();
+  }
+  else
+  {
+    
+    res.render('videoWas', {data:docs, userInfo:req.session.userInfo});
+    //res.json(docs);
+    
+     
+   }
+
+
+ });
+
+});
+
+
+
+// Contact page load
+
 router.get('/contact', function(req, res, next) {
  
 console.log("contagePage:"+req.session.userInfo);
- res.render("contact", {"userInfo":req.session.userInfo});
+ res.render("contact", {userInfo:req.session.userInfo});
 
 });
 
-router.get('/audio', function(req, res, next) {
+
+
+
+
+//About page Calling
+
+router.get('/about', function(req, res, next) {
  
-//console.log("sessionDataAudio:"+req.session.id);
-  was.find({}, function (err, docs) {
-  if(err)
-  {
-    res.json(err)
-          mongoose.connection.close();
-  }
-  else
-  {
-    // var data = [];
-    // for (var i = Things.length - 1; i >= 0; i--) {
-    //   Things[i]
-    // }
-     
-     res.render('audio', {"data" :docs, "userInfo":req.session.userInfo});
-  
-  }
-  
-});
+console.log("aboutPage:"+req.session.userInfo);
+res.render('about', {"userInfo":req.session.userInfo});
 
 
-});
-router.get('/video', function(req, res, next) {
- console.log("VideoPage:"+req.session.userInfo);
-
-  was.find({}, function (err, docs) {
-  if(err)
-  {
-    res.json(err)
-          mongoose.connection.close();
-  }
-  else
-  {
-    // var data = [];
-    // for (var i = Things.length - 1; i >= 0; i--) {
-    //   Things[i]
-    // }
-     
-     res.render('video', {"data" :docs, "userInfo":req.session.userInfo});
-  
-  }
-  
-});
-
-});
-
+ });
 
 
 

@@ -7,6 +7,9 @@ var mongoose = require('mongoose');
 
   var was = require('./../libs/wasSchema');
 
+
+  //router.use(express.basicAuth('password'));
+
  var checkAuthentication =  function(req, res, next) {
   
   console.log("before:"+req.session.value);
@@ -27,7 +30,7 @@ var mongoose = require('mongoose');
 
 router.get('/login', function(req, res, next) {
  
- res.render('admin/login', {"userInfo":req.session.userInfo});
+ res.render('admin/login', {userInfo:req.session.userInfo});
 
 }).post('/login', function(req, res, next) {
 
@@ -56,10 +59,14 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
- req.session.value = false;
+ // var path = url.parse(req.url).pathname;
 
- req.session.userInfo = false;
-  res.render('admin/login', {"userInfo":req.session.userInfo});
+  //console.log(path);
+
+
+  req.session.value = false;
+  req.session.userInfo = false;
+  res.render('admin/login', {userInfo:req.session.value});
 
 
  });
@@ -68,17 +75,20 @@ router.get('/logout', function(req, res, next) {
 
 router.get('/insert', checkAuthentication, function(req, res, next) {
    console.log("InserPage:"+req.session.userInfo);
-res.render('admin/insert', {"userInfo":req.session.userInfo});
+res.render('admin/insert', {userInfo:req.session.userInfo});
 
 }).post('/insert', function(req, res, next) {
 
   var name = req.body.name;
   var title = req.body.title;
   var url = req.body.url;
+  var was_Type = req.body.type;
+  //console.log("wasType:"+wasType);
 
       var was_Data = {
         name:name,
         title:title,
+        wasType:was_Type,
         url:url
       };
 
@@ -106,7 +116,7 @@ res.render('admin/insert', {"userInfo":req.session.userInfo});
 
 router.get('/delete', checkAuthentication, function(req, res, next) {
   console.log("DeletePage:"+req.session.userInfo);
-res.render('admin/delete', {"userInfo":req.session.userInfo});
+res.render('admin/delete', {userInfo:req.session.userInfo});
 
 }).post('/delete',function(req, res, next) {
 
@@ -135,7 +145,7 @@ console.log(data);
 
 router.get('/update', checkAuthentication, function(req, res, next) {
    console.log("Updatepage:"+req.session.userInfo);
-res.render('admin/update', {"userInfo":req.session.userInfo});
+res.render('admin/update', {userInfo:req.session.userInfo});
 }).post('/update',function(req, res, next) {
 
 //mongoose.createConnection('mongodb://localhost:27017/test'); 
@@ -143,9 +153,11 @@ var id = req.body.id;
  var name = req.body.name;
  var title = req.body.title;
  var url = req.body.url;
+ var was_Type = req.body.type;
+ console.log("was_Type:"+was_Type)
 
 var conditions = { "_id": id }
-  , update = { $set: {"name":name,"title":title,"url":url}}
+  , update = { $set: {"name":name,"title":title,"wasType":was_Type,"url":url}}
   , options = { multi: true };
 
 was.update(conditions, update, options, callback);

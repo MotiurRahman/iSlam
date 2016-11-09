@@ -65,7 +65,7 @@
                         <a href="/audio">Audio</a>
                     </li>
                     <li>
-                        <a href="/video">Video</a>
+                        <a href="/videoWas">Video</a>
                     </li>
                     <li>
                         <a href="/about">About</a>
@@ -73,14 +73,19 @@
                     <li>
                         <a href="/contact">Contact</a>
                     </li>
+                    
+                    <%if(userInfo){%>
                     <li>
-                    <% if(userInfo){ %>
                        <a  href="/admin/logout">Logout</a> 
-                     <% } else{ %>  
-                      <a  href="/admin/login">Login</a> 
-                    <% } %>
-                       
                     </li>
+                     <% } else{ %>  
+                     <li>
+                      <a  href="/admin/login">Login</a> 
+                      </li>
+                    <%}%>
+                   
+                      
+                   
                     
                 </ul>
             </div>
@@ -96,7 +101,7 @@
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/ejs.js"></script>>
+<script type="text/javascript" src="/js/ejs.js"></script>
 <%- script %>
 
 <footer class="container-fluid text-center">
@@ -108,10 +113,10 @@
 
 </html>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
  $(document).ready(function () {
     $(".current-menu-item").addClass("active");
 });
 
-</script>
+</script> -->
 

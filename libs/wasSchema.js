@@ -12,6 +12,7 @@ var mongoose = require('mongoose');
  var wasData =  new mongoose.Schema({
      name: String,
      title:String,
+     wasType: String,
      url: String
     });
 

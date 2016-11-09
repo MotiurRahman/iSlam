@@ -1,5 +1,4 @@
-<%- contentFor('body')%>
- 
+<%- contentFor('body')%> 
 !-- Page Content -->
     <div class="container">
 
@@ -18,36 +17,42 @@
         </div>
         <!-- /.row -->
 
+
+         <div class="form-group">
+		      <label class="control-label col-sm-2" for="title">Category:</label>
+		 <div class="col-sm-10">         
+		      <select id="catagory" onchange="run()">
+		      <option >All</option>
+		      <option >Abdur Razzak</option>
+		      <option >Zakir Naik</option>
+		      <option >Mozaffor</option>
+		      <option >Others</option>
+              </select>
+
+        </div>
+    </div>
+
  <!-- Projects Row -->
+
+
+
+ <% for(var i=data.length-1; i>=0; i--;) { %>
         <div class="row">
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
+            <div class="col-md-10 portfolio-item">
+                <iframe width="320" height="345" src=<%= data[i].url %>></iframe>
                 <h3>
-                    <a href="#">Project Name</a>
+                    বক্তাঃ <%= data[i].name %>
                 </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
                 <h3>
-                    <a href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-            </div>
-            <div class="col-md-4 portfolio-item">
-                <a href="#">
-                    <img class="img-responsive" src="http://placehold.it/700x400" alt="">
-                </a>
-                <h3>
-                    <a href="#">Project Name</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+                    বিষয়ঃ <%= data[i].title %>
+                     
+                </h3>  
+                <p>ID: <%= data[i].id %></p>     
+                
             </div>
         </div>
+
+       <% } %>
         <!-- /.row -->
 
         <!-- Projects Row -->
@@ -143,4 +148,70 @@
                 </ul>
             </div>
         </div>
+        </div>>
         <!-- /.row -->
+
+<script type="text/javascript">
+ function run(){
+  var name = $("#catagory").val();
+
+ // window.location.replace('http://localhost:3000/api/name/'+name);
+  
+  if (name=="All")
+  {
+  window.location.replace('http://localhost:3000/audio');
+  $('#catagory').val("All");
+  }else{
+    window.location.replace('http://localhost:3000/video/speaker/'+name);
+    $('#catagory').val(name);
+  }
+
+        // $.ajax({s
+        //   url: 'http://localhost:3000/api/name/'+name,
+        //   type: 'get',
+        //   dataType: 'json',
+        //   //data: $("#email").val(),
+        //   //data: JSON.stringify(data),
+        //   headers: {
+        //       'Content-Type': 'application/json;charset=utf-8'
+        //     },
+        //     success:function(data, textStatus, jQxhr){
+        //      if(data==null)
+        //    {
+        //     alert("NO data available with this na");
+        //    }
+        //     },
+        //     error:function(jqXhr, textStatus, errorThrown){
+        //     alert(errorThrown);
+        //     }
+        // })
+        // .done(function(data) {
+
+        //   window.location.reload();
+        //   //console.log(reuslt);
+        //  // var data = JSON.stringify(reuslt);
+        //  //   $('#name').val(reuslt.name);
+        //  //   $('#title').val(reuslt.title);
+        //  //   $('#url').val(reuslt.url);
+
+        //  //   console.log("done:"+data);
+        //   // $("body").ul(data);
+        //   //alert(reuslt.title);
+        // })
+        // .fail(function() {
+        //   console.log("error");
+        // })
+        // .always(function() {
+        //   console.log("complete");
+        // });
+        
+
+ }
+ //$("#elementId :selected").text(); // The text content of the selected option
+
+
+//var e = document.getElementById("ddlViewBy");
+//var strUser = e.options[e.selectedIndex].value;
+//$('#name').val(strUser);
+
+</script>

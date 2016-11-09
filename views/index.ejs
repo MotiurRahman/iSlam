@@ -9,21 +9,28 @@
       <p><a href="#">Link</a></p>
     </div>
     <div class="col-sm-8 text-left">
-      <h1>Welcome To the Shahi Islamic Page</h1>
+      <h1>Islam will enter every Home</h1>
       </br>
            </br>
            </br>
 
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="title">Category:</label>
+      <div class="col-sm-10">         
       <select id="catagory" onchange="run()">
       <option >All</option>
       <option >Abdur Razzak</option>
       <option >Zakir Naik</option>
       <option >Mozaffor</option>
+      <option >Others</option>
       </select>
 
-      </br>
-           </br>
-           </br>
+      </div>
+    </div>
+
+           <br>
+           <br>
+           <br>
       
 <ul>
     <% for(var i=data.length-1; i>=0; i--) { %>
@@ -63,67 +70,4 @@
   </div>
 </div>
 
-<script type="text/javascript">
- function run(){
-  var name = $("#catagory").val();
-
- // window.location.replace('http://localhost:3000/api/name/'+name);
-  
-  if (name=="All")
-  {
-  window.location.replace('http://localhost:3000');
-  $('#catagory').val("All");
-  }else{
-    window.location.replace('http://localhost:3000/speaker/'+name);
-    $('#catagory').val(name);
-  }
-
-        // $.ajax({
-        //   url: 'http://localhost:3000/api/name/'+name,
-        //   type: 'get',
-        //   dataType: 'json',
-        //   //data: $("#email").val(),
-        //   //data: JSON.stringify(data),
-        //   headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     success:function(data, textStatus, jQxhr){
-        //      if(data==null)
-        //    {
-        //     alert("NO data available with this na");
-        //    }
-        //     },
-        //     error:function(jqXhr, textStatus, errorThrown){
-        //     alert(errorThrown);
-        //     }
-        // })
-        // .done(function(data) {
-
-        //   window.location.reload();
-        //   //console.log(reuslt);
-        //  // var data = JSON.stringify(reuslt);
-        //  //   $('#name').val(reuslt.name);
-        //  //   $('#title').val(reuslt.title);
-        //  //   $('#url').val(reuslt.url);
-
-        //  //   console.log("done:"+data);
-        //   // $("body").ul(data);
-        //   //alert(reuslt.title);
-        // })
-        // .fail(function() {
-        //   console.log("error");
-        // })
-        // .always(function() {
-        //   console.log("complete");
-        // });
-        
-
- }
- //$("#elementId :selected").text(); // The text content of the selected option
-
-
-//var e = document.getElementById("ddlViewBy");
-//var strUser = e.options[e.selectedIndex].value;
-//$('#name').val(strUser);
-
-</script>
+<script type="text/javascript" src="/js/index.js"></script>

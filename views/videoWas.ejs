@@ -36,29 +36,21 @@
 <ul>
     <% for(var i=data.length-1; i>=0; i--) { %>
         <li>
-            
+             <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
+             </br>
+
                বক্তাঃ <%= data[i].name %>
                 </br>
                বিষয়ঃ <%= data[i].title %>
                 </br>
                ID: <%= data[i].id %>
                 </br>
-               <audio controls>
-                <source src="<%= data[i].url %>" type="audio/ogg">
-                <source src="<%= data[i].url %>" type="audio/mpeg">
-                 Your browser does not support the audio element.
-              </audio>
-
-
-           </br>
-           </br>
+            
            </br>
         </li>
     <% } %>
 </ul>
       <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">
@@ -79,12 +71,14 @@
   
   if (name=="All")
   {
-  window.location.replace('http://localhost:3000/audio');
+  window.location.replace('http://localhost:3000/videoWas');
   $('#catagory').val("All");
   }else{
-    window.location.replace('http://localhost:3000/audio/speaker/'+name);
+    window.location.replace('http://localhost:3000/videoWas/speaker/'+name);
     $('#catagory').val(name);
   }
+
+
 
         // $.ajax({s
         //   url: 'http://localhost:3000/api/name/'+name,
