@@ -17,27 +17,47 @@ var db = mongoose.createConnection('mongodb://localhost:27017/test');
 
 // Starting page  loading
 router.get('/', function(req, res, next) {
-  //var data;
-  console.log("FirstPage:"+ req.session.userInfo);
-  //req.session.userInfo = false;
+  if(!req.session.admin)
+  {
+    req.session.admin = false;
+  }
+  
+   console.log("FirstPage:"+ req.session.admin);
+   var video_Data;
 
-  was.find({}, function (err, docs) {
+  was.find({"wasType":"video"}).sort({_id:-1}).limit(5).exec(function(err,videoDocs){
+
   if(err)
   {
-  	res.json(err)
+    res.json(err)
           mongoose.connection.close();
-
   }
-  else
+  else {
+  
+    video_Data = videoDocs;
+  }
+  
+  });
+  
+
+//var audioData;
+was.find({"wasType":"audio"}).sort({_id:-1}).limit(5).exec(function(err,docs){
+if(err)
   {
-
-    res.render('index', {data:docs, userInfo:req.session.userInfo});
-  	 
+    res.json(err)
+          mongoose.connection.close();
   }
+  else {
+     
+     res.render('index', {data:docs, videoData: video_Data, userInfo:req.session.admin});
+   }
+  
+  });
+  
   
 });
 
- });
+
 
 
 
@@ -71,8 +91,11 @@ router.get('/content_id/:id', function(req, res, next) {
 // Search Data using the speacher name
 
 router.get('/speaker/:name', function(req, res, next) {
- 
- was.find({"name":req.params.name}, function (err, docs) {
+
+  var video_Data;
+
+  was.find({"name":req.params.name, "wasType":"video"}).sort({_id:-1}).limit(5).exec(function(err,videoDocs){
+
   if(err)
   {
     res.json(err)
@@ -80,13 +103,36 @@ router.get('/speaker/:name', function(req, res, next) {
   }
   else
   {
-    
-     res.render('index', {data:docs, userInfo:req.session.userInfo});
-     //res.json(docs);     
-   }
+  
+    video_Data = videoDocs;
 
+  
+  }
+  });
+  
 
- });
+//var audioData;
+was.find({"name":req.params.name, "wasType":"audio"}).sort({_id:-1}).limit(5).exec(function(err,docs){
+if(err)
+  {
+          res.json(err);
+          mongoose.connection.close();
+  }
+  else
+  {
+    if(video_Data==null&&docs==null)
+
+     {
+      res.json("Data does not exist");
+     }else{
+      res.render('index', {data:docs, videoData: video_Data, userInfo:req.session.admin});
+  
+     }
+     
+  }
+  
+  });
+  
 
 });
 
@@ -99,20 +145,18 @@ router.get('/speaker/:name', function(req, res, next) {
 // Search all audio data.
 
 router.get('/audio', function(req, res, next) {
- 
-console.log("AudioSession:"+req.session.userInfo);
+  //console.log("AudioSession:"+req.session.admin);
+  
   was.find({"wasType":"audio"}, function (err, docs) {
+  
   if(err)
   {
-    res.json(err)
+          res.json(err)
           mongoose.connection.close();
   }
-  else
-  {
-     
-     res.render('audio', {data:docs, userInfo:req.session.userInfo});
-  
-  }
+  else {
+      res.render("audio", {data:docs, userInfo:req.session.admin});
+    }
   
 });
 
@@ -132,14 +176,11 @@ router.get('/audio/speaker/:name', function(req, res, next) {
     res.json(err)
           mongoose.connection.close();
   }
-  else
-  {
+  else {
     
-     res.render('audio', {data:docs, userInfo:req.session.userInfo});
+     res.render("audio", {data:docs, userInfo:req.session.admin});
      //res.json(docs);
-    
-     
-   }
+    }
 
 
  });
@@ -150,7 +191,7 @@ router.get('/audio/speaker/:name', function(req, res, next) {
 
 //Vide: Search all video data
 router.get('/videoWas', function(req, res, next) {
- console.log("VideoPage:"+req.session.userInfo);
+ console.log("VideoPage:"+req.session.admin);
 
   was.find({"wasType":"video"}, function (err, docs) {
   if(err)
@@ -158,10 +199,9 @@ router.get('/videoWas', function(req, res, next) {
     res.json(err)
           mongoose.connection.close();
   }
-  else
-  {
+  else {
   
-    res.render('videoWas', {data :docs, userInfo :req.session.userInfo});
+    res.render('videoWas', {data :docs, userInfo :req.session.admin});
 
     // res.json(docs);
   
@@ -184,14 +224,11 @@ router.get('/videoWas/speaker/:name', function(req, res, next) {
     res.json(err)
           mongoose.connection.close();
   }
-  else
-  {
+  else {
     
-    res.render('videoWas', {data:docs, userInfo:req.session.userInfo});
+    res.render('videoWas', {data:docs, userInfo:req.session.admin});
     //res.json(docs);
-    
-     
-   }
+     }
 
 
  });
@@ -204,8 +241,8 @@ router.get('/videoWas/speaker/:name', function(req, res, next) {
 
 router.get('/contact', function(req, res, next) {
  
-console.log("contagePage:"+req.session.userInfo);
- res.render("contact", {userInfo:req.session.userInfo});
+console.log("contagePage:"+req.session.admin);
+ res.render("contact", {userInfo:req.session.admin});
 
 });
 
@@ -217,14 +254,19 @@ console.log("contagePage:"+req.session.userInfo);
 
 router.get('/about', function(req, res, next) {
  
-console.log("aboutPage:"+req.session.userInfo);
-res.render('about', {"userInfo":req.session.userInfo});
+console.log("aboutPage:"+req.session.admin);
+res.render('about', {"userInfo":req.session.admin});
 
 
  });
 
 
 
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  res.redirect('/');
+
+});
 
 
 //create a schema
@@ -242,7 +284,9 @@ res.render('about', {"userInfo":req.session.userInfo});
 
 // Products.register(router, '/product');
 
-
+// router.get('*', function(req, res){
+//   res.send('what???', 404);
+// });
 
 
 module.exports = router;

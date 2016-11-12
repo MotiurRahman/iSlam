@@ -1,31 +1,25 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-//var session = require('express-session');
-
-  mongoose.Promise = global.Promise;
+    mongoose.Promise = global.Promise;
 
   var was = require('./../libs/wasSchema');
+  mongoose.connect('mongodb://localhost:27017/test');
 
 
-  //router.use(express.basicAuth('password'));
+
+  //router.use(checkAuthentication);
 
  var checkAuthentication =  function(req, res, next) {
-  
-  console.log("before:"+req.session.value);
-     //req.session.value = false;
-  if(req.session.value) {
-     next();
-  } else {
+
+  if (req.session && req.session.pass === "1" && req.session.admin)
+    return next();
+  else
     res.redirect('/admin/login')
-   
-  }
 }
 
-//router.use(checkAuthentication);
    
- mongoose.connect('mongodb://localhost:27017/test');
-
+ 
 
 
 router.get('/login', function(req, res, next) {
@@ -39,17 +33,15 @@ router.get('/login', function(req, res, next) {
   if(password == "1")
   {
 
-    req.session.value = true;
-  // loginValue = true;ß
-     req.session.userInfo = true;
-   console.log("sessionInisde:"+req.session.userInfo);
-    res.redirect('/admin/insert');
+    req.session.pass = "1";
+    req.session.admin = true;
+  
+   console.log("sessionInisde:"+req.session.admin);
+    res.redirect('/');
   } 
  
   else
   {
-    req.session.value = false;
-    req.session.userInfo = false;
 
     return res.status(401).json({
         message: "please insert right password"
@@ -58,24 +50,10 @@ router.get('/login', function(req, res, next) {
 
 });
 
-router.get('/logout', function(req, res, next) {
- // var path = url.parse(req.url).pathname;
-
-  //console.log(path);
-
-
-  req.session.value = false;
-  req.session.userInfo = false;
-  res.render('admin/login', {userInfo:req.session.value});
-
-
- });
-
-
 
 router.get('/insert', checkAuthentication, function(req, res, next) {
-   console.log("InserPage:"+req.session.userInfo);
-res.render('admin/insert', {userInfo:req.session.userInfo});
+       console.log("InserPage:"+req.session.admin);
+       res.render('admin/insert', {userInfo:req.session.admin});
 
 }).post('/insert', function(req, res, next) {
 
@@ -115,8 +93,8 @@ res.render('admin/insert', {userInfo:req.session.userInfo});
    });
 
 router.get('/delete', checkAuthentication, function(req, res, next) {
-  console.log("DeletePage:"+req.session.userInfo);
-res.render('admin/delete', {userInfo:req.session.userInfo});
+  console.log("DeletePage:"+req.session.admin);
+res.render('admin/delete', {userInfo:req.session.admin});
 
 }).post('/delete',function(req, res, next) {
 
@@ -144,8 +122,8 @@ console.log(data);
 
 
 router.get('/update', checkAuthentication, function(req, res, next) {
-   console.log("Updatepage:"+req.session.userInfo);
-res.render('admin/update', {userInfo:req.session.userInfo});
+   console.log("Updatepage:"+req.session.admin);
+   res.render('admin/update', {userInfo:req.session.admin});
 }).post('/update',function(req, res, next) {
 
 //mongoose.createConnection('mongodb://localhost:27017/test'); 
@@ -175,9 +153,6 @@ function callback (err, updatdata) {
 
 });
  
-
-
-
 
 
 module.exports = router;

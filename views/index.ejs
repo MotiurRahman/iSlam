@@ -55,9 +55,33 @@
         </li>
     <% } %>
 </ul>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<ul>
+    <% for(var i=videoData.length-1; i>=0; i--) { %>
+        <li>
+            <iframe width="520" height="345" src=<%= videoData[i].url %>></iframe>
+             </br>
+               বক্তাঃ <%= videoData[i].name %>
+                </br>
+               বিষয়ঃ <%= videoData[i].title %>
+                </br>
+               ID: <%= videoData[i].id %>
+               
+
+           </br>
+           </br>
+           </br>
+        </li>
+    <% } %>
+</ul>
+
       <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+    
     </div>
     <div class="col-sm-2 sidenav">
       <div class="well">

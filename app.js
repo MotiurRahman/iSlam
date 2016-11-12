@@ -17,9 +17,17 @@ var users = require('./routes/users');
 var admin = require('./routes/admin');
 
 var app = express();
+   
 app.disable('x-powered-by');
 
-
+app.use(session({
+  name:"session-cookie",
+  secret: 'motiur08034',
+  resave: true,
+  saveUninitialized: true,
+  //cookie: { httpOnly: true, secure: true },
+  store: new FileStore("./sessions")
+}));
 
 // var checkAuthentication =  function(req, res, next) {
 //   console.log('isAuthenticated:', req.session);
@@ -51,26 +59,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('trust proxy', 1);
-app.use(session({
-  name:"session-cookie",
-  secret: 'motiur08034',
-  resave: false,
-  saveUninitialized: false,
-  //cookie: { httpOnly: true, secure: true },
-  store: new FileStore("./sessions")
-}));
 
-// var sess = {
-//   secret: 'motiur08034',
-//   cookie: {}
-// }
- 
-// if (app.get('env') === 'production') {
-//   app.set('trust proxy', 1) // trust first proxy 
-//   sess.cookie.secure = true // serve secure cookies 
-// }
- 
+
+
 // app.use(session(sess));
 app.use(requestValue);
 
@@ -78,7 +69,9 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 
-
+app.use(function(req,res){
+    res.redirect('/');
+});
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
