@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+
 //var authentication = require('express-authentication');
     
    
  mongoose.Promise = global.Promise;
    
-
-   var was = require('./../libs/wasSchema');
+var was = require('./../libs/wasSchema');
   //var db = mongoose.createConnection('mongodb://localhost:27017/', 'test');
+
+
 
 //Calling dataBase
 var db = mongoose.createConnection('mongodb://localhost:27017/test'); 
@@ -35,14 +37,8 @@ router.get('/', function(req, res, next) {
   else {
   
     video_Data = videoDocs;
-  }
-  
-  });
-  
-
-//var audioData;
-was.find({"wasType":"audio"}).sort({_id:-1}).limit(5).exec(function(err,docs){
-if(err)
+    was.find({"wasType":"audio"}).sort({_id:-1}).limit(5).exec(function(err,docs){
+  if(err)
   {
     res.json(err)
           mongoose.connection.close();
@@ -53,6 +49,14 @@ if(err)
    }
   
   });
+
+  }
+  
+  });
+  
+
+//var audioData;
+
   
   
 });
@@ -106,14 +110,8 @@ router.get('/speaker/:name', function(req, res, next) {
   
     video_Data = videoDocs;
 
-  
-  }
-  });
-  
-
-//var audioData;
-was.find({"name":req.params.name, "wasType":"audio"}).sort({_id:-1}).limit(5).exec(function(err,docs){
-if(err)
+    was.find({"name":req.params.name, "wasType":"audio"}).sort({_id:-1}).limit(5).exec(function(err,docs){
+    if(err)
   {
           res.json(err);
           mongoose.connection.close();
@@ -125,13 +123,21 @@ if(err)
      {
       res.json("Data does not exist");
      }else{
-      res.render('index', {data:docs, videoData: video_Data, userInfo:req.session.admin});
+      res.render('index', {"data":docs,"videoData": video_Data,"userInfo":req.session.admin});
   
      }
      
   }
   
   });
+
+  
+  }
+  });
+  
+
+//var audioData;
+
   
 
 });
@@ -145,9 +151,16 @@ if(err)
 // Search all audio data.
 
 router.get('/audio', function(req, res, next) {
-  //console.log("AudioSession:"+req.session.admin);
+  console.log("AudioSession:"+req.session.admin);
   
-  was.find({"wasType":"audio"}, function (err, docs) {
+
+     //set current page if specifed as get variable (eg: /?page=2)
+    var currentPage = 1;
+   if (typeof req.query.page !== 'undefined') {
+         currentPage = +req.query.page;
+    }
+  
+  was.paginate({"wasType":"audio"}, { page: currentPage, limit: 5 }, function (err, result) {
   
   if(err)
   {
@@ -155,7 +168,16 @@ router.get('/audio', function(req, res, next) {
           mongoose.connection.close();
   }
   else {
-      res.render("audio", {data:docs, userInfo:req.session.admin});
+
+   
+ res.render("audio", {data:result.docs, 
+
+        pageSize: result.limit,
+        totalAudioData: result.total,
+        pageCount: result.pages,
+        currentPage: currentPage,
+        userInfo:req.session.admin});
+
     }
   
 });
@@ -168,19 +190,34 @@ router.get('/audio', function(req, res, next) {
 
 // Search audio data using the speaker name
 
-router.get('/audio/speaker/:name', function(req, res, next) {
+router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
  
- was.find({'name':req.params.name, 'wasType':"audio"}, function (err, docs) {
+  var currentPage = 1;
+   if (typeof req.query.page !== 'undefined') {
+         currentPage = +req.query.page;
+    }
+    var name = req.params.name;
+
+was.paginate({'name':req.params.name, 'wasType':"audio"},{ page: currentPage, limit: 2 }, function (err, result) {
   if(err)
   {
     res.json(err)
           mongoose.connection.close();
   }
   else {
+
     
-     res.render("audio", {data:docs, userInfo:req.session.admin});
-     //res.json(docs);
+     res.render("audioBySpeaker", {data:result.docs, 
+
+        pageSize: result.limit,
+        totalAudioData: result.total,
+        pageCount: result.pages,
+        currentPage: currentPage,
+        speakerName: name,
+        userInfo:req.session.admin});
+
     }
+    
 
 
  });

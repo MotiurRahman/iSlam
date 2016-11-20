@@ -65,5 +65,25 @@ router.get('/', function(req, res, next) {
 // });
 
 
+// router.get('/audioTest', function(req, res, next) {
+//   console.log("AudioSession:"+req.session.admin);
+  
+//   was.find({"wasType":"audio"}, function (err, docs) {
+  
+//   if(err)
+//   {
+//           res.json(err)
+//           mongoose.connection.close();
+//   }
+//   else {
+
+//    res.render("audio", {data:docs, userInfo:req.session.admin});
+//     }
+  
+// });
+
+// });
+
+
 
 module.exports = router;

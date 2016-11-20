@@ -3,15 +3,9 @@ function run(){
 
  // window.location.replace('http://localhost:3000/api/name/'+name);
   
-  if (name=="All")
-  {
-  window.location.replace('http://localhost:3000');
-  $('#catagory').val("All");
-  }else{
+  
     window.location.replace('http://localhost:3000/speaker/'+name);
-    $('#catagory').val(name);
-  }
-
+   
         // $.ajax({
         //   url: 'http://localhost:3000/api/name/'+name,
         //   type: 'get',

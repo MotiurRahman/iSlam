@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 
   //mongoose.Promise = global.Promise;
 
@@ -16,6 +17,7 @@ var mongoose = require('mongoose');
      url: String
     });
 
+wasData.plugin(mongoosePaginate);
 
 
  module.exports = mongoose.model('motis', wasData);

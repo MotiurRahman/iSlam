@@ -1,8 +1,8 @@
 <%- contentFor('body')%>
  
  <div class="container">
- </br>
-  </br>
+ <br>
+  <br>
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <p><a href="#">Link</a></p>
@@ -11,39 +11,48 @@
     </div>
     <div class="col-sm-8 text-left">
       <h1>Welcome To the Shahi Islamic Page</h1>
-      </br>
-           </br>
-           </br>
+      <br>
+           <br>
+           <br>
 
       <div class="form-group">
       <label class="control-label col-sm-2" for="title">Category:</label>
       <div class="col-sm-10">         
-      <select id="catagory" onchange="run()">
+      <select id="catagory" onchange="run()" style="width: 200px">
       <option >All</option>
-      <option >Abdur Razzak</option>
-      <option >Zakir Naik</option>
-      <option >Mozaffor</option>
-      <option >Others</option>
+     <option >ড. যাকির নায়েক</option>
+      <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+      <option >শাইখ মতিউর রহমান মাদানী</option>
+      <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+       <option >মুযাফফর বিন মুহসিন</option>
+       <option >সিফাত হাসান</option>
+       <option >শাইখ আমানুল্লাহ মাদানী</option>
+       <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+       <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+       <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+       <option >ড. মনজুরে ইলাহী</option>
+       <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+       <option >অন্যান্য </option>
       </select>
 
       </div>
     </div>
 
 
-           </br>
-           </br>
-           </br>
-      
+           <br>
+           <br>
+           <br>
+    
 <ul>
     <% for(var i=data.length-1; i>=0; i--) { %>
         <li>
             
                বক্তাঃ <%= data[i].name %>
-                </br>
+                <br>
                বিষয়ঃ <%= data[i].title %>
-                </br>
+                <br>
                ID: <%= data[i].id %>
-                </br>
+                <br>
                <audio controls>
                 <source src="<%= data[i].url %>" type="audio/ogg">
                 <source src="<%= data[i].url %>" type="audio/mpeg">
@@ -51,12 +60,49 @@
               </audio>
 
 
-           </br>
-           </br>
-           </br>
+           <br>
+           <br>
+           <br>
         </li>
     <% } %>
 </ul>
+
+<hr>
+<br>
+<% if (pageCount > 1) { %>  
+ <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                  <% if (currentPage > 1) { %>
+                      <li><a href="/audio?page=1">&laquo;</a></li>
+                  <% } %>
+                  <% var i = 1;
+                  if (currentPage > 5) {
+                  i = +currentPage - 4;
+                  } %>
+                  <% if (i !== 1) { %>
+                      <li class="disabled"><a href="#">...</a></li>
+                  <% } %>
+                  <% for (i; i<=pageCount; i++) { %>
+                    <% if (currentPage == i) { %>
+                        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+                    <% } else { %>
+                        <li><a href="/audio?page=<%= i %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == (+currentPage + 4)) { %>
+                        <li class="disabled"><a href="#">...</a></li>
+                    <% break; } %>
+                  <% } %>
+                  <% if (currentPage != pageCount) { %>
+                      <li><a href="/audio?page=<%= pageCount %>">&raquo;</a></li>
+                  <% } %>
+               </ul>  
+
+             </div>
+      </div>
+<% } %>  
+
+
       <hr>
 
     </div>
@@ -74,64 +120,14 @@
 <script type="text/javascript">
  function run(){
   var name = $("#catagory").val();
+//  alert(name);
+ 
+   window.location.replace('http://localhost:3000/audioBySpeaker/speaker/'+name);
 
- // window.location.replace('http://localhost:3000/api/name/'+name);
-  
-  if (name=="All")
-  {
-  window.location.replace('http://localhost:3000/audio');
-  $('#catagory').val("All");
-  }else{
-    window.location.replace('http://localhost:3000/audio/speaker/'+name);
-    $('#catagory').val(name);
-  }
 
-        // $.ajax({s
-        //   url: 'http://localhost:3000/api/name/'+name,
-        //   type: 'get',
-        //   dataType: 'json',
-        //   //data: $("#email").val(),
-        //   //data: JSON.stringify(data),
-        //   headers: {
-        //       'Content-Type': 'application/json;charset=utf-8'
-        //     },
-        //     success:function(data, textStatus, jQxhr){
-        //      if(data==null)
-        //    {
-        //     alert("NO data available with this na");
-        //    }
-        //     },
-        //     error:function(jqXhr, textStatus, errorThrown){
-        //     alert(errorThrown);
-        //     }
-        // })
-        // .done(function(data) {
-
-        //   window.location.reload();
-        //   //console.log(reuslt);
-        //  // var data = JSON.stringify(reuslt);
-        //  //   $('#name').val(reuslt.name);
-        //  //   $('#title').val(reuslt.title);
-        //  //   $('#url').val(reuslt.url);
-
-        //  //   console.log("done:"+data);
-        //   // $("body").ul(data);
-        //   //alert(reuslt.title);
-        // })
-        // .fail(function() {
-        //   console.log("error");
-        // })
-        // .always(function() {
-        //   console.log("complete");
-        // });
-        
+   
 
  }
- //$("#elementId :selected").text(); // The text content of the selected option
 
-
-//var e = document.getElementById("ddlViewBy");
-//var strUser = e.options[e.selectedIndex].value;
-//$('#name').val(strUser);
 
 </script>

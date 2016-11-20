@@ -8,6 +8,10 @@ var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
+var app = express();
+app.set('trust proxy', 1) // trust first proxy 
+app.disable('x-powered-by');
+
 //var authentication = require('express-authentication');
 //var mongoose = require('mongoose');
 //var mongoose.connect('mongodb://localhost:27017/test');
@@ -15,19 +19,24 @@ var FileStore = require('session-file-store')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
+  
 
-var app = express();
-   
-app.disable('x-powered-by');
 
-app.use(session({
+var sess = {
   name:"session-cookie",
   secret: 'motiur08034',
-  resave: true,
-  saveUninitialized: true,
-  //cookie: { httpOnly: true, secure: true },
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 60000},
   store: new FileStore("./sessions")
-}));
+}
+ 
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1) // trust first proxy 
+  sess.cookie.secure = true // serve secure cookies 
+}
+ 
+app.use(session(sess));
 
 // var checkAuthentication =  function(req, res, next) {
 //   console.log('isAuthenticated:', req.session);
@@ -36,19 +45,14 @@ app.use(session({
 // }
 
 
-var requestValue = function (req, res, next) {
-  //var pass = req.body.pass;
-  //console.log(pass);
-  //req.session.userInfo = false;
-  req.requestvalue = true;
-  next();
-}
 
 // view engine setup
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set("layout extractScripts", true)
+app.set("layout extractScripts", true);
 app.use(expressLayouts);
+
 //app.use(checkAuthentication);
 
 
@@ -61,9 +65,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-// app.use(session(sess));
-app.use(requestValue);
 
 app.use('/', routes);
 app.use('/users', users);
