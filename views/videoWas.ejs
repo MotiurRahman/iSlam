@@ -1,120 +1,124 @@
 <%- contentFor('body')%>
- <div class="container">
+<div class="container">
  <br>
-  <br>
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-      <p><a href="#">Link</a></p>
-    </div>
-    <div class="col-sm-8 text-left">
-      <h1>Welcome To the Shahi Islamic Page</h1>
-      <br>
-           <br>
-           <br>
+ <div class="row content">
+  <div class="col-sm-2 sidenav">
+    <p><a href="#">Link</a></p>
+    <p><a href="#">Link</a></p>
+    <p><a href="#">Link</a></p>
+  </div>
+  <div class="col-sm-8 text-left">
+    <h1>Welcome To the Shahi Islamic Page</h1>
+    <br>
+    <br>
+    <br>
 
-      <div class="form-group">
+    <div class="form-group">
       <label class="control-label col-sm-2" for="title">Category:</label>
       <div class="col-sm-10">         
-      <select id="catagory" onchange="run()">
-       <option >All</option>
-     <option >ড. যাকির নায়েক</option>
-      <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-      <option >শাইখ মতিউর রহমান মাদানী</option>
-      <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-       <option >মুযাফফর বিন মুহসিন</option>
-       <option >সিফাত হাসান</option>
-       <option >শাইখ আমানুল্লাহ মাদানী</option>
-       <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-       <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-       <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-       <option >ড. মনজুরে ইলাহী</option>
-       <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-       <option >অন্যান্য </option>
-      </select>
+        <select id="catagory" onchange="run()">
+         <option >All</option>
+         <option >ড. যাকির নায়েক</option>
+         <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+         <option >শাইখ মতিউর রহমান মাদানী</option>
+         <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+         <option >মুযাফফর বিন মুহসিন</option>
+         <option >সিফাত হাসান</option>
+         <option >শাইখ আমানুল্লাহ মাদানী</option>
+         <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+         <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+         <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+         <option >ড. মনজুরে ইলাহী</option>
+         <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+         <option >অন্যান্য </option>
+       </select>
 
-      </div>
-    </div>
+     </div>
+   </div>
 
 
-      <br>
-           <br>
-           <br>
-      
-<ul>
+   <br>
+   <br>
+   <br>
+
+   <ul>
     <% for(var i=data.length-1; i>=0; i--) { %>
-        <li>
-             <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
-             <br>
+      <li>
+       <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
+       <br>
 
-               বক্তাঃ <%= data[i].name %>
-                <br>
-               বিষয়ঃ <%= data[i].title %>
-                <br>
-               ID: <%= data[i].id %>
-                <br>
-            
-           <br>
-        </li>
-    <% } %>
-</ul>
-      <hr>
-    </div>
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div>
+       বক্তাঃ <%= data[i].name %>
+       <br>
+       বিষয়ঃ <%= data[i].title %>
+       <br>
+       ID: <%= data[i].id %>
+       <br>
+
+       <br>
+     </li>
+     <% } %>
+   </ul>
+
+ </div>
+ <div class="col-sm-2 sidenav">
+  <div class="well">
+    <p>ADS</p>
   </div>
+  <div class="well">
+    <p>ADS</p>
+  </div>
+</div>
+</div>
 </div>
 
 <hr>
 
-        <!-- Pagination -->
-        <div class="row text-center">
-            <div class="col-lg-12">
-                <ul class="pagination">
-                    <li>
-                        <a href="#">&laquo;</a>
-                    </li>
-                    <li class="active">
-                        <a href="#">1</a>
-                    </li>
-                    <li>
-                        <a href="#">2</a>
-                    </li>
-                    <li>
-                        <a href="#">3</a>
-                    </li>
-                    <li>
-                        <a href="#">4</a>
-                    </li>
-                    <li>
-                        <a href="#">5</a>
-                    </li>
-                    <li>
-                        <a href="#">&raquo;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
+<!-- Pagination -->
+<% if (pageCount > 1) { %>  
+ <div class="row text-center">
+  <div class="col-lg-12">
+    <ul class="pagination">
+      <% if (currentPage > 1) { %>
+        <li><a href="/videoWas?page=1">&laquo;</a></li>
+        <% } %>
+        <% var i = 1;
+        if (currentPage > 5) {
+          i = +currentPage - 4;
+        } %>
+        <% if (i !== 1) { %>
+          <li class="disabled"><a href="#">...</a></li>
+          <% } %>
+          <% for (i; i<=pageCount; i++) { %>
+            <% if (currentPage == i) { %>
+              <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+              <% } else { %>
+                <li><a href="/videoWas?page=<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% if (i == (+currentPage + 4)) { %>
+                  <li class="disabled"><a href="#">...</a></li>
+                  <% break; } %>
+                  <% } %>
+                  <% if (currentPage != pageCount) { %>
+                    <li><a href="/videoWas?page=<%= pageCount %>">&raquo;</a></li>
+                    <% } %>
+                  </ul>  
 
-        <hr>
+                </div>
+              </div>
+              <% } %>  
+              <!-- /.row -->
+
+              
 
 <script type="text/javascript">
- function run(){
-  var name = $("#catagory").val();
+     function run(){
+      var name = $("#catagory").val();
 
  // window.location.replace('http://localhost:3000/api/name/'+name);
-  
-  
-    window.location.replace('http://localhost:3000/videoWas/speaker/'+name);
-  
+
+
+ window.location.replace('/videoBySpeaker/speaker/'+name);
+
 
 
 
@@ -158,7 +162,7 @@
         // });
         
 
- }
+      }
  //$("#elementId :selected").text(); // The text content of the selected option
 
 
