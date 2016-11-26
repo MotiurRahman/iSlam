@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
 var validator = require("email-validator");
 
@@ -8,7 +7,6 @@ var validator = require("email-validator");
 //var authentication = require('express-authentication');
 
 
-mongoose.Promise = global.Promise;
 
 var was = require('./../libs/wasSchema');
 //var db = mongoose.createConnection('mongodb://localhost:27017/', 'test');
@@ -16,7 +14,7 @@ var was = require('./../libs/wasSchema');
 
 
 //Calling dataBase
-var db = mongoose.createConnection('mongodb://localhost:27017/test');
+//var db = mongoose.createConnection('mongodb://localhost:27017/test');
 
 
 
@@ -25,6 +23,7 @@ router.get('/', function(req, res, next) {
     if (!req.session.admin) {
         req.session.admin = false;
     }
+
 
     console.log("FirstPage:" + req.session.admin);
     var video_Data;
@@ -69,15 +68,16 @@ router.get('/content_id/:id', function(req, res, next) {
 
     was.findOne({ "_id": req.params.id }, function(err, docs) {
         if (err) {
-            res.json(err)
-            mongoose.connection.close();
+            return res.status(500).json({
+                message: "Your Id is not valid"
+            });
+            //mongoose.connection.close();
+
         } else {
 
             // res.render('index', {data: docs});
             res.json(docs);
-            if (docs == null) {
-                console.log("NO data available with this ID");
-            }
+            
         }
 
 
@@ -148,7 +148,7 @@ router.get('/audio', function(req, res, next) {
         currentPage = +req.query.page;
     }
 
-    was.paginate({ "wasType": "audio" }, { page: currentPage, limit: 5 }, function(err, result) {
+    was.paginate({ "wasType": "audio" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
 
         if (err) {
             res.json(err)
@@ -186,7 +186,7 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "audio" }, { page: currentPage, limit: 2 }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "audio" }, { page: currentPage, limit: 2, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
             mongoose.connection.close();
@@ -224,7 +224,7 @@ router.get('/videoWas', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ "wasType": "video" }, { page: currentPage, limit: 5 }, function(err, result) {
+    was.paginate({ "wasType": "video" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
             mongoose.connection.close();
@@ -260,7 +260,7 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "video" }, { page: currentPage, limit: 3 }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "video" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
             mongoose.connection.close();
@@ -292,10 +292,7 @@ router.get('/contact', function(req, res, next) {
     console.log("contagePage:" + req.session.admin);
     res.render("contact", { userInfo: req.session.admin });
 
-});
-
-
-router.post('/contact', function(req, res, next) {
+}).post('/contact', function(req, res, next) {
 
     console.log("contagePage:" + req.session.admin);
 
@@ -316,7 +313,7 @@ router.post('/contact', function(req, res, next) {
         from: 'motiur.mbstu@gmail.com', // sender address
         to: Email, // list of receivers
         subject: subject, // Subject line
-        text: name +'\n'+message //, // plaintext body
+        text: name + '\n' + message //, // plaintext body
             // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
     };
 
@@ -345,7 +342,7 @@ router.post('/contact', function(req, res, next) {
         }); // true 
 
     } else {
-        res.json("Please fill up fields");
+        res.status(400).json("Please fill up fields");
     }
 
 

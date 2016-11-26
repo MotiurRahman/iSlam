@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+//var mongoose = require('mongoose');
+//mongoose.Promise = global.Promise;
 
 var was = require('./../libs/wasSchema');
-mongoose.connect('mongodb://localhost:27017/test');
+
 
 
 
@@ -73,7 +73,7 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
 
         if (error) {
             res.json(error)
-            mongoose.connection.close();
+           // mongoose.connection.close();
         } else {
             //res.json(data)
             res.redirect('/')
@@ -101,8 +101,10 @@ router.get('/delete', checkAuthentication, function(req, res, next) {
     was.find({ "_id": data }).remove(function(error, success) {
 
         if (error) {
-            res.json(error)
-            mongoose.connection.close();
+           return res.status(400).json({
+                message:"ID is not valid"
+            })
+          //  mongoose.connection.close();
         } else {
             console.log(success);
             res.redirect('/')
@@ -135,8 +137,10 @@ router.get('/update', checkAuthentication, function(req, res, next) {
 
     function callback(err, updatdata) {
         if (err) {
-            res.json(error)
-            mongoose.connection.close();
+            return res.status(400).json({
+                message:"Data is not valid"
+            })
+           // mongoose.connection.close();
         } else {
             console.log(updatdata);
             res.redirect('/')

@@ -61,35 +61,35 @@
             <div class="row">
                 <div class="col-md-8">
                     <h3>Send us a Message</h3>
-                    <form name="sentMessage" id="contactForm" novalidate method="post">
+                    <form name="sentMessage" id="contactForm" data-toggle="validator" method="post">
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Full Name:</label>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control" id="name" name="name" required>
                                 <p class="help-block"></p>
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Subject:</label>
-                                <input type="tel" class="form-control" id="subject" name="subject">
+                                <input type="tel" class="form-control" id="subject" name="subject" required>
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Email Address:</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <div class="controls">
                                 <label>Message:</label>
-                                <textarea rows="10" cols="100" class="form-control" id="message" name="message" required data-validation-required-message="Please enter your message" maxlength="999" style="resize:none"></textarea>
+                                <textarea rows="10" cols="100" class="form-control" id="message" name="message" style="resize:none" required></textarea>
                             </div>
                         </div>
                         <div id="success"></div>
                         <!-- For success/fail messages -->
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" id='submit'>Send Message</button>
                     </form>
                 </div>
 
@@ -101,5 +101,21 @@
 
         </div>
         <!-- /.container -->
+
+        <script type="text/javascript">
+
+// $(document).ready(function(){
+
+// $("#submit").click(function() {
+// alert("sdfdsf");
+
+// });
+
+
+            });
+
+        </script>
+
+
 
         

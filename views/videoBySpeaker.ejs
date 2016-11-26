@@ -1,16 +1,16 @@
 <%- contentFor('body')%>
-
 <div class="container">
- <br>
-
  <div class="row content">
   <div class="col-sm-2 sidenav">
-    <p><a href="#">Link</a></p>
-    <p><a href="#">Link</a></p>
-    <p><a href="#">Link</a></p>
+    <h5>Top islamic Web App</h5>
+    <p><a href="https://quran.com/" target="_blank">Al Quran</a></p>
+    <p><a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></p>
+    <p><a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></p>
+    <p><a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></p>
+    <p><a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></p>
   </div>
   <div class="col-sm-8 text-left">
-    <h1>Welcome To the Shahi Islamic Page</h1>
+    <h1>Islam will enter every Home</h1>
     <br>
     <br>
     <br>
@@ -44,7 +44,8 @@
     <br>
     
     <ul>
-      <% for(var i=data.length-1; i>=0; i--) { %>
+     
+        <% for(var i=0; i<data.length; i++) { %>
       <li>
        <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
        <br>

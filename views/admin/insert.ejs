@@ -17,12 +17,11 @@
                 </ol>
             </div>
         </div>
-  <h2>Insert your Data Pere</h2>
   <form class="form-horizontal" role="form" method="post">
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-            <select name="name" style="width: 200px">
+            <select name="name" id="speakerName" style="width: 230px; height: 35px;">
       <option >ড. যাকির নায়েক</option>
       <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
       <option >শাইখ মতিউর রহমান মাদানী</option>
@@ -42,13 +41,13 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="title">Title:</label>
       <div class="col-sm-10">
-        <input type="title" class="form-control" id="title" name="title" placeholder="Enter Tittle">
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Tittle" required>
       </div>
     </div>
     <div class="form-group">
     <label class="control-label col-sm-2" for="title">URL:</label>
       <div class="col-sm-10">
-        <input type="title" class="form-control" id="url" name="url" placeholder="Enter URL">
+        <input type="url" class="form-control" id="url" name="url" placeholder="Enter URL" required>
       </div>
     </div>
     <div class="form-group">
@@ -63,23 +62,14 @@
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <div class="checkbox">
-          <label><input type="checkbox"> Remember me</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-default">Submit</button>
-        <button type="button" class="btn btn-default"><a href="http://localhost:3000/admin/update">Update</a></button>
-        <button type="button" class="btn btn-default"><a href="http://localhost:3000/admin/delete">Delete</a></button>
         
       </div>
     </div>
   </form>
   </div>
   
-<hr>
+
 
 <script type="text/javascript">
  function run(){

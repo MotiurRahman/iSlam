@@ -1,8 +1,8 @@
 <style>
+
+
 #back-to-top {
- 
-background: none;
- 
+  
 margin: 0;
  
 position: absolute;
@@ -23,17 +23,11 @@ text-decoration: none;
  
 color: #ffffff;
  
-background-color: #ff9000;
+background-color: #000000;
  
 }
  
-  
- 
-#back-to-top i {
- 
-  font-size: 60px;
- 
-}
+
 
 
 </style>

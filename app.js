@@ -8,9 +8,13 @@ var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session');
 var FileStore = require('session-file-store')(session);
 
+
 var app = express();
 app.set('trust proxy', 1) // trust first proxy 
 app.disable('x-powered-by');
+
+//var db = mongoose.createConnection('mongodb://localhost:27017/test');
+
 
 //var authentication = require('express-authentication');
 //var mongoose = require('mongoose');
@@ -28,7 +32,7 @@ var sess = {
     secret: 'motiur08034',
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 600000 },
     store: new FileStore("./sessions")
 }
 
@@ -72,12 +76,14 @@ app.use('/users', users);
 app.use('/admin', admin);
 app.use('/api', apis);
 
-app.use(function(req, res) {
-    res.redirect('/');
-});
+// app.use(function(req, res) {
+//    // res.redirect('/');
+//     res.render('error', { message: "sorry", error: "very sorry", userInfo: req.session.admin });
+
+// });
 
 app.use(function(req, res, next) {
-    var err = new Error('Not Found');
+    var err = new Error('404 Page Not Found');
     err.status = 404;
     next(err);
 });
@@ -94,7 +100,8 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
-            error: err
+            error: err,
+            userInfo: req.session.admin
         });
     });
 }
@@ -105,7 +112,8 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
-        error: {}
+        error: {},
+        userInfo: req.session.admin
     });
 });
 

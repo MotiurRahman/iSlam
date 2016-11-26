@@ -1,16 +1,9 @@
-var mongoose = require('mongoose');
+
+var db = require('./../libs/db.js');
+
 var mongoosePaginate = require('mongoose-paginate');
 
-//mongoose.Promise = global.Promise;
-
-//var was = require('./../libs/wasSchema');
-
-//var was = mongoose.model('moti')
-
-//mongoose.connect('mongodb://localhost:27017/test'); 
-
-
-var wasData = new mongoose.Schema({
+var wasData = new db.Schema({
     name: String,
     title: String,
     wasType: String,
@@ -20,4 +13,4 @@ var wasData = new mongoose.Schema({
 wasData.plugin(mongoosePaginate);
 
 
-module.exports = mongoose.model('motis', wasData);
+module.exports = db.model('motis', wasData);

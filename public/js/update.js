@@ -9,44 +9,48 @@ $(document).ready(function() {
         var id = $("#id").val();
         //alert(id);
 
-        $.ajax({
-                url: 'http://localhost:3000/content_id/' + id,
-                type: 'get',
-                dataType: 'json',
-                //data: $("#email").val(),
-                //data: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                success: function(data, textStatus, jQxhr) {
-                    if (data == null) {
-                        alert("NO data available with this id");
+        if (id !== "") {
+
+            $.ajax({
+                    url: 'http://localhost:3000/content_id/' + id,
+                    type: 'get',
+                    dataType: 'json',
+                    //data: $("#email").val(),
+                    //data: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(data, textStatus, jQxhr) {
+                        if (data == null) {
+                            alert("NO data available with this id");
+                        }
+                    },
+                    error: function(jqXhr, textStatus, errorThrown) {
+                        alert("Error:"+errorThrown);
                     }
-                },
-                error: function(jqXhr, textStatus, errorThrown) {
-                    alert(errorThrown);
-                }
-            })
-            .done(function(reuslt) {
-                //console.log(reuslt);
-                var data = JSON.stringify(reuslt);
-                $("#speakerName").val(reuslt.name).change();
-                $('#title').val(reuslt.title);
-                $('#url').val(reuslt.url);
-                $("#contribution_status_id").val(reuslt.wasType).change();
+                })
+                .done(function(reuslt) {
+                    //console.log(reuslt);
+                    if (reuslt != null) {
+                        var data = JSON.stringify(reuslt);
+                        $("#speakerName").val(reuslt.name).change();
+                        $('#title').val(reuslt.title);
+                        $('#url').val(reuslt.url);
+                        $("#contribution_status_id").val(reuslt.wasType).change();
 
+                    }
 
-                console.log("done:" + data);
-
-
-                //alert(reuslt.name);
-            })
-            .fail(function() {
-                console.log("error");
-            })
-            .always(function() {
-                console.log("complete");
-            });
+                    //alert(reuslt.name);
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+        } else {
+            alert("Pleae insert ID value");
+        }
 
     });
 });
