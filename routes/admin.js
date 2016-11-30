@@ -4,22 +4,7 @@ var router = express.Router();
 //mongoose.Promise = global.Promise;
 
 var was = require('./../libs/wasSchema');
-
-
-
-
-//router.use(checkAuthentication);
-
-var checkAuthentication = function(req, res, next) {
-
-    if (req.session && req.session.pass === "1" && req.session.admin)
-        return next();
-    else
-        res.redirect('/admin/login')
-}
-
-
-
+var checkAuthentication = require('./../libs/autho');
 
 
 router.get('/login', function(req, res, next) {
@@ -34,6 +19,14 @@ router.get('/login', function(req, res, next) {
 
         req.session.pass = "1";
         req.session.admin = true;
+        req.session.general = false;
+
+        console.log("sessionInisde:" + req.session.admin);
+        res.redirect('/');
+    } else if (password == "0") {
+        req.session.pass = "0";
+        req.session.admin = true;
+        req.session.general = true;
 
         console.log("sessionInisde:" + req.session.admin);
         res.redirect('/');
@@ -57,10 +50,12 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
     var title = req.body.title;
     var url = req.body.url;
     var was_Type = req.body.type;
+    var Lecture = req.body.lecture;
     //console.log("wasType:"+wasType);
 
     var was_Data = {
         name: name,
+        lecture: Lecture,
         title: title,
         wasType: was_Type,
         url: url
@@ -73,7 +68,7 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
 
         if (error) {
             res.json(error)
-           // mongoose.connection.close();
+                // mongoose.connection.close();
         } else {
             //res.json(data)
             res.redirect('/')
@@ -88,7 +83,7 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
 
 router.get('/delete', checkAuthentication, function(req, res, next) {
     console.log("DeletePage:" + req.session.admin);
-    res.render('admin/delete', { userInfo: req.session.admin });
+    res.render('admin/delete', { userInfo: req.session.admin, general: req.session.general });
 
 }).post('/delete', function(req, res, next) {
 
@@ -101,10 +96,10 @@ router.get('/delete', checkAuthentication, function(req, res, next) {
     was.find({ "_id": data }).remove(function(error, success) {
 
         if (error) {
-           return res.status(400).json({
-                message:"ID is not valid"
-            })
-          //  mongoose.connection.close();
+            return res.status(400).json({
+                    message: "ID is not valid"
+                })
+                //  mongoose.connection.close();
         } else {
             console.log(success);
             res.redirect('/')
@@ -118,7 +113,10 @@ router.get('/delete', checkAuthentication, function(req, res, next) {
 
 router.get('/update', checkAuthentication, function(req, res, next) {
     console.log("Updatepage:" + req.session.admin);
-    res.render('admin/update', { userInfo: req.session.admin });
+
+        res.render('admin/update', { userInfo: req.session.admin, general: req.session.general });
+    
+
 }).post('/update', function(req, res, next) {
 
     //mongoose.createConnection('mongodb://localhost:27017/test'); 
@@ -127,10 +125,11 @@ router.get('/update', checkAuthentication, function(req, res, next) {
     var title = req.body.title;
     var url = req.body.url;
     var was_Type = req.body.type;
+    var Lecture = req.body.lecture;
     console.log("was_Type:" + was_Type)
 
     var conditions = { "_id": id },
-        update = { $set: { "name": name, "title": title, "wasType": was_Type, "url": url } },
+        update = { $set: { "name": name, "lecture": Lecture, "title": title, "wasType": was_Type, "url": url } },
         options = { multi: true };
 
     was.update(conditions, update, options, callback);
@@ -138,9 +137,9 @@ router.get('/update', checkAuthentication, function(req, res, next) {
     function callback(err, updatdata) {
         if (err) {
             return res.status(400).json({
-                message:"Data is not valid"
-            })
-           // mongoose.connection.close();
+                    message: "Data is not valid"
+                })
+                // mongoose.connection.close();
         } else {
             console.log(updatdata);
             res.redirect('/')

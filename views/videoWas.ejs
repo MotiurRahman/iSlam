@@ -18,7 +18,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="title">Category:</label>
       <div class="col-sm-10">         
-        <select id="catagory" onchange="run()">
+        <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
          <option >All</option>
          <option >ড. যাকির নায়েক</option>
          <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
@@ -46,7 +46,7 @@
    <ul>
     
      <% for(var i=0; i<data.length; i++) { %>
-      <li>
+     <li>
        <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
        <br>
 
@@ -78,44 +78,44 @@
 
 <!-- Pagination -->
 <% if (pageCount > 1) { %>  
- <div class="row text-center">
+<div class="row text-center">
   <div class="col-lg-12">
     <ul class="pagination">
       <% if (currentPage > 1) { %>
-        <li><a href="/videoWas?page=1">&laquo;</a></li>
-        <% } %>
-        <% var i = 1;
-        if (currentPage > 5) {
-          i = +currentPage - 4;
-        } %>
-        <% if (i !== 1) { %>
-          <li class="disabled"><a href="#">...</a></li>
-          <% } %>
-          <% for (i; i<=pageCount; i++) { %>
-            <% if (currentPage == i) { %>
-              <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
-              <% } else { %>
-                <li><a href="/videoWas?page=<%= i %>"><%= i %></a></li>
-                <% } %>
-                <% if (i == (+currentPage + 4)) { %>
-                  <li class="disabled"><a href="#">...</a></li>
-                  <% break; } %>
-                  <% } %>
-                  <% if (currentPage != pageCount) { %>
-                    <li><a href="/videoWas?page=<%= pageCount %>">&raquo;</a></li>
-                    <% } %>
-                  </ul>  
+      <li><a href="/videoWas?page=1">&laquo;</a></li>
+      <% } %>
+      <% var i = 1;
+      if (currentPage > 5) {
+      i = +currentPage - 4;
+    } %>
+    <% if (i !== 1) { %>
+    <li class="disabled"><a href="#">...</a></li>
+    <% } %>
+    <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+    <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+    <li><a href="/videoWas?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (+currentPage + 4)) { %>
+    <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+    <% } %>
+    <% if (currentPage != pageCount) { %>
+    <li><a href="/videoWas?page=<%= pageCount %>">&raquo;</a></li>
+    <% } %>
+  </ul>  
 
-                </div>
-              </div>
-              <% } %>  
-              <!-- /.row -->
+</div>
+</div>
+<% } %>  
+<!-- /.row -->
 
-              
+
 
 <script type="text/javascript">
-     function run(){
-      var name = $("#catagory").val();
+ function run(){
+  var name = $("#catagory").val();
 
  // window.location.replace('http://localhost:3000/api/name/'+name);
 

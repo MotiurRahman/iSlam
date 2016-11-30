@@ -11,7 +11,7 @@ var validator = require("email-validator");
 var was = require('./../libs/wasSchema');
 //var db = mongoose.createConnection('mongodb://localhost:27017/', 'test');
 
-
+var book = require('./../libs/bookSchema');
 
 //Calling dataBase
 //var db = mongoose.createConnection('mongodb://localhost:27017/test');
@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
     console.log("FirstPage:" + req.session.admin);
     var video_Data;
 
-    was.find({ "wasType": "video" }).sort({ _id: -1 }).limit(5).exec(function(err, videoDocs) {
+    was.find({ "wasType": "video", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, videoDocs) {
 
         if (err) {
             res.json(err)
@@ -36,10 +36,10 @@ router.get('/', function(req, res, next) {
         } else {
 
             video_Data = videoDocs;
-            was.find({ "wasType": "audio" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
+            was.find({ "wasType": "audio", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
                 if (err) {
                     res.json(err)
-                    mongoose.connection.close();
+
                 } else {
 
                     res.render('index', { data: docs, videoData: video_Data, userInfo: req.session.admin });
@@ -77,7 +77,7 @@ router.get('/content_id/:id', function(req, res, next) {
 
             // res.render('index', {data: docs});
             res.json(docs);
-            
+
         }
 
 
@@ -92,7 +92,7 @@ router.get('/speaker/:name', function(req, res, next) {
 
     var video_Data;
 
-    was.find({ "name": req.params.name, "wasType": "video" }).sort({ _id: -1 }).limit(5).exec(function(err, videoDocs) {
+    was.find({ "name": req.params.name, "wasType": "video", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, videoDocs) {
 
         if (err) {
             res.json(err)
@@ -101,7 +101,7 @@ router.get('/speaker/:name', function(req, res, next) {
 
             video_Data = videoDocs;
 
-            was.find({ "name": req.params.name, "wasType": "audio" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
+            was.find({ "name": req.params.name, "wasType": "audio", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
                 if (err) {
                     res.json(err);
                     mongoose.connection.close();
@@ -148,7 +148,7 @@ router.get('/audio', function(req, res, next) {
         currentPage = +req.query.page;
     }
 
-    was.paginate({ "wasType": "audio" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ "wasType": "audio", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
 
         if (err) {
             res.json(err)
@@ -186,7 +186,7 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "audio" }, { page: currentPage, limit: 2, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "audio", "lecture": "bangla" }, { page: currentPage, limit: 2, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
             mongoose.connection.close();
@@ -224,7 +224,7 @@ router.get('/videoWas', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ "wasType": "video" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ "wasType": "video", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
             mongoose.connection.close();
@@ -260,7 +260,7 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "video" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "video", "lecture": "bangla" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
             mongoose.connection.close();
@@ -354,13 +354,105 @@ router.get('/contact', function(req, res, next) {
 
 
 
-//About page Calling
+//Books page Calling
 
-router.get('/blog', function(req, res, next) {
+router.get('/books', function(req, res, next) {
 
-    console.log("blogPage:" + req.session.admin);
-    res.render('blog', { "userInfo": req.session.admin });
+    console.log("books:" + req.session.admin);
+    var currentPage = 1;
+    if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    }
 
+    book.paginate({}, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+        if (err) {
+            res.json(err)
+           
+        } else {
+
+            res.render('books', {
+                books: result.docs,
+                pageSize: result.limit,
+                totalAudioData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                userInfo: req.session.admin
+            });
+
+        }
+
+
+    });
+
+
+});
+
+//English was
+
+router.get('/english', function(req, res, next) {
+
+    console.log("english:" + req.session.admin);
+
+    var currentPage = 1;
+    if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    }
+    var name = req.params.name;
+
+    was.paginate({ "wasType": "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+        if (err) {
+            res.json(err)
+            mongoose.connection.close();
+        } else {
+
+            res.render('english', {
+
+                data: result.docs,
+                pageSize: result.limit,
+                totalVideoData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                userInfo: req.session.admin
+            });
+
+            // res.json(docs);
+
+        }
+
+    });
+
+
+});
+
+
+router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
+
+    var currentPage = 1;
+    if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    }
+    var name = req.params.name;
+
+    was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+        if (err) {
+            res.json(err)
+            mongoose.connection.close();
+        } else {
+
+            res.render('english', {
+                data: result.docs,
+                pageSize: result.limit,
+                totalAudioData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                speakerName: name,
+                userInfo: req.session.admin
+            });
+
+        }
+
+
+    });
 
 });
 

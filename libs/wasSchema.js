@@ -5,6 +5,7 @@ var mongoosePaginate = require('mongoose-paginate');
 
 var wasData = new db.Schema({
     name: String,
+    lecture: String,
     title: String,
     wasType: String,
     url: String

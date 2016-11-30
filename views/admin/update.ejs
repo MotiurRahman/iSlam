@@ -31,7 +31,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-        <select name="name" id="speakerName" style="width: 230px; height: 35px;">
+        <select name="name" class="form-control" id="speakerName" >
       <option value="ড. যাকির নায়েক">ড. যাকির নায়েক</option>
       <option value="আব্দুর রায্‌যাক বিন ইউসুফ">আব্দুর রায্‌যাক বিন ইউসুফ</option>
       <option value="শাইখ মতিউর রহমান মাদানী">শাইখ মতিউর রহমান মাদানী</option>
@@ -44,8 +44,21 @@
        <option value="ড. মোহাম্মদ মুছলে উদ্দিন">ড. মোহাম্মদ মুছলে উদ্দিন</option>       
        <option value="ড. মনজুরে ইলাহী">ড. মনজুরে ইলাহী</option>
        <option value="মুহাম্মাদ আসাদুল্লাহ আল-গালিব">মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+       <option value="Ismail Menk">Ismail Menk</option>
+       <option value="Dr. Zakir Naik">Dr. Zakir Naik</option>
+       <option value="Nouman-Ali-Khan">Nouman-Ali-Khan</option>    
        <option value="অন্যান্য">অন্যান্য </option>
         </select>
+      </div>
+    </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="title">Lecture:</label>
+      <div class="col-sm-10">
+              
+           <select name="lecture" id="lecture" style="width: 230px; height: 35px;">
+        <option value="bangla">Bangla</option>
+        <option value="english">English</option>
+         </select>
       </div>
     </div>
     <div class="form-group">
@@ -64,7 +77,7 @@
      <div class="form-group">
     <label class="control-label col-sm-2" for="url">Type:</label>
       <div class="col-sm-10">
-         <select name="type" id="contribution_status_id">
+         <select name="type" id="type_id" style="width: 230px; height: 35px;">
             <option value="audio">audio</option>
             <option value="video">video</option>
           </select>
@@ -73,7 +86,13 @@
    
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default" >Update</button>
+      
+      <%if(general){%>
+       <button type="submit" class="btn btn-primary btn-lg btn-block" disabled="disabled" >Update</button>
+      <% }else{ %>  
+       <button type="submit" class="btn btn-primary btn-lg btn-block" >Update</button>
+      <%}%>
+             
       </div>
     </div>
   </form>

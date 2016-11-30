@@ -24,6 +24,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var apis = require('./routes/api');
+var books = require('./routes/book');
+
 
 
 
@@ -75,6 +77,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 app.use('/api', apis);
+app.use('/book', books);
 
 // app.use(function(req, res) {
 //    // res.redirect('/');

@@ -34,9 +34,10 @@ $(document).ready(function() {
                     if (reuslt != null) {
                         var data = JSON.stringify(reuslt);
                         $("#speakerName").val(reuslt.name).change();
+                        $("#lecture").val(reuslt.lecture).change();
                         $('#title').val(reuslt.title);
                         $('#url').val(reuslt.url);
-                        $("#contribution_status_id").val(reuslt.wasType).change();
+                        $("#type_id").val(reuslt.wasType).change();
 
                     }
 
