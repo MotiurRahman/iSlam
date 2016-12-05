@@ -5,7 +5,7 @@ var validator = require("email-validator");
 
 
 //var authentication = require('express-authentication');
-
+var checkAuthentication = require('./../libs/autho');
 
 
 var was = require('./../libs/wasSchema');
@@ -64,7 +64,7 @@ router.get('/', function(req, res, next) {
 
 //Search Data using the user ID
 
-router.get('/content_id/:id', function(req, res, next) {
+router.get('/content_id/:id', checkAuthentication, function(req, res, next) {
 
     was.findOne({ "_id": req.params.id }, function(err, docs) {
         if (err) {

@@ -10,23 +10,15 @@ var FileStore = require('session-file-store')(session);
 
 
 var app = express();
+
 app.set('trust proxy', 1) // trust first proxy 
 app.disable('x-powered-by');
-
-//var db = mongoose.createConnection('mongodb://localhost:27017/test');
-
-
-//var authentication = require('express-authentication');
-//var mongoose = require('mongoose');
-//var mongoose.connect('mongodb://localhost:27017/test');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
 var apis = require('./routes/api');
 var books = require('./routes/book');
-
-
 
 
 var sess = {
@@ -45,12 +37,6 @@ if (app.get('env') === 'production') {
 
 app.use(session(sess));
 
-// var checkAuthentication =  function(req, res, next) {
-//   console.log('isAuthenticated:', req.session);
-//   req.session.user = "motiur";  
-//   next();
-// }
-
 
 
 // view engine setup
@@ -59,6 +45,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set("layout extractScripts", true);
 app.use(expressLayouts);
+
 
 //app.use(checkAuthentication);
 
@@ -73,17 +60,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 app.use('/api', apis);
-app.use('/book', books);
+app.use('/books', books);
 
-// app.use(function(req, res) {
-//    // res.redirect('/');
-//     res.render('error', { message: "sorry", error: "very sorry", userInfo: req.session.admin });
-
-// });
 
 app.use(function(req, res, next) {
     var err = new Error('404 Page Not Found');

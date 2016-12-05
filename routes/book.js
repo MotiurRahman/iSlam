@@ -25,7 +25,7 @@ var checkAuthentication = require('./../libs/autho');
 router.get('/bookUpload', checkAuthentication, function(req, res, next) {
     console.log("bookUpload:" + req.session.admin);
 
-     res.render('admin/bookUpload', { userInfo: req.session.admin });
+    res.render('admin/bookUpload', { userInfo: req.session.admin });
 
 
 }).post('/bookUpload', upload.any(), function(req, res, next) {
@@ -54,18 +54,38 @@ router.get('/bookUpload', checkAuthentication, function(req, res, next) {
     //res.json(was_Data)
 
     var newBook = new book(book_Data);
-    newBook.save(function(error, data) {
 
-        if (error) {
-            res.json(error)
-                // mongoose.connection.close();
-        } else {
-            //res.json(data)
-            res.redirect('/books')
+
+
+    function UploadBook() {
+        newBook.save(function(error, data) {
+
+            if (error) {
+                res.json(error)
+                    // mongoose.connection.close();
+            } else {
+                //res.json(data)
+                res.redirect('/books')
+            }
+
+
+        });
+    }
+
+
+    book.find({ "bookurl": bookurl }, function(err, existingBook) {
+        if (existingBook) {
+
+            if (existingBook.length > 0) {
+                res.json("Already have that Book")
+            } else {
+                UploadBook();
+            }
         }
 
 
     });
+
 
 });
 
@@ -74,33 +94,20 @@ router.get('/updateBook', checkAuthentication, function(req, res, next) {
     console.log("updateBook:" + req.session.admin);
     res.render('admin/updateBook', { userInfo: req.session.admin });
 
-}).post('/updateBook', function(req, res, next) {
+}).post('/updateBook', upload.any(), function(req, res, next) {
 
 
     var id = req.body.id;
-    var name = req.body.author;
+    var author = req.body.author;
     var title = req.body.title;
     var bookInfo = req.body.bookInfo;
     var bookurl = req.body.bookurl;
-    var bookType = req.body.booktype;
+    var bookType = req.body.bookType;
     var imageName = req.files;
     var bookImage = imageName[0].filename;
-    // console.log("bookName:" + imageName[0].filename);
-    // console.log("bookType:" + bookType)
-
-
-    // var book_Data = {
-    //     author: name,
-    //     title: title,
-    //     bookInfo: bookInfo,
-    //     bookType: bookType,
-    //     bookurl: bookurl,
-    //     bookImage: bookImage,
-    // };
-
 
     var conditions = { "_id": id },
-        update = { $set: { "author": name, "title": title, "bookInfo": bookInfo, "bookType": bookType, "bookurl": bookurl,"bookImage": bookImage } },
+        update = { $set: { "author": author, "title": title, "bookInfo": bookInfo, "bookType": bookType, "bookurl": bookurl, "bookImage": bookImage } },
         options = { multi: true };
 
     book.update(conditions, update, options, callback);
@@ -129,7 +136,7 @@ router.get('/deleteBook', checkAuthentication, function(req, res, next) {
 }).post('/deleteBook', function(req, res, next) {
 
     var idData = req.body.id;
-    console.log(idData);
+    console.log("idData:" + idData);
     //res.json(data)
     //http://mongoosejs.com/docs/api.html#query_Query-remove
 
@@ -152,7 +159,7 @@ router.get('/deleteBook', checkAuthentication, function(req, res, next) {
 });
 
 
-router.get('/books/:bookType', function(req, res, next) {
+router.get('/:bookType', function(req, res, next) {
 
     console.log("books:" + req.session.admin);
     var bookType = req.params.bookType;
@@ -161,10 +168,10 @@ router.get('/books/:bookType', function(req, res, next) {
         currentPage = +req.query.page;
     }
 
-    book.paginate({"bookType": bookType}, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+    book.paginate({ "bookType": bookType }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
             res.render('books', {
@@ -181,6 +188,28 @@ router.get('/books/:bookType', function(req, res, next) {
 
     });
 
+
+});
+
+
+router.get('/content_id/:id', checkAuthentication, function(req, res, next) {
+
+    book.findOne({ "_id": req.params.id }, function(err, docs) {
+        if (err) {
+            return res.status(500).json({
+                message: "Your Id is not valid"
+            });
+            //mongoose.connection.close();
+
+        } else {
+
+            // res.render('index', {data: docs});
+            res.json(docs);
+
+        }
+
+
+    });
 
 });
 

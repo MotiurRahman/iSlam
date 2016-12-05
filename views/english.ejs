@@ -3,14 +3,14 @@
  <div class="row content">
    <div class="col-sm-2 sidenav">
     <h5>Top islamic Web App</h5>
-    <p><a href="https://quran.com/" target="_blank">Al Quran</a></p>
-    <p><a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></p>
-    <p><a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></p>
-    <p><a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></p>
-    <p><a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></p>
+   <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></i></p>
   </div>
   <div class="col-sm-8 text-left">
-    <h1>Welcome To the Shahi Islamic Page</h1>
+    <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
     <br>
     <br>
     <br>
@@ -42,7 +42,7 @@
 
        বক্তাঃ <%= data[i].name %>
        <br>
-       বিষয়ঃ <%= data[i].title %>
+        বিষয়ঃ <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
        <br>
        ID: <%= data[i].id %>
        <br>

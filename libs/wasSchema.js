@@ -14,4 +14,4 @@ var wasData = new db.Schema({
 wasData.plugin(mongoosePaginate);
 
 
-module.exports = db.model('motis', wasData);
+module.exports = db.model('wasinfo', wasData);

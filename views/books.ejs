@@ -18,11 +18,7 @@
                   <option value="others">Others</option>
               </select>
               </p>
-          
       </div>
-
-           
-
   </div>
 </div>
 
@@ -100,3 +96,15 @@
 </div>
 <% } %>  
         <!-- /.row -->
+
+        <script type="text/javascript">
+
+  function run(){
+    var name = $("#catagory").val();
+
+ // window.location.replace('http://localhost:3000/api/name/'+name);  
+
+ window.location.replace('/books/'+name);
+
+}
+</script>

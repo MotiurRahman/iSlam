@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 //var mongoose = require('mongoose');
+
 //mongoose.Promise = global.Promise;
 
 var was = require('./../libs/wasSchema');
@@ -51,7 +52,7 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
     var url = req.body.url;
     var was_Type = req.body.type;
     var Lecture = req.body.lecture;
-    //console.log("wasType:"+wasType);
+
 
     var was_Data = {
         name: name,
@@ -61,23 +62,37 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
         url: url
     };
 
-    //res.json(was_Data)
-
     var new_Was = new was(was_Data);
-    new_Was.save(function(error, data) {
 
-        if (error) {
-            res.json(error)
-                // mongoose.connection.close();
-        } else {
-            //res.json(data)
-            res.redirect('/')
+
+    function InsertWas() {
+        new_Was.save(function(err) {
+
+            if (err) {
+                res.json(err)
+                    // mongoose.connection.close();
+            } else {
+                //res.json(data)
+                res.redirect('/')
+            }
+
+
+        });
+    }
+
+
+    was.find({ "url": url }, function(err, existingUser) {
+        if (existingUser) {
+
+            if (existingUser.length > 0) {
+                res.json("Already have that Was")
+            } else {
+                InsertWas();
+            }
         }
 
 
     });
-
-
 
 });
 
@@ -114,8 +129,8 @@ router.get('/delete', checkAuthentication, function(req, res, next) {
 router.get('/update', checkAuthentication, function(req, res, next) {
     console.log("Updatepage:" + req.session.admin);
 
-        res.render('admin/update', { userInfo: req.session.admin, general: req.session.general });
-    
+    res.render('admin/update', { userInfo: req.session.admin, general: req.session.general });
+
 
 }).post('/update', function(req, res, next) {
 

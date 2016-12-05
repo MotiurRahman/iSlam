@@ -19,6 +19,17 @@
         </div>
   
 <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+    
+  <div class="form-group">
+      <label class="control-label col-sm-2" for="id">ID:</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" required>
+         </br>
+         <button type="button" class="btn btn-default" id="search" >Search</button>
+      </div>
+    </div>
+
+
     <div class="form-group">
       <label class="control-label col-sm-2" for="author">Author Name:</label>
       <div class="col-sm-10">
@@ -33,10 +44,10 @@
       </div>
     </div>
 
-    <div class="form-group">
+   <div class="form-group">
       <label class="control-label col-sm-2" for="bookInfo">Book Info:</label>
       <div class="col-sm-10">
-        <textarea name="bookInfo" class="form-control" rows="3"></textarea>
+        <textarea name="bookInfo" class="form-control" id="bookInfo" rows="3"></textarea>
       </div>
     </div>
 
@@ -48,10 +59,10 @@
     </div>
 
     <div class="form-group">
-    <label class="control-label col-sm-2" for="title">Book Type:</label>
+    <label class="control-label col-sm-2" for="bookType">Book Type:</label>
       <div class="col-sm-10">
               
-           <select name="type" style="width: 230px; height: 35px;" required="required">
+           <select name="bookType" id="bookType" style="width: 230px; height: 35px;" required="required">
         <option value="Quran">All Quran</option>
         <option value="Hadith">Hadith</option>
         <option value="others">others</option>
@@ -60,7 +71,7 @@
     </div>
 
     <div class="form-group">
-    <label class="control-label col-sm-2" for="bookurl">Book Image:</label>
+    <label class="control-label col-sm-2" for="bookImage">Book Image:</label>
       <div class="col-sm-10">
         <input type="file" class="form-control" id="bookImage" name="bookImage" required>
       </div>
@@ -68,7 +79,7 @@
     
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Upload</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
         
       </div>
     </div>
@@ -81,16 +92,62 @@
 
 
 <script type="text/javascript">
- // function run(){
- //  var strUser = $("#ddlViewBy").val();
- //  $('#name').val(strUser);
+ $(document).ready(function() {
+    $("#search").click(function() {
+        //alert("Email");
+        // $('#name').val("motiur");
+        // $('#title').val("rahman");
+        // $('#url').val("palash");
 
- // }
- //$("#elementId :selected").text(); // The text content of the selected option
+        // var data = {"id":$("#id").val()};
+        var id = $("#id").val();
+        //alert(id);
 
+        if (id !== "") {
 
-//var e = document.getElementById("ddlViewBy");
-//var strUser = e.options[e.selectedIndex].value;
-//$('#name').val(strUser);
+            $.ajax({
+                    url: 'http://localhost:3000/books/content_id/' + id,
+                    type: 'get',
+                    dataType: 'json',
+                    //data: $("#email").val(),
+                    //data: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(data, textStatus, jQxhr) {
+                        if (data == null) {
+                            alert("NO data available with this id");
+                        }
+                    },
+                    error: function(jqXhr, textStatus, errorThrown) {
+                        alert("Error:"+errorThrown);
+                    }
+                })
+                .done(function(reuslt) {
+                    //console.log(reuslt);
+                    if (reuslt != null) {
+                        $('#author').val(reuslt.author);
+                        $('#title').val(reuslt.title);
+                        $('#bookInfo').val(reuslt.bookInfo);
+                        $('#bookType').val(reuslt.bookType).change();;
+                        $('#bookurl').val(reuslt.bookurl);
+                        
+
+                    }
+
+                    //alert(reuslt.name);
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+        } else {
+            alert("Pleae enter ID value");
+        }
+
+    });
+});
 
 </script>
