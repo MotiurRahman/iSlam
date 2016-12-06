@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session');
-var FileStore = require('session-file-store')(session);
+
 
 
 var app = express();
@@ -25,9 +25,8 @@ var sess = {
     name: "session-cookie",
     secret: 'motiur08034',
     resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 600000 },
-    store: new FileStore("./sessions")
+    saveUninitialized: true,
+    cookie: { maxAge: 600000 }
 }
 
 if (app.get('env') === 'production') {
