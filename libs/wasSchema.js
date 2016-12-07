@@ -8,6 +8,7 @@ var wasData = new db.Schema({
     lecture: String,
     title: String,
     wasType: String,
+    wasCatatory:String,
     url: String
 });
 

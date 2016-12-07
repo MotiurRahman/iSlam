@@ -3,119 +3,139 @@
 <div class="container">
  <div class="row content">
   <div class="col-sm-2 sidenav">
-    <h5>Top islamic Web App</h5>
+    <p class="text-left"><b>Top islamic Web App</b></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tawhidmedia.com/" target="_blank">Tawhidmedia</a></i></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></i></p>
+
   </div>
   <div class="col-sm-8 text-left">
    <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
-    <br>
-    <br>
-    <br>
+   <br>
+   <br>
+   <br>
 
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="name">Category:</label>
-      <div class="col-sm-10">
+   <div class="form-group">
+    <label class="control-label col-sm-2" for="name">Category:</label>
+    <div class="col-sm-10">
       <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">         
-          <option >All</option>
-          <option >ড. যাকির নায়েক</option>
-          <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-          <option >শাইখ মতিউর রহমান মাদানী</option>
-          <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-          <option >মুযাফফর বিন মুহসিন</option>
-          <option >সিফাত হাসান</option>
-          <option >শাইখ আমানুল্লাহ মাদানী</option>
-          <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-          <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-          <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-          <option >ড. মনজুরে ইলাহী</option>
-          <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-          <option >অন্যান্য </option>
-        </select>
+        <option >All</option>
+        <option >ড. যাকির নায়েক</option>
+        <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+        <option >শাইখ মতিউর রহমান মাদানী</option>
+        <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+        <option >মুযাফফর বিন মুহসিন</option>
+        <option >সিফাত হাসান</option>
+        <option >শাইখ আমানুল্লাহ মাদানী</option>
+        <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+        <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+        <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+        <option >ড. মনজুরে ইলাহী</option>
+        <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+        <option >অন্যান্য </option>
+      </select>
 
-      </div>
     </div>
-
-    <br>
-    <br>
-    <br>
-
-    <ul>
-      <% for(var i=0; i<data.length; i++) { %>
-      <li>
-
-       বক্তাঃ <%= data[i].name %>
-       <br>
-       বিষয়ঃ <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
-       <br>
-       ID: <%= data[i].id %>
-       <br>
-       <audio controls>
-        <source src="<%= data[i].url %>" type="audio/ogg">
-          <source src="<%= data[i].url %>" type="audio/mpeg">
-           Your browser does not support the audio element.
-         </audio>
-
-
-         <br>
-         <br>
-         <br>
-       </li>
-       <% } %>
-     </ul>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-
-
-     <ul>
-       <% for(var i=0; i<videoData.length; i++) { %>
-       <li>
-        <iframe width="520" height="345" src=<%= videoData[i].url %>></iframe>
-        <br>
-        বক্তাঃ <%= videoData[i].name %>
-        <br>
-        বিষয়ঃ <a href="<%= videoData[i].url %>" target="_blank"><%= videoData[i].title %></a>
-        <br>
-        ID: <%= videoData[i].id %>
-
-
-        <br>
-        <br>
-        <br>
-      </li>
-      <% } %>
-    </ul>
-
-
-
-
-
-
-
   </div>
-  <div class="col-sm-2 sidenav">
-    <div class="well">
-      <p>ADS</p>
-    </div>
-    <div class="well">
-      <p>ADS</p>
-    </div>
 
-    <div class="motiur">
+  <br>
+  <br>
+  <br>
 
-      <a id="back-to-top" href="#">
-       <i class="fa fa-arrow-circle-o-up" style="font-size:50px"></i>
-      </a>
-   </div>
+  <ul>
+    <% for(var i=0; i<data.length; i++) { %>
+    <li>
+
+     বক্তাঃ <%= data[i].name %>
+     <br>
+     বিষয়ঃ <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+     <br>
+     ID: <%= data[i].id %>
+     <br>
+     <audio controls>
+      <source src="<%= data[i].url %>" type="audio/ogg">
+        <source src="<%= data[i].url %>" type="audio/mpeg">
+         Your browser does not support the audio element.
+       </audio>
 
 
+       <br>
+       <br>
+       <br>
+     </li>
+     <% } %>
+   </ul>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+
+
+   <ul>
+     <% for(var i=0; i<videoData.length; i++) { %>
+     <li>
+      <iframe width="520" height="345" src=<%= videoData[i].url %>></iframe>
+      <br>
+      বক্তাঃ <%= videoData[i].name %>
+      <br>
+      বিষয়ঃ <a href="<%= videoData[i].url %>" target="_blank"><%= videoData[i].title %></a>
+      <br>
+      ID: <%= videoData[i].id %>
+
+
+      <br>
+      <br>
+      <br>
+    </li>
+    <% } %>
+  </ul>
+
+</div>
+
+
+
+
+<div class="col-sm-2 sidenav" >
+ <a href="/wascatagory/ঈমান">
+  <div class="well" >
+    <p class="text-center" id="sidebar">ঈমান</p>
+  </div>
+</a>
+
+<a href="/wascatagory/সালাত">
+  <div class="well">
+   <p class="text-center" id="sidebar">সালাত</p> 
  </div>
+</a>
+<a href="/wascatagory/সিয়াম">
+  <div class="well">
+    <p class="text-center" id="sidebar">সিয়াম</p>
+  </div>
+</a>
+<a href="/wascatagory/যাকাত">
+  <div class="well">
+    <p class="text-center" id="sidebar">যাকাত</p>
+  </div>
+</a>
+<a href="/wascatagory/হজ্জ">
+  <div class="well">
+    <p class="text-center" id="sidebar">হজ্জ</p>
+  </div>
+</a>
+
+<div class="motiur">
+
+  <a id="back-to-top" href="#">
+   <i class="fa fa-arrow-circle-o-up" style="font-size:50px"></i>
+ </a>
+</div>
+
+
+</div>
 
 
 </div>
@@ -131,7 +151,7 @@
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
- window.location.replace('/speaker/'+name);
+   window.location.replace('/speaker/'+name);
 
 }
 

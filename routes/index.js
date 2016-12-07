@@ -32,7 +32,6 @@ router.get('/', function(req, res, next) {
 
         if (err) {
             res.json(err)
-            mongoose.connection.close();
         } else {
 
             video_Data = videoDocs;
@@ -96,7 +95,7 @@ router.get('/speaker/:name', function(req, res, next) {
 
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+            
         } else {
 
             video_Data = videoDocs;
@@ -104,7 +103,7 @@ router.get('/speaker/:name', function(req, res, next) {
             was.find({ "name": req.params.name, "wasType": "audio", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
                 if (err) {
                     res.json(err);
-                    mongoose.connection.close();
+                  
                 } else {
                     if (video_Data == null && docs == null)
 
@@ -152,7 +151,7 @@ router.get('/audio', function(req, res, next) {
 
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+            
         } else {
 
 
@@ -189,7 +188,7 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
     was.paginate({ 'name': name, 'wasType': "audio", "lecture": "bangla" }, { page: currentPage, limit: 2, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+           
         } else {
 
 
@@ -227,7 +226,7 @@ router.get('/videoWas', function(req, res, next) {
     was.paginate({ "wasType": "video", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+           
         } else {
 
             res.render('videoWas', {
@@ -263,7 +262,7 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
     was.paginate({ 'name': name, 'wasType': "video", "lecture": "bangla" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+           
         } else {
 
             res.render('videoBySpeaker', {
@@ -402,7 +401,7 @@ router.get('/english', function(req, res, next) {
     was.paginate({ "wasType": "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+           
         } else {
 
             res.render('english', {
@@ -436,7 +435,7 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
     was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-            mongoose.connection.close();
+           
         } else {
 
             res.render('english', {

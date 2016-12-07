@@ -38,6 +38,7 @@ $(document).ready(function() {
                         $('#title').val(reuslt.title);
                         $('#url').val(reuslt.url);
                         $("#type_id").val(reuslt.wasType).change();
+                        $("#wascatatory").val(reuslt.wasCatatory).change();
 
                     }
 

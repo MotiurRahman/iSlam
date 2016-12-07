@@ -51,6 +51,7 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
     var title = req.body.title;
     var url = req.body.url;
     var was_Type = req.body.type;
+    var wasCatatory = req.body.wasCatatory;
     var Lecture = req.body.lecture;
 
 
@@ -59,6 +60,7 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
         lecture: Lecture,
         title: title,
         wasType: was_Type,
+        wasCatatory: wasCatatory,
         url: url
     };
 
@@ -140,11 +142,12 @@ router.get('/update', checkAuthentication, function(req, res, next) {
     var title = req.body.title;
     var url = req.body.url;
     var was_Type = req.body.type;
+    var wasCatatory = req.body.wasCatatory;
     var Lecture = req.body.lecture;
     console.log("was_Type:" + was_Type)
 
     var conditions = { "_id": id },
-        update = { $set: { "name": name, "lecture": Lecture, "title": title, "wasType": was_Type, "url": url } },
+        update = { $set: { "name": name, "lecture": Lecture, "title": title, "wasType": was_Type, "wasCatatory":wasCatatory, "url": url } },
         options = { multi: true };
 
     was.update(conditions, update, options, callback);

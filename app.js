@@ -10,12 +10,10 @@ var session = require('express-session');
 
 
 var app = express();
-
-app.set('trust proxy', 1) // trust first proxy 
 app.disable('x-powered-by');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var wascatagory = require('./routes/wascatagory');
 var admin = require('./routes/admin');
 var apis = require('./routes/api');
 var books = require('./routes/book');
@@ -29,10 +27,10 @@ var sess = {
     cookie: { maxAge: 600000 }
 }
 
-// if (app.get('env') === 'production') {
-//     app.set('trust proxy', 1) // trust first proxy 
-//     sess.cookie.secure = true // serve secure cookies 
-// }
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1) // trust first proxy 
+    sess.cookie.secure = true // serve secure cookies 
+}
 
 app.use(session(sess));
 
@@ -61,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/wascatagory', wascatagory);
 app.use('/admin', admin);
 app.use('/api', apis);
 app.use('/books', books);
