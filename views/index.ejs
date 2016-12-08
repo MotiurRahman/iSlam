@@ -72,13 +72,16 @@
    <br>
    <br>
    <br>
-   <br>
-
 
    <ul>
      <% for(var i=0; i<videoData.length; i++) { %>
      <li>
-      <iframe width="520" height="345" src=<%= videoData[i].url %>></iframe>
+      
+      <!-- 16:9 aspect ratio -->
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src=<%= videoData[i].url %>></iframe>
+      </div>
+
       <br>
       বক্তাঃ <%= videoData[i].name %>
       <br>
@@ -100,34 +103,35 @@
 
 
 <div class="col-sm-2 sidenav" >
- <a href="/wascatagory/ঈমান">
-  <div class="well" >
-    <p class="text-center" id="sidebar">ঈমান</p>
-  </div>
-</a>
 
-<a href="/wascatagory/সালাত">
   <div class="well">
-   <p class="text-center" id="sidebar">সালাত</p> 
- </div>
-</a>
-<a href="/wascatagory/সিয়াম">
-  <div class="well">
-    <p class="text-center" id="sidebar">সিয়াম</p>
-  </div>
-</a>
-<a href="/wascatagory/যাকাত">
-  <div class="well">
-    <p class="text-center" id="sidebar">যাকাত</p>
-  </div>
-</a>
-<a href="/wascatagory/হজ্জ">
-  <div class="well">
-    <p class="text-center" id="sidebar">হজ্জ</p>
-  </div>
-</a>
+   <p class="text-center"> Search By Topics<br><select id="topicName" onchange="topic()"  style="width: 130px; height: 35px;">
+    <option >বিষয় নির্বাচন</option>
+    <option value="ঈমান">ঈমান</option>
+    <option value="সালাত">সালাত</option>
+    <option value="সিয়াম">সিয়াম</option>
+    <option value="যাকাত">যাকাত</option>
+    <option value="হজ্জ">হজ্জ</option>       
+    <option value="শির্ক ">শির্ক </option>
+    <option value="বিদআত">বিদআত</option>
+    <option value="জান্নাত">জান্নাত</option>
+    <option value="জাহান্নাম">জাহান্নাম</option>
+    <option value="নেশা">নেশা</option>
+    <option value="গানবাজনা">গানবাজনা</option>
+    <option value="যেনা ব্যাভিচার">যেনা ব্যাভিচার</option>
+    <option value="সুদ">সুদ</option>
+    <option value="দয়া ও রহমত">দয়া ও রহমত</option>
+    <option value="অন্যান্য">অন্যান্য</option>
+    
+  </select> </p>
+</div>
 
-<div class="motiur">
+<div class="well">
+  <p class="text-center">Apps</p>
+</div>
+
+
+<div class="scrollToTop">
 
   <a id="back-to-top" href="#">
    <i class="fa fa-arrow-circle-o-up" style="font-size:50px"></i>
@@ -151,7 +155,7 @@
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
-   window.location.replace('/speaker/'+name);
+ window.location.replace('/speaker/'+name);
 
 }
 
@@ -179,41 +183,15 @@ $(document).ready(function(){
       });
 
 
+function topic(){
+  var topicName = $("#topicName").val();
 
-// $(function(){
+ // window.location.replace('http://localhost:3000/api/name/'+name);  
 
-//     $(document).on( 'scroll', function(){
+ window.location.replace('/wascatagory/'+topicName);
 
-//       if ($(window).scrollTop() > 100) {
-//         $('.scroll-top-wrapper').addClass('show');
-//       } else {
-//         $('.scroll-top-wrapper').removeClass('show');
-//       }
-//     });
-//   });
+}
 
-
-// $(function(){
-
-//     $(document).on( 'scroll', function(){
-
-//       if ($(window).scrollTop() > 100) {
-//         $('.scroll-top-wrapper').addClass('show');
-//       } else {
-//         $('.scroll-top-wrapper').removeClass('show');
-//       }
-//     });
-
-//     $('.scroll-top-wrapper').on('click', scrollToTop);
-//   });
-
-//   function scrollToTop() {
-//     verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-//     element = $('body');
-//     offset = element.offset();
-//     offsetTop = offset.top;
-//     $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
-//   }
 
 </script>
 

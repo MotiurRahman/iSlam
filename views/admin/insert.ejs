@@ -1,106 +1,134 @@
 <%- contentFor('body')%>  
 
- 
 
- <div class="container">
-<br>
-        <!-- Page Heading/Breadcrumbs -->
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Insert
-                    <small>Subheading</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="/">Home</a>
-                    </li>
-                    <li class="active">Insert</li>
-                </ol>
-            </div>
-        </div>
+
+<div class="container">
+  <br>
+  <!-- Page Heading/Breadcrumbs -->
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">Insert
+        <small>Subheading</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a>
+        </li>
+        <li class="active">Insert</li>
+      </ol>
+    </div>
+  </div>
   <form class="form-horizontal" role="form" method="post">
     <div class="form-group">
       <label class="control-label col-sm-2" for="name">Name:</label>
       <div class="col-sm-10">
-            <select name="name" id="speakerName" class="form-control" required="required">
-      <option >ড. যাকির নায়েক</option>
-      <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-      <option >শাইখ মতিউর রহমান মাদানী</option>
-      <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-       <option >মুযাফফর বিন মুহসিন</option>
-       <option >সিফাত হাসান</option>
-       <option >শাইখ আমানুল্লাহ মাদানী</option>
-       <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-       <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-       <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-       <option >ড. মনজুরে ইলাহী</option>
-       <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-       <option >Ismail Menk</option>
-       <option >Dr. Zakir Naik</option>
-       <option >Nouman-Ali-Khan</option>    
-       <option >অন্যান্য </option>
+        <select name="name" id="speakerName" class="form-control" required="required">
+          <option >ড. যাকির নায়েক</option>
+          <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+          <option >শাইখ মতিউর রহমান মাদানী</option>
+          <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+          <option >মুযাফফর বিন মুহসিন</option>
+          <option >সিফাত হাসান</option>
+          <option >শাইখ আমানুল্লাহ মাদানী</option>
+          <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+          <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+          <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+          <option >ড. মনজুরে ইলাহী</option>
+          <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+          <option >অন্যান্য </option>
+          <option >Ismail Menk</option>
+          <option >Dr. Zakir Naik</option>
+          <option >Fariq Naik</option>
+          <option >Nouman-Ali-Khan</option>
+          <option >Others</option>    
+
         </select>
       </div>
     </div>
 
     <div class="form-group">
-    <label class="control-label col-sm-2" for="title">Lecture:</label>
+      <label class="control-label col-sm-2" for="title">Lecture:</label>
       <div class="col-sm-10">
-              
-           <select name="lecture" style="width: 230px; height: 35px;" required="required">
+
+       <select name="lecture" style="width: 230px; height: 35px;" required="required">
         <option value="bangla">Bangla</option>
         <option value="english">English</option>
-         </select>
-      </div>
+      </select>
     </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="title">Title:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Tittle" required>
-      </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="title">Title:</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Tittle" required>
     </div>
-    <div class="form-group">
+  </div>
+  <div class="form-group">
     <label class="control-label col-sm-2" for="title">URL:</label>
-      <div class="col-sm-10">
-        <input type="url" class="form-control" id="url" name="url" placeholder="Enter URL" required>
-      </div>
+    <div class="col-sm-10">
+      <input type="url" class="form-control" id="url" name="url" placeholder="Enter URL" required>
     </div>
-     <div class="form-group">
+  </div>
+  <div class="form-group">
     <label class="control-label col-sm-2" for="title">Was Catagory:</label>
-      <div class="col-sm-10">
-              
-           <select name="wasCatatory" style="width: 230px; height: 35px;" required="required">
-        <option value="ঈমান">ঈমান</option>
-        <option value="সালাত">সালাত</option>
-        <option value="সিয়াম">সিয়াম</option>
-        <option value="যাকাত">যাকাত</option>
-        <option value="হজ্জ">হজ্জ</option>
-        <option value="অন্যান্য">অন্যান্য</option>
-         </select>
-      </div>
-    </div>
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="title">Type:</label>
-      <div class="col-sm-10">
-              
-           <select name="type" style="width: 230px; height: 35px;" required="required">
-        <option value="audio">Audio</option>
-        <option value="video">Video</option>
-         </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-        
-      </div>
-    </div>
-  </form>
+    <div class="col-sm-10">
+
+     <select name="wasCatatory" style="width: 230px; height: 35px;" required="required">
+      <option value="ঈমান">ঈমান</option>
+      <option value="সালাত">সালাত</option>
+      <option value="সিয়াম">সিয়াম</option>
+      <option value="যাকাত">যাকাত</option>
+      <option value="হজ্জ">হজ্জ</option>       
+      <option value="শির্ক">শির্ক</option>
+      <option value="বিদআত">বিদআত</option>
+      <option value="জান্নাত">জান্নাত</option>
+      <option value="জাহান্নাম">জাহান্নাম</option>
+      <option value="নেশা">নেশা</option>
+      <option value="গানবাজনা">গানবাজনা</option>
+      <option value="যেনা ব্যাভিচার">যেনা ব্যাভিচার</option>
+      <option value="সুদ">সুদ</option>
+      <option value="দয়া ও রহমত">দয়া ও রহমত</option>
+      <option value="অন্যান্য">অন্যান্য</option>
+      <option value="Faith">Faith</option>
+      <option value="Salat">Salat</option>
+      <option value="Fasting">Fasting</option>
+      <option value="Zakat">Zakat</option>
+      <option value="Hajj">Hajj</option>       
+      <option value="Shirk ">Shirk</option>
+      <option value="Innovations">Innovations</option>
+      <option value="Jannat">Jannat</option>
+      <option value="Jahannam">Jahannam</option>
+      <option value="Drug">Drug</option>
+      <option value="Music">Music</option>
+      <option value="Adultery">Adultery</option>
+      <option value="Mercy">Mercy</option>
+      <option value="Bank Interest">Bank Interest</option>
+      <option value="Others">Others</option>
+
+    </select>
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label col-sm-2" for="title">Type:</label>
+  <div class="col-sm-10">
+
+   <select name="type" style="width: 230px; height: 35px;" required="required">
+    <option value="audio">Audio</option>
+    <option value="video">Video</option>
+  </select>
+</div>
+</div>
+<div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
 
   </div>
+</div>
+</form>
+
+</div>
 
 
 
-  
+
 
 
 <script type="text/javascript">

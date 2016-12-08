@@ -185,7 +185,7 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "audio", "lecture": "bangla" }, { page: currentPage, limit: 2, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "audio", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
            
@@ -259,7 +259,7 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "video", "lecture": "bangla" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "video", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
            
@@ -432,7 +432,7 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
            
@@ -463,25 +463,6 @@ router.get('/logout', function(req, res, next) {
 
 });
 
-
-//create a schema
-// var productSchema = new mongoose.Schema({
-//   name: String,
-//   url:String,
-//   title:String
-// });
-
-// // the schema is useless so far
-// // we needsto create a model using it
-// var Products = restful.model('products', productSchema);
-
-// Products.methods(['get','put','post','delete']);
-
-// Products.register(router, '/product');
-
-// router.get('*', function(req, res){
-//   res.send('what???', 404);
-// });
 
 
 module.exports = router;

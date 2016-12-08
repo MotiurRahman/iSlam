@@ -4,7 +4,7 @@ function run() {
     // window.location.replace('http://localhost:3000/api/name/'+name);
 
 
-    window.location.replace('http://localhost:3000/speaker/' + name);
+    window.location.replace('/speaker/' + name);
 
     // $.ajax({
     //   url: 'http://localhost:3000/api/name/'+name,

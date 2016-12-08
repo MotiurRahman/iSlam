@@ -12,7 +12,7 @@ $(document).ready(function() {
         if (id !== "") {
 
             $.ajax({
-                    url: 'http://localhost:3000/content_id/' + id,
+                    url: '/content_id/' + id,
                     type: 'get',
                     dataType: 'json',
                     //data: $("#email").val(),

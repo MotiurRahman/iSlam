@@ -1,12 +1,13 @@
+
 $(document).ready(function() {
     $("#search").click(function() {
         // alert("Email: " + $("#email").val());
 
         var id = $("#id").val();
-        
+
         if (id != "") {
             $.ajax({
-                url: 'http://localhost:3000/content_id/' + id
+                url: "/content_id/" + id
             }).then(function(reuslt) {
 
                 if (reuslt != null) {
@@ -21,7 +22,7 @@ $(document).ready(function() {
                 console.log('uh oh: ', error); // 'uh oh: something bad happened’
             });
         } else {
-           alert("Pleae insert ID value");
+            alert("Pleae insert ID value");
         }
 
 

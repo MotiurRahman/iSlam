@@ -6,9 +6,7 @@
    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
     <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></i></p>
+    
   </div>
   <div class="col-sm-8 text-left">
     <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
@@ -38,12 +36,15 @@
     
      <% for(var i=0; i<data.length; i++) { %>
      <li>
-       <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
+      
+        <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src=<%= data[i].url %>></iframe>
+      </div>
        <br>
 
-       বক্তাঃ <%= data[i].name %>
+       Speaker: <%= data[i].name %>
        <br>
-        বিষয়ঃ <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+        Title: <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
        <br>
        ID: <%= data[i].id %>
        <br>
@@ -56,10 +57,29 @@
  </div>
  <div class="col-sm-2 sidenav">
   <div class="well">
-    <p>ADS</p>
+   <p class="text-center"> Search By Topics<br><select name="wasCatatory" style="width: 130px; height: 35px;">
+      <option >Select Topics</option>
+      <option value="Faith">Faith</option>
+      <option value="Salat">Salat</option>
+      <option value="Fasting">Fasting</option>
+      <option value="Zakat">Zakat</option>
+      <option value="Hajj">Hajj</option>       
+      <option value="Shirk ">Shirk</option>
+      <option value="Innovations">Innovations</option>
+      <option value="Jannat">Jannat</option>
+      <option value="Jahannam">Jahannam</option>
+      <option value="Drug">Drug</option>
+      <option value="Music">Music</option>
+      <option value="Adultery">Adultery</option>
+      <option value="Mercy">Mercy</option>
+      <option value="Bank Interest">Bank Interest</option>
+      <option value="Others">Others</option>
+
+      
+    </select> </p>
   </div>
-  <div class="well">
-    <p>ADS</p>
+ <div class="well">
+    <p class="text-center">Apps</p>
   </div>
 </div>
 </div>

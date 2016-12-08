@@ -48,7 +48,9 @@
      
       <% for(var i=0; i<data.length; i++) { %>
       <li>
-       <iframe width="520" height="345" src=<%= data[i].url %>></iframe>
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src=<%= data[i].url %>></iframe>
+      </div>
        <br>
 
        বক্তাঃ <%= data[i].name %>
@@ -64,32 +66,34 @@
    </ul>
  </div>
  <div class="col-sm-2 sidenav">
-  <a href="/wascatagory/videoWas/ঈমান">
-  <div class="well" >
-    <p class="text-center" id="sidebar">ঈমান</p>
-  </div>
-</a>
 
-<a href="/wascatagory/videoWas/সালাত">
-  <div class="well">
-   <p class="text-center" id="sidebar">সালাত</p> 
- </div>
-</a>
-<a href="/wascatagory/videoWas/সিয়াম">
-  <div class="well">
-    <p class="text-center" id="sidebar">সিয়াম</p>
-  </div>
-</a>
-<a href="/wascatagory/videoWas/যাকাত">
-  <div class="well">
-    <p class="text-center" id="sidebar">যাকাত</p>
-  </div>
-</a>
-<a href="/wascatagory/videoWas/হজ্জ">
-  <div class="well">
-    <p class="text-center" id="sidebar">হজ্জ</p>
-  </div>
-</a>
+
+ <div class="well">
+   <p class="text-center"> Search By Topics<br><select id="topicName" onchange="topic()"  style="width: 130px; height: 35px;">
+    <option >বিষয় নির্বাচন</option>
+    <option value="ঈমান">ঈমান</option>
+    <option value="সালাত">সালাত</option>
+    <option value="সিয়াম">সিয়াম</option>
+    <option value="যাকাত">যাকাত</option>
+    <option value="হজ্জ">হজ্জ</option>       
+    <option value="শির্ক">শির্ক</option>
+    <option value="বিদআত">বিদআত</option>
+    <option value="জান্নাত">জান্নাত</option>
+    <option value="জাহান্নাম">জাহান্নাম</option>
+    <option value="নেশা">নেশা</option>
+    <option value="গানবাজনা">গানবাজনা</option>
+    <option value="যেনা ব্যাভিচার">যেনা ব্যাভিচার</option>
+    <option value="সুদ">সুদ</option>
+    <option value="দয়া ও রহমত">দয়া ও রহমত</option>
+    <option value="অন্যান্য">অন্যান্য</option>
+    
+  </select> </p>
+</div>
+
+<div class="well">
+  <p class="text-center">Apps</p>
+</div>
+
 
 </div>
 </div>
@@ -142,5 +146,13 @@
 window.location.replace('/videoBySpeaker/speaker/'+name);
 }
 
+function topic(){
+  var topicName = $("#topicName").val();
+
+ // window.location.replace('http://localhost:3000/api/name/'+name);  
+
+ window.location.replace('/wascatagory/videoWas/'+topicName);
+
+}
 
 </script>
