@@ -95,7 +95,7 @@ router.get('/speaker/:name', function(req, res, next) {
 
         if (err) {
             res.json(err)
-            
+
         } else {
 
             video_Data = videoDocs;
@@ -103,7 +103,7 @@ router.get('/speaker/:name', function(req, res, next) {
             was.find({ "name": req.params.name, "wasType": "audio", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
                 if (err) {
                     res.json(err);
-                  
+
                 } else {
                     if (video_Data == null && docs == null)
 
@@ -151,7 +151,7 @@ router.get('/audio', function(req, res, next) {
 
         if (err) {
             res.json(err)
-            
+
         } else {
 
 
@@ -188,7 +188,7 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
     was.paginate({ 'name': name, 'wasType': "audio", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
 
@@ -226,7 +226,7 @@ router.get('/videoWas', function(req, res, next) {
     was.paginate({ "wasType": "video", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
             res.render('videoWas', {
@@ -262,7 +262,7 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
     was.paginate({ 'name': name, 'wasType': "video", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
             res.render('videoBySpeaker', {
@@ -295,57 +295,55 @@ router.get('/contact', function(req, res, next) {
 
     console.log("contagePage:" + req.session.admin);
 
+
     var transporter = nodemailer.createTransport({
-        service: 'Gmail',
+        host: 'smtp.gmail.com',
+        port: 465,
         auth: {
             user: 'motiur.mbstu@gmail.com', // Your email id
             pass: 'cvifcxpetookuwts' // Your password
         }
     });
 
+    //var transporter = nodemailer.createTransport('smtps://motiur.mbstu@gmail.com%40gmail.com:cvifcxpetookuwts@smtp.gmail.com');
+
     var name = req.body.name;
-    var Email = req.body.email;
-    var subject = req.body.subject;
+    var email = req.body.email;
+    var Subject = req.body.subject;
     var message = req.body.message;
 
+    console.log("Email:" + email);
+    console.log("name:" + name);
+    console.log("subject:" + Subject);
+    //console.log("message"+message);
+
+
     var mailOptions = {
-        from: 'motiur.mbstu@gmail.com', // sender address
-        to: Email, // list of receivers
-        subject: subject, // Subject line
-        text: name + '\n' + message //, // plaintext body
+        from: email, // sender address
+        to: 'motiur.mbstu@gmail.com', // list of receivers
+        subject: Subject, // Subject line
+        text: name + '\n' + message + '\n' + email //, // plaintext body
             // html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
     };
 
-    if (Email != "" && subject != "" && message !== "") {
-        validator.validate_async(Email, function(err, isValidEmail) {
-
-            if (isValidEmail) {
-                transporter.sendMail(mailOptions, function(error, info) {
-                    if (error) {
-                        console.log(error);
-                        res.json("Please try again");
-                    } else {
-                        console.log('Message sent: ' + info.response);
-                        //res.json({yo: info.response});
-
-                        res.redirect("/contact");
-
-                    };
-                });
+    if (validator.validate(email)) {
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log(error);
+                res.json("Please try again");
             } else {
-                res.json("Please provide valid email");
+                console.log('Message sent: ' + info.response);
+                res.json("Message has been send successfully");
 
-            }
+                //res.redirect("/contact");
 
+            };
+        });
 
-        }); // true 
 
     } else {
-        res.status(400).json("Please fill up fields");
+        res.json("Please try again with valid email");
     }
-
-
-
 
 });
 
@@ -366,7 +364,7 @@ router.get('/books', function(req, res, next) {
     book.paginate({}, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
             res.render('books', {
@@ -401,7 +399,7 @@ router.get('/english', function(req, res, next) {
     was.paginate({ "wasType": "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
             res.render('english', {
@@ -435,7 +433,7 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
     was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
-           
+
         } else {
 
             res.render('english', {

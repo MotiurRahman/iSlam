@@ -29,96 +29,187 @@
         <div class="col-md-4">
             <h3>Contact Details</h3>
             <p>
-               <br>Mirpur Dhaka<br>
-            </p>
+             <br>Mirpur Dhaka<br>
+         </p>
             <!-- <p><i class="fa fa-phone"></i> 
-                <abbr title="Phone">P</abbr>+88 01723306519</p> -->
-                <p><i class="fa fa-envelope-o"></i> 
-                    <abbr title="Email">E</abbr>: <a href="motiur.mbstu@gmail.com">motiur.mbstu@gmail.com</a>
-                </p>
-                <p><i class="fa fa-clock-o"></i> 
-                    <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p>
-                    <ul class="list-unstyled list-inline list-social-icons">
-                        <li>
-                            <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a>
-                        </li>
-                    </ul>
-                </div>
+            <abbr title="Phone">P</abbr>+88 01723306519</p> -->
+            <p><i class="fa fa-envelope-o"></i> 
+                <abbr title="Email">E</abbr>: <a href="motiur.mbstu@gmail.com">motiur.mbstu@gmail.com</a>
+            </p>
+            <p><i class="fa fa-clock-o"></i> 
+                <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p>
+                <ul class="list-unstyled list-inline list-social-icons">
+                    <li>
+                        <a href="#"><i class="fa fa-facebook-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-twitter-square fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                    </li>
+                </ul>
             </div>
-            <!-- /.row -->
+        </div>
+        <!-- /.row -->
 
-            <!-- Contact Form -->
-            <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
-            <div class="row">
-                <div class="col-md-8">
-                    <h3>Send us a Message</h3>
-                    <form name="sentMessage" id="contactForm" data-toggle="validator" method="post">
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Full Name:</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                                <p class="help-block"></p>
-                            </div>
+        <!-- Contact Form -->
+        <!-- In order to set the email address and subject line for the contact form go to the bin/contact_me.php file. -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="alert alert-success" role="alert" id="successData"></div>
+                <div class="alert alert-danger" role="alert" id="errrData"></div>
+                <h3>Send us a Message</h3>
+                <form name="sentMessage" id="contactForm" data-toggle="validator" method="post">
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Full Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                            <p class="help-block"></p>
                         </div>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Subject:</label>
-                                <input type="tel" class="form-control" id="subject" name="subject" required>
-                            </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Subject:</label>
+                            <input type="tel" class="form-control" id="subject" name="subject" required>
                         </div>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Email Address:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Email Address:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
                         </div>
-                        <div class="control-group form-group">
-                            <div class="controls">
-                                <label>Message:</label>
-                                <textarea rows="10" cols="100" class="form-control" id="message" name="message" style="resize:none" required></textarea>
-                               
-                            </div>
-                        </div>
-                        <div id="success"></div>
-                        <!-- For success/fail messages -->
-                        <button type="submit" class="btn btn-primary" id='submit'>Send Message</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="control-group form-group">
+                        <div class="controls">
+                            <label>Message:</label>
+                            <textarea rows="10" cols="100" class="form-control" id="message" name="message" style="resize:none" required></textarea>
 
+                        </div>
+                    </div>
+                    <div id="success"></div>
+                    <!-- For success/fail messages -->
+                    <button type="button" class="btn btn-primary btn-lg" id="sendMes"><i class="fa fa-spinner fa-spin"></i> Message Sending</button>
+                    
+                    <button type="button" class="btn btn-primary" id='sendMail'>Send Message</button>
+
+                </form>
             </div>
-            <!-- /.row -->
-
-
-
 
         </div>
-        <br>
-        <br>
-        <!-- /.container -->
+        <!-- /.row -->
 
-        <script type="text/javascript">
 
-// $(document).ready(function(){
 
-// $("#submit").click(function() {
-// alert("sdfdsf");
 
-// });
+    </div>
+    <br>
+    <br>
+    <!-- /.container -->
+
+    <script type="text/javascript">
+      $("#successData").hide();
+      $("#errrData").hide();
+      $("#sendMes").hide();
+
+
+      $(document).ready(function() {
+          $("#sendMail").click(function() {
+        //alert("Email");
+
+        var Name =  $('#name').val();
+        var Subject = $('#subject').val();
+        var Email =  $('#email').val();
+        var Message =  $('#message').val();
+
+        var contant = {
+            "name" :Name,
+            "subject":Subject,
+            "email":Email,
+            "message":Message
+        };
+
+
+        if (Name !="" && Subject != "" && Email != "" && Message !== "") {
+
+           $("#sendMes").show();
+           $("#sendMail").hide();
+
+           $.ajax({
+            url: '/contact',
+            type: 'POST',
+            dataType: 'json',
+                    //data: $("#email").val(),
+                    data: JSON.stringify(contant),
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(data, textStatus, jQxhr) {
+
+                       $("#sendMes").hide();
+                       $("#sendMail").show();
+
+                       if(data =="Message has been send successfully")
+                       {
+                         $("#successData").show();
+                         $("#successData").text(data);
+
+                         $("#errrData").hide();
+
+                     }else{
+                      $("#errrData").show();
+                      $("#errrData").text(data);
+                      $("#successData").hide();
+                  }
+
+
+
+              },
+              error: function(jqXhr, textStatus, errorThrown) {
+                        //alert("Error:"+errorThrown);
+                        $("#errrData").show();
+                        $("#errrData").text(errorThrown);
+                        $("#successData").hide();
+                    }
+                })
+           .done(function(reuslt) {
+
+                    //console.log(reuslt);
+                   // alert(reuslt);
+                    // if (reuslt != null) {
+                    //     var data = JSON.stringify(reuslt);
+                    //     $("#speakerName").val(reuslt.name).change();
+                    //     $("#lecture").val(reuslt.lecture).change();
+                    //     $('#title').val(reuslt.title);
+                    //     $('#url').val(reuslt.url);
+                    //     $("#type_id").val(reuslt.wasType).change();
+                    //     $("#wascatatory").val(reuslt.wasCatatory).change();
+
+                    // }
+
+                    //alert(reuslt.name);
+                })
+           .fail(function() {
+            console.log("error");
+        })
+           .always(function() {
+            console.log("complete");
+        });
+       } else {
+        alert("Please fillup All the fields");
+    }
+
+});
+      });
 
 
          //   });
 
-        </script>
+     </script>
 
 
 
-        
+
