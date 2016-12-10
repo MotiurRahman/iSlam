@@ -1,4 +1,5 @@
 
+  $("#errrData").hide();
 $(document).ready(function() {
     $("#search").click(function() {
         // alert("Email: " + $("#email").val());
@@ -9,13 +10,16 @@ $(document).ready(function() {
             $.ajax({
                 url: "/content_id/" + id
             }).then(function(reuslt) {
+                $("#errrData").hide();
 
                 if (reuslt != null) {
                     $('#name').val(reuslt.name);
                     $('#title').val(reuslt.title);
                     $('#url').val(reuslt.url);
                 } else {
-                    alert("There is no data available with this value");
+                     $("#errrData").show();
+                     $("#errrData").text("NO data available with this id");
+                    
                 }
 
             }, function(error) {

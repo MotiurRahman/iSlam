@@ -1,11 +1,5 @@
 $(document).ready(function() {
     $("#search").click(function() {
-        //alert("Email");
-        // $('#name').val("motiur");
-        // $('#title').val("rahman");
-        // $('#url').val("palash");
-
-        // var data = {"id":$("#id").val()};
         var id = $("#id").val();
         //alert(id);
 
@@ -56,32 +50,3 @@ $(document).ready(function() {
 
     });
 });
-
-// $(document).ready(function() {
-// $("#update").click(function(){
-//         var value = {"id":$("#id").val(),
-//                      "name":$("#name").val(),
-//                     "title":$("#title").val(),
-//                     "url":$("#url").val(),
-
-//                     };
-
-//         $.ajax({
-//           url: 'http://localhost:3000/admin/updateDelete',
-//           type: 'put',
-//           dataType: 'json',
-//           //data: $("#email").val(),
-//           data: JSON.stringify(value),
-//           headers: {
-//               'Content-Type': 'application/json;charset=utf-8'
-//             },
-//             success:function(data){
-//             document.location.href = 'http://localhost:3000/'
-//             },
-//             error:function(error){
-//             alert(error)
-//             }
-//         });
-
-//     });
-//   });

@@ -128,6 +128,42 @@ router.get('/videoWas/:wasCatatory', function(req, res, next) {
 });
 
 
+router.get('/englishWas/:wasCatatory', function(req, res, next) {
+    console.log("VideoPage:" + req.session.admin);
+
+    var catagory = req.params.wasCatatory;
+
+    var currentPage = 1;
+    if (typeof req.query.page !== 'undefined') {
+        currentPage = +req.query.page;
+    }
+    var name = req.params.name;
+
+    was.paginate({ "wasCatatory": catagory,"wasType": "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+        if (err) {
+            res.json(err)
+           
+        } else {
+
+            res.render('english', {
+                data: result.docs,
+                pageSize: result.limit,
+                totalVideoData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                userInfo: req.session.admin
+            });
+
+            // res.json(docs);
+
+        }
+
+    });
+
+});
+
+
+
 
 
 

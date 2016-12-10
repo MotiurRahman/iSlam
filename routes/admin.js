@@ -74,8 +74,8 @@ router.get('/insert', checkAuthentication, function(req, res, next) {
                 res.json(err)
                     // mongoose.connection.close();
             } else {
-                //res.json(data)
-                res.redirect('/')
+                res.json("Was has been inserted successfully")
+                
             }
 
 
@@ -141,28 +141,36 @@ router.get('/update', checkAuthentication, function(req, res, next) {
     var name = req.body.name;
     var title = req.body.title;
     var url = req.body.url;
-    var was_Type = req.body.type;
+    var was_Type = req.body.wasType;
     var wasCatatory = req.body.wasCatatory;
     var Lecture = req.body.lecture;
+    console.log("id:" + id);
+    console.log("name:" + name);
+    console.log("title:" + title)
+    console.log("url:" + url)
     console.log("was_Type:" + was_Type)
+    console.log("wasCatatory:" + wasCatatory)
+    console.log("Lecture:" + Lecture)
+
 
     var conditions = { "_id": id },
         update = { $set: { "name": name, "lecture": Lecture, "title": title, "wasType": was_Type, "wasCatatory":wasCatatory, "url": url } },
         options = { multi: true };
 
+
     was.update(conditions, update, options, callback);
 
     function callback(err, updatdata) {
         if (err) {
-            return res.status(400).json({
-                    message: "Data is not valid"
-                })
+           res.json("Data is not valid");
                 // mongoose.connection.close();
         } else {
-            console.log(updatdata);
-            res.redirect('/')
+            
+            res.json('Was has been updated successfully')
         }
     };
+
+
 
 });
 
