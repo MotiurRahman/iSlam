@@ -10,7 +10,7 @@ var checkAuthentication = require('./../libs/autho');
 
 router.get('/login', function(req, res, next) {
 
-    res.render('admin/login', { userInfo: req.session.userInfo });
+    res.render('admin/login', { layout: "layoutorg", userInfo: req.session.userInfo });
 
 }).post('/login', function(req, res, next) {
 

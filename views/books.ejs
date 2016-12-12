@@ -3,7 +3,7 @@
 <!-- Page Content -->
 <div class="container">
 
-    <div class="row">
+    <div class="row content">
         <div class="col-lg-12">
             <h1 class="page-header">Books Corner
                 <small>Subheading</small>
@@ -31,7 +31,7 @@
 <% for(var i=0; i<books.length; i++) { %>
 
 <!-- Blog Post Row -->
-<div class="row">
+<div class="row content">
     <div class="col-md-1 text-center">
         <p><i class="fa fa-camera fa-4x"></i>
         </p>
@@ -39,7 +39,7 @@
         var timestamp = dateData.toString().substring(0,8);
         var d = new Date( parseInt( timestamp, 16 ) * 1000 ) 
         var orgDate = (d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()); %>
-        <p><%= orgDate %></p>
+        <p style="font-size: 12px"><%= orgDate %></p>
     </div>
     <div class="col-md-5">
         <P>
