@@ -51,7 +51,7 @@
 
      বক্তাঃ <%= data[i].name %>
      <br>
-     বিষয়ঃ <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+    বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
      <br>
      ID: <%= data[i].id %>
      <br>
@@ -85,7 +85,7 @@
       <br>
       বক্তাঃ <%= videoData[i].name %>
       <br>
-      বিষয়ঃ <a href="<%= videoData[i].url %>" target="_blank"><%= videoData[i].title %></a>
+      বিষয়ঃ <a href="/details?url=<%= videoData[i].url %>&name=<%= videoData[i].name %>&title=<%= videoData[i].title %>&type=video" target="_blank"><%= videoData[i].title %></a>
       <br>
       ID: <%= videoData[i].id %>
 

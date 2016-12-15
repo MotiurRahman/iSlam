@@ -52,7 +52,7 @@
         
        বক্তাঃ <%= data[i].name %>
        <br>
-        বিষয়ঃ <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+         বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
        <br>
        ID: <%= data[i].id %>
        <br>

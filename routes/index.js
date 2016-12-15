@@ -105,12 +105,13 @@ router.get('/speaker/:name', function(req, res, next) {
                     res.json(err);
 
                 } else {
-                    if (video_Data == null && docs == null)
 
-                    {
-                        res.json("Data does not exist");
-                    } else {
+                    if (video_Data.length > 0 || docs.length > 0) {
+
                         res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
+
+                    } else {
+                        res.render('index', { layout: "layoutorg", "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
 
                     }
 
@@ -191,17 +192,34 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
 
         } else {
 
+            if (result.docs.length > 0) {
+                res.render("audioBySpeaker", {
+                    data: result.docs,
+                    pageSize: result.limit,
+                    totalAudioData: result.total,
+                    pageCount: result.pages,
+                    currentPage: currentPage,
+                    speakerName: name,
+                    userInfo: req.session.admin
+                });
 
-            res.render("audioBySpeaker", {
-                data: result.docs,
 
-                pageSize: result.limit,
-                totalAudioData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                speakerName: name,
-                userInfo: req.session.admin
-            });
+            } else {
+                res.render("audioBySpeaker", {
+                    data: result.docs,
+                    layout: "layoutorg",
+                    pageSize: result.limit,
+                    totalAudioData: result.total,
+                    pageCount: result.pages,
+                    currentPage: currentPage,
+                    speakerName: name,
+                    userInfo: req.session.admin
+                });
+
+
+            }
+
+
 
         }
 
@@ -265,15 +283,34 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
 
         } else {
 
-            res.render('videoBySpeaker', {
-                data: result.docs,
-                pageSize: result.limit,
-                totalAudioData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                speakerName: name,
-                userInfo: req.session.admin
-            });
+            if (result.docs.length > 0) {
+
+                res.render('videoBySpeaker', {
+                    data: result.docs,
+                    pageSize: result.limit,
+                    totalAudioData: result.total,
+                    pageCount: result.pages,
+                    currentPage: currentPage,
+                    speakerName: name,
+                    userInfo: req.session.admin
+                });
+
+            } else {
+
+                res.render('videoBySpeaker', {
+                    data: result.docs,
+                    layout: "layoutorg",
+                    pageSize: result.limit,
+                    totalAudioData: result.total,
+                    pageCount: result.pages,
+                    currentPage: currentPage,
+                    speakerName: name,
+                    userInfo: req.session.admin
+                });
+
+            }
+
+
 
         }
 
@@ -436,15 +473,34 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
 
         } else {
 
-            res.render('english', {
-                data: result.docs,
-                pageSize: result.limit,
-                totalAudioData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                speakerName: name,
-                userInfo: req.session.admin
-            });
+            if (result.docs.length > 0) {
+
+                res.render('english', {
+                    data: result.docs,
+                    pageSize: result.limit,
+                    totalAudioData: result.total,
+                    pageCount: result.pages,
+                    currentPage: currentPage,
+                    speakerName: name,
+                    userInfo: req.session.admin
+                });
+
+            } else {
+
+                res.render('english', {
+                    data: result.docs,
+                    layout: "layoutorg",
+                    pageSize: result.limit,
+                    totalAudioData: result.total,
+                    pageCount: result.pages,
+                    currentPage: currentPage,
+                    speakerName: name,
+                    userInfo: req.session.admin
+                });
+
+            }
+
+
 
         }
 
@@ -460,6 +516,30 @@ router.get('/logout', function(req, res, next) {
     res.redirect('/');
 
 });
+
+
+router.get('/details', function(req, res, next) {
+    console.log("VideoPage:" + req.session.admin);
+
+    var Url = req.query.url;
+    var Name = req.query.name;
+    var Title = req.query.title;
+    var wasType = req.query.type;
+
+
+    res.render('details', {
+        url: Url,
+        name: Name,
+        title: Title,
+        wastype: wasType,
+        userInfo: req.session.admin
+    });
+
+
+
+});
+
+
 
 
 
