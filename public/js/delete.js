@@ -1,5 +1,3 @@
-
-  $("#errrData").hide();
 $(document).ready(function() {
     $("#search").click(function() {
         // alert("Email: " + $("#email").val());
@@ -10,16 +8,21 @@ $(document).ready(function() {
             $.ajax({
                 url: "/content_id/" + id
             }).then(function(reuslt) {
-                $("#errrData").hide();
+                $("#showResult").hide();
 
                 if (reuslt != null) {
                     $('#name').val(reuslt.name);
                     $('#title').val(reuslt.title);
                     $('#url').val(reuslt.url);
                 } else {
-                     $("#errrData").show();
-                     $("#errrData").text("NO data available with this id");
-                    
+
+
+                    $("#showResult").show();
+                    $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text("No data available with this id");
+                    $('#name').val("");
+                    $('#title').val("");
+                    $('#url').val("");
+
                 }
 
             }, function(error) {
@@ -33,31 +36,3 @@ $(document).ready(function() {
     });
 });
 
-// $(document).ready(function() {
-// $("#update").click(function(){
-//         var value = {"id":$("#id").val(),
-//                      "name":$("#name").val(),
-//                     "title":$("#title").val(),
-//                     "url":$("#url").val(),
-
-//                     };
-
-//         $.ajax({
-//           url: 'http://localhost:3000/admin/updateDelete',
-//           type: 'put',
-//           dataType: 'json',
-//           //data: $("#email").val(),
-//           data: JSON.stringify(value),
-//           headers: {
-//               'Content-Type': 'application/json;charset=utf-8'
-//             },
-//             success:function(data){
-//             document.location.href = 'http://localhost:3000/'
-//             },
-//             error:function(error){
-//             alert(error)
-//             }
-//         });
-
-//     });
-//   });

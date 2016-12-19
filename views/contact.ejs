@@ -61,8 +61,7 @@
           <div class="row">
             <div class="col-md-8">
               <div class="col-md-6 col-md-offset-3" style="text-align: center;">
-                <div class="alert alert-success" role="alert" id="successData" ></div>
-                <div class="alert alert-danger" role="alert" id="errrData"></div>
+                <div id="showResult" role="alert"></div>
               </div>
               <br>
               <br>
@@ -117,8 +116,6 @@
         <!-- /.container -->
 
         <script type="text/javascript">
-          $("#successData").hide();
-          $("#errrData").hide();
           $("#sendMes").hide();
 
 
@@ -171,15 +168,13 @@
 
                      if(data =="Message has been send successfully")
                      {
-                       $("#successData").show();
-                       $("#successData").text(data);
 
-                       $("#errrData").hide();
-
+                      $("#showResult").removeClass("alert alert-danger").addClass("alert alert-success").text(data);
+                       
                      }else{
-                      $("#errrData").show();
-                      $("#errrData").text(data);
-                      $("#successData").hide();
+
+                      $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(data);
+                     
                     }
 
 
@@ -187,9 +182,8 @@
                   },
                   error: function(jqXhr, textStatus, errorThrown) {
                         //alert("Error:"+errorThrown);
-                        $("#errrData").show();
-                        $("#errrData").text(errorThrown);
-                        $("#successData").hide();
+                        $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(data);
+                        
                       }
                     })
        .done(function(reuslt) {

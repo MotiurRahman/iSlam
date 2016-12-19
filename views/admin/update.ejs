@@ -8,9 +8,8 @@
       <h1 class="page-header">Update
         <small>Subheading</small>
       </h1>
-      <div class="col-md-6 col-md-offset-3" style="text-align: center;">
-        <div class="alert alert-success" role="alert" id="successData" ></div>
-        <div class="alert alert-danger" role="alert" id="errrData"></div>
+       <div class="col-md-6 col-md-offset-3" style="text-align: center;">
+        <div id="showResult" role="alert"></div>
       </div>
     </div>
   </div>
@@ -144,8 +143,7 @@
 
 
 <script type="text/javascript"> 
-  $("#successData").hide();
-  $("#errrData").hide();
+  
   $("#updating").hide();
 
   $(document).ready(function() {
@@ -193,8 +191,8 @@
      $("#wasCatatory").focus();
    }else{
 
-     $("#inserting").show();
-     $("#insert").hide();
+     $("#updating").show();
+     $("#update").hide();
 
      $.ajax({
       url: '/admin/update',
@@ -212,28 +210,23 @@
 
                      if(data =="Was has been updated successfully")
                      {
-                       $("#successData").show();
-                       $("#successData").text(data);
-
-                       $("#errrData").hide();
+                       $("#showResult").show();
+                       $("#showResult").removeClass("alert alert-danger").addClass("alert alert-success").text(data);
 
                      }else{
-                      $("#errrData").show();
-                      $("#errrData").text(data);
-                      $("#successData").hide();
+                       $("#showResult").show();
+                       $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(data);
                     }
 
 
 
                   },
                   error: function(jqXhr, textStatus, errorThrown) {
-                        //alert("Error:"+errorThrown);
-                        $("#errrData").show();
-                        $("#errrData").text(errorThrown);
-                        $("#successData").hide();
+                        $("#showResult").show();
+                       $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(errorThrown);
                       }
                     })
-     .done(function(reuslt) {
+                .done(function(reuslt) {
 
                     //console.log(reuslt);
                    // alert(reuslt);
@@ -287,15 +280,28 @@ $(document).ready(function() {
                       'Content-Type': 'application/json;charset=utf-8'
                     },
                     success: function(data, textStatus, jQxhr) {
-                      $("#errrData").hide();
+
+                      $("#showResult").hide();
+
+                    
                       if (data == null) {
                            // alert("NO data available with this id");
-                           $("#errrData").show();
-                           $("#errrData").text("NO data available with this id");
+                           $("#showResult").show();
+                           $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text("No data available with this id");
+
+                           $('#title').val("");
+                           $('#url').val("");
+                           
                          }
                        },
                        error: function(jqXhr, textStatus, errorThrown) {
-                        alert("Error:"+errorThrown);
+                       $("#showResult").show();
+                        $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(errorThrown);
+
+                     
+                      $('#title').val("");
+                      $('#url').val("");
+                      
                       }
                     })
           .done(function(reuslt) {

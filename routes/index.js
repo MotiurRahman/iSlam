@@ -106,14 +106,12 @@ router.get('/speaker/:name', function(req, res, next) {
 
                 } else {
 
-                    if (video_Data.length > 0 || docs.length > 0) {
 
-                        res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
 
-                    } else {
-                        res.render('index', { layout: "layoutorg", "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
+                    res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
 
-                    }
+
+
 
                 }
 
@@ -192,7 +190,6 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
 
         } else {
 
-            if (result.docs.length > 0) {
                 res.render("audioBySpeaker", {
                     data: result.docs,
                     pageSize: result.limit,
@@ -202,23 +199,6 @@ router.get('/audioBySpeaker/speaker/:name', function(req, res, next) {
                     speakerName: name,
                     userInfo: req.session.admin
                 });
-
-
-            } else {
-                res.render("audioBySpeaker", {
-                    data: result.docs,
-                    layout: "layoutorg",
-                    pageSize: result.limit,
-                    totalAudioData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    speakerName: name,
-                    userInfo: req.session.admin
-                });
-
-
-            }
-
 
 
         }
@@ -283,7 +263,6 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
 
         } else {
 
-            if (result.docs.length > 0) {
 
                 res.render('videoBySpeaker', {
                     data: result.docs,
@@ -294,22 +273,6 @@ router.get('/videoBySpeaker/speaker/:name', function(req, res, next) {
                     speakerName: name,
                     userInfo: req.session.admin
                 });
-
-            } else {
-
-                res.render('videoBySpeaker', {
-                    data: result.docs,
-                    layout: "layoutorg",
-                    pageSize: result.limit,
-                    totalAudioData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    speakerName: name,
-                    userInfo: req.session.admin
-                });
-
-            }
-
 
 
         }
@@ -459,6 +422,58 @@ router.get('/english', function(req, res, next) {
 });
 
 
+// router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
+
+//     var currentPage = 1;
+//     if (typeof req.query.page !== 'undefined') {
+//         currentPage = +req.query.page;
+//     }
+//     var name = req.params.name;
+
+//     was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+//         if (err) {
+//             res.json(err)
+
+//         } else {
+
+//             if (result.docs.length > 0) {
+
+//                 res.render('english', {
+//                     data: result.docs,
+//                     pageSize: result.limit,
+//                     totalAudioData: result.total,
+//                     pageCount: result.pages,
+//                     currentPage: currentPage,
+//                     speakerName: name,
+//                     userInfo: req.session.admin
+//                 });
+
+//             } else {
+
+//                 res.render('english', {
+//                     data: result.docs,
+//                     layout: "layoutorg",
+//                     pageSize: result.limit,
+//                     totalAudioData: result.total,
+//                     pageCount: result.pages,
+//                     currentPage: currentPage,
+//                     speakerName: name,
+//                     userInfo: req.session.admin
+//                 });
+
+//             }
+
+
+
+//         }
+
+
+//     });
+
+// });
+
+
+
 router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
 
     var currentPage = 1;
@@ -473,32 +488,31 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
 
         } else {
 
-            if (result.docs.length > 0) {
 
-                res.render('english', {
-                    data: result.docs,
-                    pageSize: result.limit,
-                    totalAudioData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    speakerName: name,
-                    userInfo: req.session.admin
-                });
+            var value = {
 
-            } else {
-
-                res.render('english', {
-                    data: result.docs,
-                    layout: "layoutorg",
-                    pageSize: result.limit,
-                    totalAudioData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    speakerName: name,
-                    userInfo: req.session.admin
-                });
+                data: result.docs,
+                pageSize: result.limit,
+                totalAudioData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                speakerName: name,
+                userInfo: req.session.admin
 
             }
+
+            res.json({
+
+                data: result.docs,
+                pageSize: result.limit,
+                totalAudioData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                speakerName: name,
+                userInfo: req.session.admin
+
+            });
+
 
 
 
@@ -508,6 +522,26 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
     });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

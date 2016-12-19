@@ -23,14 +23,7 @@ router.get('/:wasCatatory', function(req, res, next) {
 
                 } else {
 
-
-                    if (docs.length > 0 || video_Data.length > 0) {
-
-                        res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
-                    } else {
-
-                        res.render('index', { layout: "layoutorg", "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
-                    }
+                    res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
 
 
 
@@ -75,34 +68,14 @@ router.get('/audio/:wasCatatory', function(req, res, next) {
 
         } else {
 
-
-
-            if (result.docs.length> 0) {
-
-                res.render("audio", {
-                    data: result.docs,
-                    pageSize: result.limit,
-                    totalAudioData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    userInfo: req.session.admin
-                });
-
-
-            } else {
-
-                res.render("audio", {
-                    data: result.docs,
-                    layout: "layoutorg",
-                    pageSize: result.limit,
-                    totalAudioData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    userInfo: req.session.admin
-                });
-
-            }
-
+            res.render("audio", {
+                data: result.docs,
+                pageSize: result.limit,
+                totalAudioData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                userInfo: req.session.admin
+            });
 
 
 
@@ -134,29 +107,15 @@ router.get('/videoWas/:wasCatatory', function(req, res, next) {
 
         } else {
 
-            if (result.docs.length > 0) {
 
-                res.render('videoWas', {
-                    data: result.docs,
-                    pageSize: result.limit,
-                    totalVideoData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    userInfo: req.session.admin
-                });
-            } else {
-
-                res.render('videoWas', {
-                    data: result.docs,
-                    layout: "layoutorg",
-                    pageSize: result.limit,
-                    totalVideoData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    userInfo: req.session.admin
-                });
-
-            }
+            res.render('videoWas', {
+                data: result.docs,
+                pageSize: result.limit,
+                totalVideoData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                userInfo: req.session.admin
+            });
 
             // res.json(docs);
 
@@ -184,31 +143,15 @@ router.get('/englishWas/:wasCatatory', function(req, res, next) {
 
         } else {
 
-            if (result.docs.length > 0) {
-                res.render('english', {
-                    data: result.docs,
-                    pageSize: result.limit,
-                    totalVideoData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    userInfo: req.session.admin
-                });
+            res.render('english', {
+                data: result.docs,
+                pageSize: result.limit,
+                totalVideoData: result.total,
+                pageCount: result.pages,
+                currentPage: currentPage,
+                userInfo: req.session.admin
+            });
 
-            } else {
-
-
-                res.render('english', {
-                    data: result.docs,
-                    layout: "layoutorg",
-                    pageSize: result.limit,
-                    totalVideoData: result.total,
-                    pageCount: result.pages,
-                    currentPage: currentPage,
-                    userInfo: req.session.admin
-                });
-
-
-            }
 
 
 

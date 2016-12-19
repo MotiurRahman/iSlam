@@ -3,99 +3,98 @@
 <div class="container">
  <div class="row content">
   <div class="col-sm-2 sidenav">
-    <p class="text-left"><b>Top islamic Web App</b></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tawhidmedia.com/" target="_blank">Tawhidmedia</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></i></p>
 
-  </div>
-  <div class="col-sm-8 text-left">
+   <div style="height: 300px; background-image: url(/images/mosque.jpg);"></div>
+
+   <br>
+  
+
+ </div>
+ 
+ <div class="col-sm-8 text-left">
    <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
    <br>
-   <br>
-   <br>
+
+
 
    <div class="form-group">
-    <label class="control-label col-sm-2" for="name">Category:</label>
-    <div class="col-sm-10">
-      <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">         
-        <option >All</option>
-        <option >ড. যাকির নায়েক</option>
-        <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-        <option >শাইখ মতিউর রহমান মাদানী</option>
-        <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-        <option >মুযাফফর বিন মুহসিন</option>
-        <option >সিফাত হাসান</option>
-        <option >শাইখ আমানুল্লাহ মাদানী</option>
-        <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-        <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-        <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-        <option >ড. মনজুরে ইলাহী</option>
-        <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-        <option >অন্যান্য </option>
-      </select>
+    <div class="col-md-4 col-md-offset-4">              
+     <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+      <option >বক্তা নির্বাচন করুন</option>
+      <option >ড. যাকির নায়েক</option>
+      <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+      <option >শাইখ মতিউর রহমান মাদানী</option>
+      <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+      <option >মুযাফফর বিন মুহসিন</option>
+      <option >সিফাত হাসান</option>
+      <option >শাইখ আমানুল্লাহ মাদানী</option>
+      <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+      <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+      <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+      <option >ড. মনজুরে ইলাহী</option>
+      <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+      <option >অন্যান্য </option>
+    </select>
 
-    </div>
   </div>
+</div>
 
-  <br>
-  <br>
-  <br>
 
-  <ul>
-    <% for(var i=0; i<data.length; i++) { %>
-    <li>
+<br>
+<br>
+<br>
 
-     বক্তাঃ <%= data[i].name %>
+<ul>
+  <% for(var i=0; i<data.length; i++) { %>
+  <li>
+
+   বক্তাঃ <%= data[i].name %>
+   <br>
+   বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
+   <br>
+   ID: <%= data[i].id %>
+   <br>
+   <audio controls>
+    <source src="<%= data[i].url %>" type="audio/ogg">
+      <source src="<%= data[i].url %>" type="audio/mpeg">
+       Your browser does not support the audio element.
+     </audio>
+
+
      <br>
-    বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
      <br>
-     ID: <%= data[i].id %>
      <br>
-     <audio controls>
-      <source src="<%= data[i].url %>" type="audio/ogg">
-        <source src="<%= data[i].url %>" type="audio/mpeg">
-         Your browser does not support the audio element.
-       </audio>
+   </li>
+   <% } %>
+ </ul>
+ <br>
+ <br>
+ <br>
+ <br>
+
+ <ul>
+   <% for(var i=0; i<videoData.length; i++) { %>
+   <li>
+
+    <!-- 16:9 aspect ratio -->
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src=<%= videoData[i].url %>></iframe>
+    </div>
+
+    <br>
+    বক্তাঃ <%= videoData[i].name %>
+    <br>
+    বিষয়ঃ <a href="/details?url=<%= videoData[i].url %>&name=<%= videoData[i].name %>&title=<%= videoData[i].title %>&type=video" target="_blank"><%= videoData[i].title %></a>
+    <br>
+    ID: <%= videoData[i].id %>
 
 
-       <br>
-       <br>
-       <br>
-     </li>
-     <% } %>
-   </ul>
-   <br>
-   <br>
-   <br>
-   <br>
-
-   <ul>
-     <% for(var i=0; i<videoData.length; i++) { %>
-     <li>
-      
-      <!-- 16:9 aspect ratio -->
-      <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src=<%= videoData[i].url %>></iframe>
-      </div>
-
-      <br>
-      বক্তাঃ <%= videoData[i].name %>
-      <br>
-      বিষয়ঃ <a href="/details?url=<%= videoData[i].url %>&name=<%= videoData[i].name %>&title=<%= videoData[i].title %>&type=video" target="_blank"><%= videoData[i].title %></a>
-      <br>
-      ID: <%= videoData[i].id %>
-
-
-      <br>
-      <br>
-      <br>
-    </li>
-    <% } %>
-  </ul>
+    <br>
+    <br>
+    <br>
+  </li>
+  <% } %>
+</ul>
 
 </div>
 
@@ -103,7 +102,6 @@
 
 
 <div class="col-sm-2 sidenav" >
-
   <div class="well">
    <p class="text-center"> Search By Topics<br><select id="topicName" onchange="topic()"  style="width: 95%; height: 35px;">
     <option >বিষয় নির্বাচন</option>
@@ -142,10 +140,10 @@
 </div>
 
 
-</div>
 
 </div>
 
+</div>
 
 
 <script type="text/javascript">
@@ -155,32 +153,10 @@
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
- window.location.replace('/speaker/'+name);
+ window.location.assign('/speaker/'+name);
 
 }
 
-
-
-$(document).ready(function(){
- $(window).scroll(function () {
-  if ($(this).scrollTop() > 1000) {
-    $('#back-to-top').fadeIn();
-  } else {
-    $('#back-to-top').fadeOut();
-  }
-});
-        // scroll body to 0px on click
-        $('#back-to-top').click(function () {
-          $('#back-to-top').tooltip('hide');
-          $('body,html').animate({
-            scrollTop: 0
-          }, 300);
-          return false;
-        });
-        
-        $('#back-to-top').tooltip('show');
-
-      });
 
 
 function topic(){
@@ -188,7 +164,7 @@ function topic(){
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
- window.location.replace('/wascatagory/'+topicName);
+ window.location.assign('/wascatagory/'+topicName);
 
 }
 

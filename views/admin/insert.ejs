@@ -11,8 +11,7 @@
         <small>Subheading</small>
       </h1>
       <div class="col-md-6 col-md-offset-3" style="text-align: center;">
-        <div class="alert alert-success" role="alert" id="successData" ></div>
-        <div class="alert alert-danger" role="alert" id="errrData"></div>
+        <div id="showResult" role="alert"></div>
       </div>
     </div>
   </div>
@@ -135,8 +134,6 @@
 
 
 <script type="text/javascript">
-  $("#successData").hide();
-  $("#errrData").hide();
   $("#inserting").hide();
 
   $(document).ready(function() {
@@ -180,6 +177,8 @@
        $("#inserting").show();
        $("#insert").hide();
 
+
+
        $.ajax({
         url: '/admin/insert',
         type: 'POST',
@@ -196,25 +195,20 @@
 
                      if(data =="Was has been inserted successfully")
                      {
-                       $("#successData").show();
-                       $("#successData").text(data);
-
-                       $("#errrData").hide();
+                      
+                      $("#showResult").removeClass("alert alert-danger").addClass("alert alert-success").text(data);
 
                      }else{
-                      $("#errrData").show();
-                      $("#errrData").text(data);
-                      $("#successData").hide();
+                     $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(data);
                     }
 
 
 
                   },
                   error: function(jqXhr, textStatus, errorThrown) {
-                        //alert("Error:"+errorThrown);
-                        $("#errrData").show();
-                        $("#errrData").text(errorThrown);
-                        $("#successData").hide();
+                       
+            
+                       $("#showResult").removeClass("alert alert-success").addClass("alert alert-danger").text(errorThrown);
                       }
                     })
        .done(function(reuslt) {

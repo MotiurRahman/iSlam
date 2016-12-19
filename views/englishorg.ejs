@@ -1,0 +1,145 @@
+<%- contentFor('body')%>
+<div class="container">
+ <div class="row content">
+   <div class="col-sm-2 sidenav">
+    <p class="text-left"><b>Top islamic Web App</b></p>
+   <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
+    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
+    
+  </div>
+  <div class="col-sm-8 text-left">
+    <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
+    <br>
+   
+  <div class="form-group">
+      <div class="col-md-4 col-md-offset-4">              
+       <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+         <option >Select Speaker Name</option>
+          <option >Ismail Menk</option>
+          <option >Dr. Zakir Naik</option>
+          <option >Nouman-Ali-Khan</option>   
+       </select>
+
+      </div>
+      </div>
+
+   <br>
+   <br>
+   <br>
+
+  
+   <ul>
+    
+     <% for(var i=0; i<data.length; i++) { %>
+     <li>
+      
+        <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src=<%= data[i].url %>></iframe>
+      </div>
+       <br>
+
+       Speaker: <%= data[i].name %>
+       <br>
+        Title: <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+       <br>
+       ID: <%= data[i].id %>
+       <br>
+
+       <br>
+     </li>
+     <% } %>
+   </ul>
+  
+
+ </div>
+ <div class="col-sm-2 sidenav">
+  <div class="well">
+   <p class="text-center"> Search By Topics<br><select name="wasCatatory" id="topicName" onchange="topic()" style="width: 95%; height: 35px;">
+      <option >Select Topics</option>
+      <option value="Faith">Faith</option>
+      <option value="Salat">Salat</option>
+      <option value="Fasting">Fasting</option>
+      <option value="Zakat">Zakat</option>
+      <option value="Hajj">Hajj</option>       
+      <option value="Shirk ">Shirk</option>
+      <option value="Innovations">Innovations</option>
+      <option value="Jannat">Jannat</option>
+      <option value="Jahannam">Jahannam</option>
+      <option value="Drug">Drug</option>
+      <option value="Music">Music</option>
+      <option value="Adultery">Adultery</option>
+      <option value="Mercy">Mercy</option>
+      <option value="Bank Interest">Bank Interest</option>
+      <option value="Others">Others</option>
+
+      
+    </select> </p>
+  </div>
+ <div class="well">
+    <p class="text-center">Apps</p>
+  </div>
+</div>
+</div>
+</div>
+
+<hr>
+
+<!-- Pagination -->
+<% if (pageCount > 1) { %>  
+<div class="row text-center">
+  <div class="col-lg-12">
+    <ul class="pagination">
+      <% if (currentPage > 1) { %>
+      <li><a href="/videoWas?page=1">&laquo;</a></li>
+      <% } %>
+      <% var i = 1;
+      if (currentPage > 5) {
+      i = +currentPage - 4;
+    } %>
+    <% if (i !== 1) { %>
+    <li class="disabled"><a href="#">...</a></li>
+    <% } %>
+    <% for (i; i<=pageCount; i++) { %>
+    <% if (currentPage == i) { %>
+    <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+    <li><a href="/videoWas?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (+currentPage + 4)) { %>
+    <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+    <% } %>
+    <% if (currentPage != pageCount) { %>
+    <li><a href="/videoWas?page=<%= pageCount %>">&raquo;</a></li>
+    <% } %>
+  </ul>  
+
+</div>
+</div>
+<% } %>  
+<!-- /.row -->
+
+
+
+<script type="text/javascript">
+ function run(){
+  var name = $("#catagory").val();
+
+ // window.location.replace('http://localhost:3000/api/name/'+name);
+
+ window.location.assign('/englishVideoBySpeaker/speaker/'+name);
+
+
+      }
+
+    function topic(){
+    var topicName = $("#topicName").val();
+
+   window.location.assign('/wascatagory/englishWas/'+topicName);
+
+    }
+
+ 
+
+</script>

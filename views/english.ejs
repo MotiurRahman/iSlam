@@ -1,91 +1,132 @@
+
+
 <%- contentFor('body')%>
 <div class="container">
  <div class="row content">
-   <div class="col-sm-2 sidenav">
-    <p class="text-left"><b>Top islamic Web App</b></p>
-   <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
-    <p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
-    
-  </div>
+    <div class="col-sm-2 sidenav">
+
+   <div style="height: 300px; background-image: url(/images/mosque.jpg);"></div>
+
+   <br>
+   <br>
+
+ </div>
   <div class="col-sm-8 text-left">
     <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
     <br>
-    <br>
-    <br>
 
     <div class="form-group">
-      <label class="control-label col-sm-2" for="title">Category:</label>
-      <div class="col-sm-10">         
-        <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
-         <option >All</option>
-          <option >Ismail Menk</option>
-          <option >Dr. Zakir Naik</option>
-          <option >Nouman-Ali-Khan</option>   
+      <div class="col-md-4 col-md-offset-4">              
+       <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+         <option >Select Speaker Name</option>
+         <option >Ismail Menk</option>
+         <option >Dr. Zakir Naik</option>
+         <option >Nouman-Ali-Khan</option>
+         <option >Fariq Naik</option>  
        </select>
 
      </div>
    </div>
 
-
    <br>
    <br>
    <br>
 
-   <ul>
-    
-     <% for(var i=0; i<data.length; i++) { %>
-     <li>
-      
+   <div id="wasContent">
+     <ul >
+
+       <% for(var i=0; i<data.length; i++) { %>
+       <li>
+
         <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src=<%= data[i].url %>></iframe>
-      </div>
-       <br>
+          <iframe class="embed-responsive-item" src=<%= data[i].url %>></iframe>
+        </div>
+        <br>
 
-       Speaker: <%= data[i].name %>
-       <br>
+        Speaker: <%= data[i].name %>
+        <br>
         Title: <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
-       <br>
-       ID: <%= data[i].id %>
-       <br>
+        <br>
+        ID: <%= data[i].id %>
+        <br>
 
-       <br>
-     </li>
-     <% } %>
-   </ul>
+        <br>
+      </li>
+      <% } %>
+    </ul>
+  </div>
 
- </div>
- <div class="col-sm-2 sidenav">
+</div>
+<div class="col-sm-2 sidenav">
   <div class="well">
    <p class="text-center"> Search By Topics<br><select name="wasCatatory" id="topicName" onchange="topic()" style="width: 95%; height: 35px;">
-      <option >Select Topics</option>
-      <option value="Faith">Faith</option>
-      <option value="Salat">Salat</option>
-      <option value="Fasting">Fasting</option>
-      <option value="Zakat">Zakat</option>
-      <option value="Hajj">Hajj</option>       
-      <option value="Shirk ">Shirk</option>
-      <option value="Innovations">Innovations</option>
-      <option value="Jannat">Jannat</option>
-      <option value="Jahannam">Jahannam</option>
-      <option value="Drug">Drug</option>
-      <option value="Music">Music</option>
-      <option value="Adultery">Adultery</option>
-      <option value="Mercy">Mercy</option>
-      <option value="Bank Interest">Bank Interest</option>
-      <option value="Others">Others</option>
+    <option >Select Topics</option>
+    <option value="Faith">Faith</option>
+    <option value="Salat">Salat</option>
+    <option value="Fasting">Fasting</option>
+    <option value="Zakat">Zakat</option>
+    <option value="Hajj">Hajj</option>       
+    <option value="Shirk ">Shirk</option>
+    <option value="Innovations">Innovations</option>
+    <option value="Jannat">Jannat</option>
+    <option value="Jahannam">Jahannam</option>
+    <option value="Drug">Drug</option>
+    <option value="Music">Music</option>
+    <option value="Adultery">Adultery</option>
+    <option value="Mercy">Mercy</option>
+    <option value="Bank Interest">Bank Interest</option>
+    <option value="Others">Others</option>
 
-      
-    </select> </p>
-  </div>
- <div class="well">
-    <p class="text-center">Apps</p>
-  </div>
+
+  </select> </p>
+</div>
+<div class="well">
+  <p class="text-center">Apps</p>
+</div>
+
+<div class="scrollToTop">
+
+  <a id="back-to-top" href="#">
+   <i class="fa fa-arrow-circle-o-up" style="font-size:50px"></i>
+ </a>
 </div>
 </div>
 </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+
+    <div id="loader">
+        <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="lading"></div>
+    </div>
+
+
+<div class="col-md-6 col-md-offset-3" style="text-align: center;">
+
+  <div id="showResult" role="alert"></div>
+
+</div>
+
+<br>
+<br>
+
+
 
 <hr>
+
+
 
 <!-- Pagination -->
 <% if (pageCount > 1) { %>  
@@ -125,23 +166,76 @@
 
 
 <script type="text/javascript">
+$("#loader").hide();
  function run(){
   var name = $("#catagory").val();
 
  // window.location.replace('http://localhost:3000/api/name/'+name);
 
- window.location.replace('/englishVideoBySpeaker/speaker/'+name);
+// window.location.assign('/englishVideoBySpeaker/speaker/'+name);
+$("#loader").show();
+$("#wasContent ul").empty();
 
 
-      }
+$.ajax({
+  url: '/englishVideoBySpeaker/speaker/'+name,
+  type: 'GET',
+  dataType: 'json',
+                    //data: $("#email").val(),
+                    //data: JSON.stringify(content),
+                    headers: {
+                      'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(dataValue, textStatus, jQxhr) {
+                      $("#loader").hide();
+                     var value = dataValue.data;
 
-    function topic(){
-    var topicName = $("#topicName").val();
+                     if(value.length>0)
+                     {
+                      $("#showResult").hide();
 
-   window.location.replace('/wascatagory/englishWas/'+topicName);
+                      for (var i = 0; i < value.length; i++) {
+                       $("#wasContent ul").append("<li> <iframe src="+value[i].url+" width=710px height=400px></iframe></li>");
+                       $("#wasContent ul").append("Speaker:"+value[i].name+" <br> Title:"+value[i].title+" <br> ID:"+value[i]._id+" <br><br>");
 
-    }
 
- 
+                     }
+                   }
+                   else{
+
+                     $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+
+                   }
+
+
+                 },
+                 error: function(jqXhr, textStatus, errorThrown) {
+
+
+
+                 }
+               })
+.done(function(reuslt) {
+
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+
+
+
+}
+
+function topic(){
+  var topicName = $("#topicName").val();
+
+  window.location.assign('/wascatagory/englishWas/'+topicName);
+
+}
+
+
 
 </script>
