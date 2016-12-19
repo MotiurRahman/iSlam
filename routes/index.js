@@ -489,18 +489,6 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
         } else {
 
 
-            var value = {
-
-                data: result.docs,
-                pageSize: result.limit,
-                totalAudioData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                speakerName: name,
-                userInfo: req.session.admin
-
-            }
-
             res.json({
 
                 data: result.docs,

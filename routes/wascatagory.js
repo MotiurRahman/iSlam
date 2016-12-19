@@ -143,7 +143,17 @@ router.get('/englishWas/:wasCatatory', function(req, res, next) {
 
         } else {
 
-            res.render('english', {
+            // res.render('english', {
+            //     data: result.docs,
+            //     pageSize: result.limit,
+            //     totalVideoData: result.total,
+            //     pageCount: result.pages,
+            //     currentPage: currentPage,
+            //     userInfo: req.session.admin
+            // });
+
+
+            res.json({
                 data: result.docs,
                 pageSize: result.limit,
                 totalVideoData: result.total,
@@ -151,6 +161,7 @@ router.get('/englishWas/:wasCatatory', function(req, res, next) {
                 currentPage: currentPage,
                 userInfo: req.session.admin
             });
+
 
 
 

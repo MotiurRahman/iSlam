@@ -3,55 +3,55 @@
 <%- contentFor('body')%>
 <div class="container">
  <div class="row content">
-    <div class="col-sm-2 sidenav">
+  <div class="col-sm-2 sidenav">
 
    <div style="height: 300px; background-image: url(/images/mosque.jpg);"></div>
 
  </div>
-  <div class="col-sm-8 text-left">
-    <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
-    <br>
+ <div class="col-sm-8 text-left">
+  <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
+  <br>
 
-    <div class="form-group">
-      <div class="col-md-4 col-md-offset-4">              
-       <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
-         <option >Select Speaker Name</option>
-         <option >Ismail Menk</option>
-         <option >Dr. Zakir Naik</option>
-         <option >Nouman-Ali-Khan</option>
-         <option >Fariq Naik</option>  
-       </select>
+  <div class="form-group">
+    <div class="col-md-4 col-md-offset-4">              
+     <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+       <option >Select Speaker Name</option>
+       <option >Ismail Menk</option>
+       <option >Dr. Zakir Naik</option>
+       <option >Nouman-Ali-Khan</option>
+       <option >Fariq Naik</option>  
+     </select>
 
-     </div>
    </div>
+ </div>
 
-   <br>
-   <br>
-   <br>
+ <br>
+ <br>
+ <br>
 
-   <div id="wasContent">
-     <ul >
+ <div id="wasContent">
+   <ul> 
 
-       <% for(var i=0; i<data.length; i++) { %>
-       <li>
+  <% for(var i=0; i<data.length; i++) { %>
 
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src=<%= data[i].url %>></iframe>
-        </div>
-        <br>
+  <div class="embed-responsive embed-responsive-16by9" id="videValue">
 
-        Speaker: <%= data[i].name %>
-        <br>
-        Title: <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
-        <br>
-        ID: <%= data[i].id %>
-        <br>
+    <iframe class="embed-responsive-item" id="videData" src=<%= data[i].url %>></iframe>
 
-        <br>
-      </li>
-      <% } %>
-    </ul>
   </div>
+     
+   <li>
+    Speaker: <%= data[i].name %>
+    <br>
+    Title: <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+    <br>
+    ID: <%= data[i].id %>
+    <br>
+    <br>
+  </li>
+  <% } %>
+</ul>
+</div>
 
 </div>
 <div class="col-sm-2 sidenav">
@@ -95,17 +95,17 @@
 <br>
 
 
-    <div id="loader">
-        <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="lading"></div>
-    </div>
+<div id="loader">
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="lading"></div>
+</div>
 
 
 <div class="col-md-6 col-md-offset-3" style="text-align: center;">
@@ -161,15 +161,16 @@
 
 
 <script type="text/javascript">
-$("#loader").hide();
- function run(){
-  var name = $("#catagory").val();
+  $("#loader").hide();
+  function run(){
+    var name = $("#catagory").val();
 
  // window.location.replace('http://localhost:3000/api/name/'+name);
 
 // window.location.assign('/englishVideoBySpeaker/speaker/'+name);
 $("#loader").show();
 $("#wasContent ul").empty();
+
 
 
 $.ajax({
@@ -183,33 +184,43 @@ $.ajax({
                     },
                     success: function(dataValue, textStatus, jQxhr) {
                       $("#loader").hide();
-                     var value = dataValue.data;
+                      var value = dataValue.data;
 
-                     if(value.length>0)
-                     {
-                      $("#showResult").hide();
+                      if(value.length>0)
+                      {
+                        $("#showResult").hide();
 
-                      for (var i = 0; i < value.length; i++) {
-                       $("#wasContent ul").append("<li> <iframe src="+value[i].url+" width=710px height=400px></iframe></li>");
-                       $("#wasContent ul").append("Speaker:"+value[i].name+" <br> Title:"+value[i].title+" <br> ID:"+value[i]._id+" <br><br>");
+                        for (var i = 0; i < value.length; i++) {
 
+                          var outerDiv = $("<div></div>");
+                          outerDiv.attr("class","embed-responsive embed-responsive-16by9");
+
+                          var innerDiv = $("<iframe src="+value[i].url+"></iframe>");
+                          innerDiv.attr("class","embed-responsive-item");
+
+                          outerDiv.append(innerDiv);
+
+                          $("#wasContent ul").append(outerDiv);
+                          
+                         $("#wasContent ul").append("Speaker:"+value[i].name+" <br>Title:"+value[i].title+" <br> ID:"+value[i]._id+" <br><br>");
+
+
+                       }
+                     }
+                     else{
+
+                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
 
                      }
+
+
+                   },
+                   error: function(jqXhr, textStatus, errorThrown) {
+
+
+
                    }
-                   else{
-
-                     $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
-
-                   }
-
-
-                 },
-                 error: function(jqXhr, textStatus, errorThrown) {
-
-
-
-                 }
-               })
+                 })
 .done(function(reuslt) {
 
 })
@@ -227,7 +238,72 @@ $.ajax({
 function topic(){
   var topicName = $("#topicName").val();
 
-  window.location.assign('/wascatagory/englishWas/'+topicName);
+  //window.location.assign('/wascatagory/englishWas/'+topicName);
+
+  $("#loader").show();
+$("#wasContent ul").empty();
+
+
+
+$.ajax({
+  url: '/wascatagory/englishWas/'+topicName,
+  type: 'GET',
+  dataType: 'json',
+                    //data: $("#email").val(),
+                    //data: JSON.stringify(content),
+                    headers: {
+                      'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(dataValue, textStatus, jQxhr) {
+                      $("#loader").hide();
+                      var value = dataValue.data;
+
+                      if(value.length>0)
+                      {
+                        $("#showResult").hide();
+
+                        for (var i = 0; i < value.length; i++) {
+
+                          var outerDiv = $("<div></div>");
+                          outerDiv.attr("class","embed-responsive embed-responsive-16by9");
+
+                          var innerDiv = $("<iframe src="+value[i].url+"></iframe>");
+                          innerDiv.attr("class","embed-responsive-item");
+
+                          outerDiv.append(innerDiv);
+
+                          $("#wasContent ul").append(outerDiv);
+                          
+                         $("#wasContent ul").append("Speaker:"+value[i].name+" <br>Title:"+value[i].title+" <br> ID:"+value[i]._id+" <br><br>");
+
+
+                       }
+                     }
+                     else{
+
+                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+
+                     }
+
+
+                   },
+                   error: function(jqXhr, textStatus, errorThrown) {
+
+
+
+                   }
+                 })
+.done(function(reuslt) {
+
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+
+
 
 }
 
