@@ -108,7 +108,8 @@ router.get('/speaker/:name', function(req, res, next) {
 
 
 
-                    res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
+                    //res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
+                     res.json({ "audioData": docs, "videoData": video_Data});
 
 
 

@@ -15,26 +15,26 @@
 			<br>
 
 			<div class="form-group">
-      <div class="col-md-4 col-md-offset-4">              
-       <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
-          <option >বক্তা নির্বাচন করুন</option>
-          <option >ড. যাকির নায়েক</option>
-          <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-          <option >শাইখ মতিউর রহমান মাদানী</option>
-          <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-          <option >মুযাফফর বিন মুহসিন</option>
-          <option >সিফাত হাসান</option>
-          <option >শাইখ আমানুল্লাহ মাদানী</option>
-          <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-          <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-          <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-          <option >ড. মনজুরে ইলাহী</option>
-          <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-          <option >অন্যান্য </option>
-        </select>
+				<div class="col-md-4 col-md-offset-4">              
+					<select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+						<option >বক্তা নির্বাচন করুন</option>
+						<option >ড. যাকির নায়েক</option>
+						<option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+						<option >শাইখ মতিউর রহমান মাদানী</option>
+						<option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+						<option >মুযাফফর বিন মুহসিন</option>
+						<option >সিফাত হাসান</option>
+						<option >শাইখ আমানুল্লাহ মাদানী</option>
+						<option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+						<option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+						<option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+						<option >ড. মনজুরে ইলাহী</option>
+						<option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+						<option >অন্যান্য </option>
+					</select>
 
-      </div>
-      </div>
+				</div>
+			</div>
 
 
 			<br>
@@ -53,24 +53,29 @@
 						<iframe class="embed-responsive-item" src=<%=url %>></iframe>
 					</div>
 
+					বক্তাঃ <%=name %>
+					<br>
+					বিষয়ঃ <a href="<%=url %>" target="_blank"><%=title %></a>
+					<br>
+
 					<% }else{ %> 
+
+					বক্তাঃ <%=name %>
+					<br>
+					বিষয়ঃ <a href="<%=url %>" target="_blank"><%=title %></a>
+					<br>
 
 					<audio controls>
 						<source src="<%=url %> %>" type="audio/ogg">
-						<source src="<%=url %> %>" type="audio/mpeg">
-					     Your browser does not support the audio element.
-					</audio>
+							<source src="<%=url %> %>" type="audio/mpeg">
+								Your browser does not support the audio element.
+							</audio>
 
 
 							<%}%>
 							<br>
-
-							বক্তাঃ <%=name %>
-							<br>
-							বিষয়ঃ <a href="<%=url %>" target="_blank"><%=title %></a>
 							<br>
 
-							<br>
 						</li>
 
 					</ul>

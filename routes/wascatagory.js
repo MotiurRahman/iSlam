@@ -23,7 +23,8 @@ router.get('/:wasCatatory', function(req, res, next) {
 
                 } else {
 
-                    res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
+                   // res.render('index', { "data": docs, "videoData": video_Data, "userInfo": req.session.admin });
+                     res.json({ "audioData": docs, "videoData": video_Data});
 
 
 
@@ -68,13 +69,14 @@ router.get('/audio/:wasCatatory', function(req, res, next) {
 
         } else {
 
-            res.render("audio", {
-                data: result.docs,
-                pageSize: result.limit,
-                totalAudioData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                userInfo: req.session.admin
+
+            res.json({
+                audioData: result.docs,
+                // pageSize: result.limit,
+                // totalAudioData: result.total,
+                // pageCount: result.pages,
+                // currentPage: currentPage,
+                // userInfo: req.session.admin
             });
 
 
@@ -108,13 +110,13 @@ router.get('/videoWas/:wasCatatory', function(req, res, next) {
         } else {
 
 
-            res.render('videoWas', {
-                data: result.docs,
-                pageSize: result.limit,
-                totalVideoData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                userInfo: req.session.admin
+            res.json({
+                videoData: result.docs,
+                // pageSize: result.limit,
+                // totalVideoData: result.total,
+                // pageCount: result.pages,
+                // currentPage: currentPage,
+                // userInfo: req.session.admin
             });
 
             // res.json(docs);

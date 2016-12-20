@@ -7,7 +7,7 @@
    <div style="height: 300px; background-image: url(/images/mosque.jpg);"></div>
 
    <br>
-  
+
 
  </div>
  
@@ -17,84 +17,89 @@
 
 
 
-   <div class="form-group">
-    <div class="col-md-4 col-md-offset-4">              
-     <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
-      <option >বক্তা নির্বাচন করুন</option>
-      <option >ড. যাকির নায়েক</option>
-      <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-      <option >শাইখ মতিউর রহমান মাদানী</option>
-      <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-      <option >মুযাফফর বিন মুহসিন</option>
-      <option >সিফাত হাসান</option>
-      <option >শাইখ আমানুল্লাহ মাদানী</option>
-      <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-      <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-      <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-      <option >ড. মনজুরে ইলাহী</option>
-      <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-      <option >অন্যান্য </option>
-    </select>
+   <div class="form-group text-center">
+    <div class="col-md-6 col-md-offset-3 ">              
+      <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+        <option >বক্তা নির্বাচন করুন</option>
+        <option >ড. যাকির নায়েক</option>
+        <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+        <option >শাইখ মতিউর রহমান মাদানী</option>
+        <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+        <option >মুযাফফর বিন মুহসিন</option>
+        <option >সিফাত হাসান</option>
+        <option >শাইখ আমানুল্লাহ মাদানী</option>
+        <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+        <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+        <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+        <option >ড. মনজুরে ইলাহী</option>
+        <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+        <option >অন্যান্য </option>
+      </select>
 
-  </div>
-</div>
-
-
-<br>
-<br>
-<br>
-
-<ul>
-  <% for(var i=0; i<data.length; i++) { %>
-  <li>
-
-   বক্তাঃ <%= data[i].name %>
-   <br>
-   বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
-   <br>
-   ID: <%= data[i].id %>
-   <br>
-   <audio controls>
-    <source src="<%= data[i].url %>" type="audio/ogg">
-      <source src="<%= data[i].url %>" type="audio/mpeg">
-       Your browser does not support the audio element.
-     </audio>
-
-
-     <br>
-     <br>
-     <br>
-   </li>
-   <% } %>
- </ul>
- <br>
- <br>
- <br>
- <br>
-
- <ul>
-   <% for(var i=0; i<videoData.length; i++) { %>
-   <li>
-
-    <!-- 16:9 aspect ratio -->
-    <div class="embed-responsive embed-responsive-16by9">
-      <iframe class="embed-responsive-item" src=<%= videoData[i].url %>></iframe>
     </div>
-
-    <br>
-    বক্তাঃ <%= videoData[i].name %>
-    <br>
-    বিষয়ঃ <a href="/details?url=<%= videoData[i].url %>&name=<%= videoData[i].name %>&title=<%= videoData[i].title %>&type=video" target="_blank"><%= videoData[i].title %></a>
-    <br>
-    ID: <%= videoData[i].id %>
+  </div>
 
 
-    <br>
-    <br>
-    <br>
-  </li>
-  <% } %>
-</ul>
+  <br>
+  <br>
+  <br>
+
+  <div id="audioContent">
+
+    <ul>
+      <% for(var i=0; i<data.length; i++) { %>
+      <li>
+
+       বক্তাঃ <%= data[i].name %>
+       <br>
+       বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
+       <br>
+       ID: <%= data[i].id %>
+       <br>
+       <audio controls>
+        <source src="<%= data[i].url %>" type="audio/ogg">
+          <source src="<%= data[i].url %>" type="audio/mpeg">
+           Your browser does not support the audio element.
+         </audio>
+
+
+         <br>
+         <br>
+         <br>
+       </li>
+       <% } %>
+     </ul>
+   </div>
+   <br>
+   <br>
+   <br>
+
+   <div id="videoContent">
+
+     <ul>
+       <% for(var i=0; i<videoData.length; i++) { %>
+       <li>
+
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src=<%= videoData[i].url %>></iframe>
+        </div>
+
+        <br>
+        বক্তাঃ <%= videoData[i].name %>
+        <br>
+        বিষয়ঃ <a href="/details?url=<%= videoData[i].url %>&name=<%= videoData[i].name %>&title=<%= videoData[i].title %>&type=video" target="_blank"><%= videoData[i].title %></a>
+        <br>
+        ID: <%= videoData[i].id %>
+
+
+        <br>
+        <br>
+        <br>
+      </li>
+      <% } %>
+    </ul>
+  </div>
 
 </div>
 
@@ -143,17 +148,163 @@
 
 </div>
 
+<div id="loader">
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="lading"></div>
 </div>
 
 
-<script type="text/javascript">
+<div class="col-md-6 col-md-offset-3" style="text-align: center;">
 
+  <div id="showResult" role="alert"></div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+  $("#loader").hide();
   function run(){
     var name = $("#catagory").val();
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
- window.location.assign('/speaker/'+name);
+ //window.location.assign('/speaker/'+name);
+
+ $("#loader").show();
+ $("#audioContent ul").empty();
+ $("#videoContent ul").empty();
+
+
+
+ $.ajax({
+  url: '/speaker/'+name,
+  type: 'GET',
+  dataType: 'json',
+                    //data: $("#email").val(),
+                    //data: JSON.stringify(content),
+                    headers: {
+                      'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(dataValue, textStatus, jQxhr) {
+                      $("#loader").hide();
+                      var audioValue = dataValue.audioData;
+                      var videoValue = dataValue.videoData;
+
+                      if(audioValue.length>0 || videoValue.length>0)
+                      {
+                        //$("#showResult").hide();
+                        $("#showResult").hide().removeClass("alert alert-info");
+
+                        for (var i = 0; i < audioValue.length; i++) {
+
+                          var audioDiv = $("<audio controls> </audio>");
+
+
+                          var innerAudio1 = $("<source src="+audioValue[i].url+">");
+                          innerAudio1.attr("type","audio/ogg");
+
+                          var innerAudio2 = $("<source src="+audioValue[i].url+">");
+                          innerAudio2.attr("type","audio/mpeg");
+
+
+                          audioDiv.append(innerAudio1);
+                          audioDiv.append(innerAudio2);
+                          audioDiv.append("Your browser does not support the audio element.");
+
+                          var urltitle_audio = $("<a>"+audioValue[i].title+"</a>");
+
+
+                          urltitle_audio.attr("href","/details?url="+audioValue[i].url+"&name="+audioValue[i].name+"&title="+audioValue[i].title+"&type=audio");
+
+                          urltitle_audio.attr("target","_blank");
+
+                          
+                          
+                          $("#audioContent ul").append("<br><br> বক্তাঃ&nbsp"+audioValue[i].name+"<br>");
+
+                          $("#audioContent ul").append("বিষয়ঃ");
+                          $("#audioContent ul").append(" ");
+
+
+                          $("#audioContent ul").append(urltitle_audio);
+                          $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+                          $("#audioContent ul").append(audioDiv);
+
+
+                        }
+
+
+
+                        for (var i = 0; i < videoValue.length; i++) {
+
+                          var outerDiv = $("<div></div>");
+                          outerDiv.attr("class","embed-responsive embed-responsive-16by9");
+
+                          var innerDiv = $("<iframe src="+videoValue[i].url+"></iframe>");
+                          innerDiv.attr("class","embed-responsive-item");
+
+                          outerDiv.append(innerDiv);
+
+                          $("#videoContent ul").append(outerDiv);
+
+
+                          var urltitle = $("<a>"+videoValue[i].title+"</a>");
+
+
+                          urltitle.attr("href","/details?url="+videoValue[i].url+"&name="+videoValue[i].name+"&title="+videoValue[i].title+"&type=video");
+
+                          urltitle.attr("target","_blank");
+
+
+
+
+                          $("#videoContent ul").append("বক্তাঃ&nbsp"+videoValue[i].name+"<br>");
+                          $("#videoContent ul").append("বিষয়ঃ");
+                          $("#videoContent ul").append(" ");
+                          $("#videoContent ul").append(urltitle);
+                          $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
+                          
+
+
+                        }
+                      }
+                      else{
+
+                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+
+                     }
+
+
+                   },
+                   error: function(jqXhr, textStatus, errorThrown) {
+
+
+
+                   }
+                 })
+.done(function(reuslt) {
+
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+
 
 }
 
@@ -164,7 +315,126 @@ function topic(){
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
- window.location.assign('/wascatagory/'+topicName);
+ //window.location.assign('/wascatagory/'+topicName);
+
+ $("#loader").show();
+ $("#audioContent ul").empty();
+ $("#videoContent ul").empty();
+
+
+
+ $.ajax({
+  url: '/wascatagory/'+topicName,
+  type: 'GET',
+  dataType: 'json',
+                    //data: $("#email").val(),
+                    //data: JSON.stringify(content),
+                    headers: {
+                      'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    success: function(dataValue, textStatus, jQxhr) {
+                      $("#loader").hide();
+                      var audioValue = dataValue.audioData;
+                      var videoValue = dataValue.videoData;
+
+                      if(audioValue.length>0 || videoValue.length>0)
+                      {
+                        //$("#showResult").hide();
+                        $("#showResult").hide().removeClass("alert alert-info");
+
+                        for (var i = 0; i < audioValue.length; i++) {
+
+                          var audioDiv = $("<audio controls> </audio>");
+
+
+                          var innerAudio1 = $("<source src="+audioValue[i].url+">");
+                          innerAudio1.attr("type","audio/ogg");
+
+                          var innerAudio2 = $("<source src="+audioValue[i].url+">");
+                          innerAudio2.attr("type","audio/mpeg");
+
+
+                          audioDiv.append(innerAudio1);
+                          audioDiv.append(innerAudio2);
+                          audioDiv.append("Your browser does not support the audio element.");
+
+                          var urltitle_audio = $("<a>"+audioValue[i].title+"</a>");
+
+
+                          urltitle_audio.attr("href","/details?url="+audioValue[i].url+"&name="+audioValue[i].name+"&title="+audioValue[i].title+"&type=audio");
+
+                          urltitle_audio.attr("target","_blank");
+
+                          
+                          
+                          $("#audioContent ul").append("<br><br> বক্তাঃ&nbsp"+audioValue[i].name+"<br>");
+
+                          $("#audioContent ul").append("বিষয়ঃ");
+                          $("#audioContent ul").append(" ");
+
+                          $("#audioContent ul").append(urltitle_audio);
+                          $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+                          $("#audioContent ul").append(audioDiv);
+
+
+                        }
+
+
+
+                        for (var i = 0; i < videoValue.length; i++) {
+
+                          var outerDiv = $("<div></div>");
+                          outerDiv.attr("class","embed-responsive embed-responsive-16by9");
+
+                          var innerDiv = $("<iframe src="+videoValue[i].url+"></iframe>");
+                          innerDiv.attr("class","embed-responsive-item");
+
+                          outerDiv.append(innerDiv);
+
+                          $("#videoContent ul").append(outerDiv);
+
+
+                          var urltitle = $("<a>"+videoValue[i].title+"</a>");
+
+
+                          urltitle.attr("href","/details?url="+videoValue[i].url+"&name="+videoValue[i].name+"&title="+videoValue[i].title+"&type=video");
+
+                          urltitle.attr("target","_blank");                        
+
+                          $("#videoContent ul").append("বক্তাঃ&nbsp"+videoValue[i].name+"<br>");
+                          $("#videoContent ul").append("বিষয়ঃ");
+                          $("#videoContent ul").append(" ");
+                          $("#videoContent ul").append(urltitle);
+                          $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
+                          
+
+
+                        }
+                      }
+                      else{
+
+                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+
+                     }
+
+
+                   },
+                   error: function(jqXhr, textStatus, errorThrown) {
+
+
+
+                   }
+                 })
+.done(function(reuslt) {
+
+})
+.fail(function() {
+  console.log("error");
+})
+.always(function() {
+  console.log("complete");
+});
+
 
 }
 
