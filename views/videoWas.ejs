@@ -190,7 +190,9 @@ function topic(){
  $("#videoContent ul").empty();
  $("#pager").remove();
 
-
+if(topicName==="বিষয় নির্বাচন"){
+  $("#loader").hide();
+}else {
 
  $.ajax({
   url: '/wascatagory/'+topicName,
@@ -244,7 +246,7 @@ function topic(){
                       }
                       else{
 
-                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
 
                      }
 
@@ -265,7 +267,7 @@ function topic(){
 .always(function() {
   console.log("complete");
 });
-
+}
 
 }
 

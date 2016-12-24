@@ -186,7 +186,9 @@
  $("#loader").show();
  $("#audioContent ul").empty();
  $("#videoContent ul").empty();
-
+ if(name==="বক্তা নির্বাচন করুন"){
+  $("#loader").hide();
+}else {
 
 
  $.ajax({
@@ -283,7 +285,7 @@
                       }
                       else{
 
-                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
 
                      }
 
@@ -295,15 +297,17 @@
 
                    }
                  })
-.done(function(reuslt) {
+ .done(function(reuslt) {
 
-})
-.fail(function() {
+ })
+ .fail(function() {
   console.log("error");
 })
-.always(function() {
+ .always(function() {
   console.log("complete");
 });
+
+}
 
 
 }
@@ -320,6 +324,10 @@ function topic(){
  $("#loader").show();
  $("#audioContent ul").empty();
  $("#videoContent ul").empty();
+
+ if(topicName==="বিষয় নির্বাচন"){
+  $("#loader").hide();
+}else {
 
 
 
@@ -413,7 +421,7 @@ function topic(){
                       }
                       else{
 
-                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
 
                      }
 
@@ -425,15 +433,16 @@ function topic(){
 
                    }
                  })
-.done(function(reuslt) {
+ .done(function(reuslt) {
 
-})
-.fail(function() {
+ })
+ .fail(function() {
   console.log("error");
 })
-.always(function() {
+ .always(function() {
   console.log("complete");
 });
+}
 
 
 }

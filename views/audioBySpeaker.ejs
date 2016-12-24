@@ -7,101 +7,101 @@
    <div style="height: 300px; background-image: url(/images/mosque.jpg);"></div>
 
    <br>
-  
+   
 
  </div>
-  <div class="col-sm-8 text-left">
-     <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
-    <br>
-  
-
-
-
-     <div class="form-group text-center">
-      <div class="col-md-6 col-md-offset-3">               
-       <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
-          <option >বক্তা নির্বাচন করুন</option>
-          <option >ড. যাকির নায়েক</option>
-          <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
-          <option >শাইখ মতিউর রহমান মাদানী</option>
-          <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
-          <option >মুযাফফর বিন মুহসিন</option>
-          <option >সিফাত হাসান</option>
-          <option >শাইখ আমানুল্লাহ মাদানী</option>
-          <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
-          <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
-          <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
-          <option >ড. মনজুরে ইলাহী</option>
-          <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
-          <option >অন্যান্য </option>
-        </select>
-
-      </div>
-      </div>
+ <div class="col-sm-8 text-left">
+   <h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
+   <br>
    
 
 
-    <br>
-    <br>
-    <br>
 
-    <div id="audioContent">
+   <div class="form-group text-center">
+    <div class="col-md-6 col-md-offset-3">               
+     <select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+      <option >বক্তা নির্বাচন করুন</option>
+      <option >ড. যাকির নায়েক</option>
+      <option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
+      <option >শাইখ মতিউর রহমান মাদানী</option>
+      <option >শাইখ শহীদুল্লাহ খান মাদানী</option>
+      <option >মুযাফফর বিন মুহসিন</option>
+      <option >সিফাত হাসান</option>
+      <option >শাইখ আমানুল্লাহ মাদানী</option>
+      <option >ড. মুহাম্মাদ সাইফুল্লাহ</option>
+      <option >মুফতি কাজী মুহাম্মাদ ইব্রাহীম</option>
+      <option >ড. মোহাম্মদ মুছলে উদ্দিন</option>       
+      <option >ড. মনজুরে ইলাহী</option>
+      <option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
+      <option >অন্যান্য </option>
+    </select>
+
+  </div>
+</div>
+
+
+
+<br>
+<br>
+<br>
+
+<div id="audioContent">
+  
+  <ul>
+   <% for(var i=0; i<data.length; i++) { %>
+
+   <li>
     
-    <ul>
-     <% for(var i=0; i<data.length; i++) { %>
+     বক্তাঃ <%= data[i].name %>
+     <br>
+     বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
+     <br>
+     ID: <%= data[i].id %>
+     <br>
+     <audio controls>
+      <source src="<%= data[i].url %>" type="audio/ogg">
+        <source src="<%= data[i].url %>" type="audio/mpeg">
+         Your browser does not support the audio element.
+       </audio>
 
-      <li>
-        
-       বক্তাঃ <%= data[i].name %>
+
        <br>
-          বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
        <br>
-       ID: <%= data[i].id %>
        <br>
-       <audio controls>
-        <source src="<%= data[i].url %>" type="audio/ogg">
-          <source src="<%= data[i].url %>" type="audio/mpeg">
-           Your browser does not support the audio element.
-         </audio>
+     </li>
+     <% } %>
+   </ul>
+ </div>
 
-
-         <br>
-         <br>
-         <br>
-       </li>
-       <% } %>
-     </ul>
-     </div>
-
-   </div>
-   <div class="col-sm-2 sidenav">
-   <div class="well">
+</div>
+<div class="col-sm-2 sidenav">
+ <div class="well">
    <p class="text-center"> Search By Topics<br><select id="topicName" onchange="topic()"  style="width: 95%; height: 35px;">
-      <option >বিষয় নির্বাচন</option>
-      <option value="ঈমান">ঈমান</option>
-      <option value="সালাত">সালাত</option>
-      <option value="সিয়াম">সিয়াম</option>
-      <option value="যাকাত">যাকাত</option>
-      <option value="হজ্জ">হজ্জ</option>       
-      <option value="শির্ক ">শির্ক </option>
-      <option value="বিদআত">বিদআত</option>
-      <option value="জান্নাত">জান্নাত</option>
-      <option value="জাহান্নাম">জাহান্নাম</option>
-      <option value="নেশা">নেশা</option>
-      <option value="গানবাজনা">গানবাজনা</option>
-      <option value="যেনা ব্যাভিচার">যেনা ব্যাভিচার</option>
-      <option value="সুদ">সুদ</option>
-      <option value="দয়া ও রহমত">দয়া ও রহমত</option>
-      <option value="অন্যান্য">অন্যান্য</option>
-      
-    </select> </p>
-  </div>
+    <option >বিষয় নির্বাচন</option>
+    <option value="ঈমান">ঈমান</option>
+    <option value="সালাত">সালাত</option>
+    <option value="সিয়াম">সিয়াম</option>
+    <option value="যাকাত">যাকাত</option>
+    <option value="হজ্জ">হজ্জ</option>       
+    <option value="শির্ক ">শির্ক </option>
+    <option value="বিদআত">বিদআত</option>
+    <option value="জান্নাত">জান্নাত</option>
+    <option value="জাহান্নাম">জাহান্নাম</option>
+    <option value="নেশা">নেশা</option>
+    <option value="গানবাজনা">গানবাজনা</option>
+    <option value="যেনা ব্যাভিচার">যেনা ব্যাভিচার</option>
+    <option value="সুদ">সুদ</option>
+    <option value="দয়া ও রহমত">দয়া ও রহমত</option>
+    <option value="অন্যান্য">অন্যান্য</option>
+    
+  </select> </p>
+</div>
 
-  <div class="well">
-    <p class="text-center">Apps</p>
-  </div>
+<div class="well">
+  <p class="text-center">Apps</p>
+</div>
 
-  <div class="scrollToTop">
+<div class="scrollToTop">
 
   <a id="back-to-top" href="#">
    <i class="fa fa-arrow-circle-o-up" style="font-size:50px"></i>
@@ -110,7 +110,7 @@
 
 
 
-  </div>
+</div>
 </div>
 
 <div id="loader">
@@ -180,32 +180,34 @@
 
 
 <script type="text/javascript">
-$("#loader").hide();
- function run(){
-  var name = $("#catagory").val();
+  $("#loader").hide();
+  function run(){
+    var name = $("#catagory").val();
 //  alert(name);
 window.location.assign('/audioBySpeaker/speaker/'+name);
 
- }
+}
 
- function topic(){
-    var topicName = $("#topicName").val();
+function topic(){
+  var topicName = $("#topicName").val();
 
  // window.location.replace('http://localhost:3000/api/name/'+name);  
 
    //window.location.assign('/wascatagory/audio/'+topicName);
 
- $("#loader").show();
- $("#audioContent ul").empty();
- $("#pager").remove();
+   $("#loader").show();
+   $("#audioContent ul").empty();
+   $("#pager").remove();
+
+   if(topicName==="বিষয় নির্বাচন"){
+    $("#loader").hide();
+  }else {
 
 
-
-
- $.ajax({
-  url: '/wascatagory/audio/'+topicName,
-  type: 'GET',
-  dataType: 'json',
+   $.ajax({
+    url: '/wascatagory/audio/'+topicName,
+    type: 'GET',
+    dataType: 'json',
                     //data: $("#email").val(),
                     //data: JSON.stringify(content),
                     headers: {
@@ -214,7 +216,7 @@ window.location.assign('/audioBySpeaker/speaker/'+name);
                     success: function(dataValue, textStatus, jQxhr) {
                       $("#loader").hide();
                       var audioValue = dataValue.audioData;
-                     
+                      
 
                       if(audioValue.length>0)
                       {
@@ -260,11 +262,11 @@ window.location.assign('/audioBySpeaker/speaker/'+name);
 
 
 
-                       
+                        
                       }
                       else{
 
-                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
 
                      }
 
@@ -276,17 +278,17 @@ window.location.assign('/audioBySpeaker/speaker/'+name);
 
                    }
                  })
-.done(function(reuslt) {
+   .done(function(reuslt) {
 
-})
-.fail(function() {
-  console.log("error");
-})
-.always(function() {
-  console.log("complete");
-});
+   })
+   .fail(function() {
+    console.log("error");
+  })
+   .always(function() {
+    console.log("complete");
+  });
 
-
+ }
 }
 
 

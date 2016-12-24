@@ -2,21 +2,20 @@
 <div class="container">
 	<div class="row content">
 		<div class="col-sm-2 sidenav">
-			<p class="text-left"><b>Top islamic Web App</b></p>
-			<p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="https://quran.com/" target="_blank">Al Quran</a></i></p>
-			<p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://quranicaudio.com/" target="_blank">QuranicAudio</a></i></p>
-			<p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tanzil.net/" target="_blank">Recite Al Quran</a></i></p>
-			<p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://at-tahreek.com/" target="_blank">Islamic Paper</a></i></p>
-			<p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://tawhidmedia.com/" target="_blank">Tawhidmedia</a></i></p>
-			<p><i class="fa fa-external-link" style="font-size:16px">&nbsp<a href="http://www.banglaquranhadith.com/" target="_blank">Banglaquranhadith</a></i></p>
+			
+			<div style="height: 300px; background-image: url(/images/mosque.jpg);"></div>
+
+			<br>
+
 		</div>
 		<div class="col-sm-8 text-left">
 			<h2 class="headerTitle"><p class="text-center">Islam will Enter Every Home</p></h2>
 			<br>
 
 			<div class="form-group">
-				<div class="col-md-4 col-md-offset-4">              
-					<select id="catagory" onchange="run()" style="width: 230px; height: 25px;">
+				<div class="col-md-4 col-md-offset-4">
+					<% if (lanType !="english") { %>               
+					<select id="catagory" onchange="run()" disabled="disabled" style="width: 230px; height: 25px;">
 						<option >বক্তা নির্বাচন করুন</option>
 						<option >ড. যাকির নায়েক</option>
 						<option >আব্দুর রায্‌যাক বিন ইউসুফ</option>
@@ -32,6 +31,18 @@
 						<option >মুহাম্মাদ আসাদুল্লাহ আল-গালিব</option>
 						<option >অন্যান্য </option>
 					</select>
+					<% }else{ %> 
+
+					<select id="catagory" onchange="run()" disabled="disabled" style="width: 230px; height: 25px;">
+						<option >Select Speaker Name</option>
+						<option >Ismail Menk</option>
+						<option >Dr. Zakir Naik</option>
+						<option >Nouman-Ali-Khan</option>
+						<option >Fariq Naik</option>  
+					</select>
+
+
+					<%}%>
 
 				</div>
 			</div>
@@ -49,6 +60,8 @@
 
 					<% if (wastype !="audio") { %>  
 
+					<% if (lanType !="english") { %> 
+
 					<div class="embed-responsive embed-responsive-16by9">
 						<iframe class="embed-responsive-item" src=<%=url %>></iframe>
 					</div>
@@ -58,6 +71,23 @@
 					বিষয়ঃ <a href="<%=url %>" target="_blank"><%=title %></a>
 					<br>
 
+
+					<% }else{ %> 
+
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe class="embed-responsive-item" src=<%=url %>></iframe>
+					</div>
+
+					Speaker: <%=name %>
+					<br>
+					Title: <a href="<%=url %>" target="_blank"><%=title %></a>
+					<br>
+
+
+
+					<%}%>
+
+					
 					<% }else{ %> 
 
 					বক্তাঃ <%=name %>
@@ -88,7 +118,9 @@
 				<div class="col-sm-2 sidenav">
 
 					<div class="well">
-						<p class="text-center"> Search By Topics<br><select id="topicName" onchange="topic()"  style="width: 95%; height: 35px;">
+
+						<% if (lanType !="english") { %> 
+						<p class="text-center"> Search By Topics<br><select id="topicName" onchange="topic()" disabled="disabled"  style="width: 95%; height: 35px;">
 							<option >বিষয় নির্বাচন</option>
 							<option value="ঈমান">ঈমান</option>
 							<option value="সালাত">সালাত</option>
@@ -107,6 +139,33 @@
 							<option value="অন্যান্য">অন্যান্য</option>
 
 						</select> </p>
+
+						<% }else{ %> 
+
+						<p class="text-center"> Search By Topics<br><select name="wasCatatory" id="topicName" onchange="topic()" disabled="disabled" style="width: 95%; height: 35px;">
+							<option >Select Topics</option>
+							<option value="Faith">Faith</option>
+							<option value="Salat">Salat</option>
+							<option value="Fasting">Fasting</option>
+							<option value="Zakat">Zakat</option>
+							<option value="Hajj">Hajj</option>       
+							<option value="Shirk ">Shirk</option>
+							<option value="Innovations">Innovations</option>
+							<option value="Jannat">Jannat</option>
+							<option value="Jahannam">Jahannam</option>
+							<option value="Drug">Drug</option>
+							<option value="Music">Music</option>
+							<option value="Adultery">Adultery</option>
+							<option value="Mercy">Mercy</option>
+							<option value="Bank Interest">Bank Interest</option>
+							<option value="Others">Others</option>
+
+
+						</select> </p>
+
+						<%}%>
+
+						
 					</div>
 
 					<div class="well">

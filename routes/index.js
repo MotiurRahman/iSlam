@@ -423,55 +423,6 @@ router.get('/english', function(req, res, next) {
 });
 
 
-// router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
-
-//     var currentPage = 1;
-//     if (typeof req.query.page !== 'undefined') {
-//         currentPage = +req.query.page;
-//     }
-//     var name = req.params.name;
-
-//     was.paginate({ 'name': name, 'wasType': "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
-//         if (err) {
-//             res.json(err)
-
-//         } else {
-
-//             if (result.docs.length > 0) {
-
-//                 res.render('english', {
-//                     data: result.docs,
-//                     pageSize: result.limit,
-//                     totalAudioData: result.total,
-//                     pageCount: result.pages,
-//                     currentPage: currentPage,
-//                     speakerName: name,
-//                     userInfo: req.session.admin
-//                 });
-
-//             } else {
-
-//                 res.render('english', {
-//                     data: result.docs,
-//                     layout: "layoutorg",
-//                     pageSize: result.limit,
-//                     totalAudioData: result.total,
-//                     pageCount: result.pages,
-//                     currentPage: currentPage,
-//                     speakerName: name,
-//                     userInfo: req.session.admin
-//                 });
-
-//             }
-
-
-
-//         }
-
-
-//     });
-
-// });
 
 
 
@@ -548,6 +499,10 @@ router.get('/details', function(req, res, next) {
     var Name = req.query.name;
     var Title = req.query.title;
     var wasType = req.query.type;
+    var lanType = req.query.wasType;
+
+    console.log(wasType);
+    console.log(lanType);
 
 
     res.render('details', {
@@ -555,6 +510,7 @@ router.get('/details', function(req, res, next) {
         name: Name,
         title: Title,
         wastype: wasType,
+        lanType: lanType,
         userInfo: req.session.admin
     });
 

@@ -43,7 +43,7 @@
    <li>
     Speaker: <%= data[i].name %>
     <br>
-    Title: <a href="<%= data[i].url %>" target="_blank"><%= data[i].title %></a>
+    Title: <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=video&wasType=english" target="_blank"><%= data[i].title %></a>
     <br>
     ID: <%= data[i].id %>
     <br>
@@ -163,7 +163,9 @@
 $("#loader").show();
 $("#wasContent ul").empty();
 
-
+if(name==="Select Speaker Name"){
+  $("#loader").hide();
+}else {
 
 $.ajax({
   url: '/englishVideoBySpeaker/speaker/'+name,
@@ -192,16 +194,28 @@ $.ajax({
 
                           outerDiv.append(innerDiv);
 
-                          $("#wasContent ul").append(outerDiv);
-                          
-                         $("#wasContent ul").append("Speaker:"+value[i].name+" <br>Title:"+value[i].title+" <br> ID:"+value[i]._id+" <br><br>");
+                         $("#wasContent ul").append(outerDiv);
+
+
+                          var urltitle = $("<a>"+value[i].title+"</a>");
+
+
+                          urltitle.attr("href","/details?url="+value[i].url+"&name="+value[i].name+"&title="+value[i].title+"&type=video&wasType=english");
+
+                          urltitle.attr("target","_blank");     
+
+                          $("#wasContent ul").append("Speaker:&nbsp"+value[i].name+"<br>");
+                          $("#wasContent ul").append("Title:");
+                          $("#wasContent ul").append(" ");
+                          $("#wasContent ul").append(urltitle);
+                          $("#wasContent ul").append("<br> ID:"+value[i]._id+"<br><br>"); 
 
 
                        }
                      }
                      else{
 
-                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
 
                      }
 
@@ -223,7 +237,7 @@ $.ajax({
   console.log("complete");
 });
 
-
+}
 
 }
 
@@ -235,6 +249,9 @@ function topic(){
   $("#loader").show();
 $("#wasContent ul").empty();
 
+if(topicName==="Select Topics"){
+  $("#loader").hide();
+}else {
 
 
 $.ajax({
@@ -264,16 +281,28 @@ $.ajax({
 
                           outerDiv.append(innerDiv);
 
-                          $("#wasContent ul").append(outerDiv);
-                          
-                         $("#wasContent ul").append("Speaker:"+value[i].name+" <br>Title:"+value[i].title+" <br> ID:"+value[i]._id+" <br><br>");
+                           $("#wasContent ul").append(outerDiv);
+
+
+                          var urltitle = $("<a>"+value[i].title+"</a>");
+
+
+                          urltitle.attr("href","/details?url="+value[i].url+"&name="+value[i].name+"&title="+value[i].title+"&type=video&wasType=english");
+
+                          urltitle.attr("target","_blank");     
+
+                          $("#wasContent ul").append("Speaker:&nbsp"+value[i].name+"<br>");
+                          $("#wasContent ul").append("Title:");
+                          $("#wasContent ul").append(" ");
+                          $("#wasContent ul").append(urltitle);
+                          $("#wasContent ul").append("<br> ID:"+value[i]._id+"<br><br>"); 
 
 
                        }
                      }
                      else{
 
-                       $("#showResult").show().addClass("alert alert-info").text("Was will be uploaded Soon");
+                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
 
                      }
 
@@ -295,7 +324,7 @@ $.ajax({
   console.log("complete");
 });
 
-
+}
 
 }
 
