@@ -94,7 +94,7 @@ router.get('/updateBook', checkAuthentication, function(req, res, next) {
     console.log("updateBook:" + req.session.admin);
     res.render('admin/updateBook', { userInfo: req.session.admin });
 
-}).post('/updateBook', upload.any(), function(req, res, next) {
+}).post('/updateBook', function(req, res, next) {
 
 
     var id = req.body.id;
@@ -103,11 +103,9 @@ router.get('/updateBook', checkAuthentication, function(req, res, next) {
     var bookInfo = req.body.bookInfo;
     var bookurl = req.body.bookurl;
     var bookType = req.body.bookType;
-    var imageName = req.files;
-    var bookImage = imageName[0].filename;
 
     var conditions = { "_id": id },
-        update = { $set: { "author": author, "title": title, "bookInfo": bookInfo, "bookType": bookType, "bookurl": bookurl, "bookImage": bookImage } },
+        update = { $set: { "author": author, "title": title, "bookInfo": bookInfo, "bookType": bookType, "bookurl": bookurl } },
         options = { multi: true };
 
     book.update(conditions, update, options, callback);
@@ -168,7 +166,7 @@ router.get('/:bookType', function(req, res, next) {
         currentPage = +req.query.page;
     }
 
-    book.paginate({ "bookType": bookType }, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+    book.paginate({ "bookType": bookType }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
 

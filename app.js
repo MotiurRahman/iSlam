@@ -24,7 +24,7 @@ var sess = {
     secret: 'motiur08034',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 600000 }
+    cookie: { maxAge: 6000000}
 }
 
 if (app.get('env') === 'production') {

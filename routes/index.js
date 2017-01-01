@@ -362,7 +362,7 @@ router.get('/books', function(req, res, next) {
         currentPage = +req.query.page;
     }
 
-    book.paginate({}, { page: currentPage, limit: 3, sort: { _id: -1 } }, function(err, result) {
+    book.paginate({}, { page: currentPage, limit: 10, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
 
@@ -462,25 +462,6 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
     });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

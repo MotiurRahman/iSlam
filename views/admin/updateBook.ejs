@@ -18,7 +18,7 @@
             </div>
         </div>
   
-<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data">
+<form class="form-horizontal" role="form" method="post">
     
   <div class="form-group">
       <label class="control-label col-sm-2" for="id">ID:</label>
@@ -63,20 +63,14 @@
       <div class="col-sm-10">
               
            <select name="bookType" id="bookType" style="width: 230px; height: 35px;" required="required">
-        <option value="Quran">All Quran</option>
-        <option value="Hadith">Hadith</option>
-        <option value="others">others</option>
+         <option >All</option>
+                  <option value="quran">Al Quran</option>
+                  <option value="hadith">Hadith</option>
+                  <option value="others">Others</option>
          </select>
       </div>
     </div>
 
-    <div class="form-group">
-    <label class="control-label col-sm-2" for="bookImage">Book Image:</label>
-      <div class="col-sm-10">
-        <input type="file" class="form-control" id="bookImage" name="bookImage" required>
-      </div>
-    </div>
-    
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-primary btn-lg btn-block">Update</button>
@@ -106,7 +100,7 @@
         if (id !== "") {
 
             $.ajax({
-                    url: 'http://localhost:3000/books/content_id/' + id,
+                    url: '/books/content_id/' + id,
                     type: 'get',
                     dataType: 'json',
                     //data: $("#email").val(),
