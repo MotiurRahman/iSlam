@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
-var upload = multer({ dest: __dirname + './../public/uploads/' });
+// var multer = require('multer');
+// var upload = multer({ dest: __dirname + './../public/uploads/' });
 
 //var cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }]);
 
@@ -28,7 +28,7 @@ router.get('/bookUpload', checkAuthentication, function(req, res, next) {
     res.render('admin/bookUpload', { userInfo: req.session.admin });
 
 
-}).post('/bookUpload', upload.any(), function(req, res, next) {
+}).post('/bookUpload', function(req, res, next) {
 
 
     var name = req.body.author;
@@ -36,11 +36,11 @@ router.get('/bookUpload', checkAuthentication, function(req, res, next) {
     var bookInfo = req.body.bookInfo;
     var bookurl = req.body.bookurl;
     var bookType = req.body.booktype;
-    var imageName = req.files;
-    var bookImage = imageName[0].filename;
-    console.log("bookName:" + imageName[0].filename);
-    console.log("bookType:" + bookType)
-
+    var ImageURL = req.body.bookimage;
+    // var imageName = req.files;
+    // var bookImage = imageName[0].filename;
+    // console.log("bookName:" + imageName[0].filename);
+    
 
     var book_Data = {
         author: name,
@@ -48,7 +48,7 @@ router.get('/bookUpload', checkAuthentication, function(req, res, next) {
         bookInfo: bookInfo,
         bookType: bookType,
         bookurl: bookurl,
-        bookImage: bookImage,
+        bookImage: ImageURL,
     };
 
     //res.json(was_Data)
@@ -77,7 +77,7 @@ router.get('/bookUpload', checkAuthentication, function(req, res, next) {
         if (existingBook) {
 
             if (existingBook.length > 0) {
-                res.json("Already have that Book")
+                res.json("Already have that Book:"+existingBook)
             } else {
                 UploadBook();
             }
@@ -103,9 +103,10 @@ router.get('/updateBook', checkAuthentication, function(req, res, next) {
     var bookInfo = req.body.bookInfo;
     var bookurl = req.body.bookurl;
     var bookType = req.body.bookType;
+    var bookImage = req.body.bookimage;
 
     var conditions = { "_id": id },
-        update = { $set: { "author": author, "title": title, "bookInfo": bookInfo, "bookType": bookType, "bookurl": bookurl } },
+        update = { $set: { "author": author, "title": title, "bookInfo": bookInfo, "bookType": bookType, "bookurl": bookurl, "bookImage":bookImage } },
         options = { multi: true };
 
     book.update(conditions, update, options, callback);
