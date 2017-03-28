@@ -54,7 +54,9 @@
        <br>
        বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
        <br>
+       <%if(userInfo){%>
        ID: <%= data[i].id %>
+       <% }%>  
        <br>
        <audio controls>
         <source src="<%= data[i].url %>" type="audio/ogg">
@@ -90,7 +92,10 @@
         <br>
         বিষয়ঃ <a href="/details?url=<%= videoData[i].url %>&name=<%= videoData[i].name %>&title=<%= videoData[i].title %>&type=video" target="_blank"><%= videoData[i].title %></a>
         <br>
+        <%if(userInfo){%>
         ID: <%= videoData[i].id %>
+        <% }%>  
+        
 
 
         <br>
@@ -242,68 +247,82 @@
 
 
                           $("#audioContent ul").append(urltitle_audio);
-                          $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
-                          $("#audioContent ul").append(audioDiv);
+                         
+
+                            <%if(userInfo){%>
+                              $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+                              
+                              <% }else{ %>  
+                                $("#audioContent ul").append(" <br> <br>");
+                              <%}%>
+
+                            $("#audioContent ul").append(audioDiv);
 
 
-                        }
-
-
-
-                        for (var i = 0; i < videoValue.length; i++) {
-
-                          var outerDiv = $("<div></div>");
-                          outerDiv.attr("class","embed-responsive embed-responsive-16by9");
-
-                          var innerDiv = $("<iframe src="+videoValue[i].url+"></iframe>");
-                          innerDiv.attr("class","embed-responsive-item");
-
-                          outerDiv.append(innerDiv);
-
-                          $("#videoContent ul").append(outerDiv);
-
-
-                          var urltitle = $("<a>"+videoValue[i].title+"</a>");
-
-
-                          urltitle.attr("href","/details?url="+videoValue[i].url+"&name="+videoValue[i].name+"&title="+videoValue[i].title+"&type=video");
-
-                          urltitle.attr("target","_blank");
+                          }
 
 
 
+                          for (var i = 0; i < videoValue.length; i++) {
 
-                          $("#videoContent ul").append("বক্তাঃ&nbsp"+videoValue[i].name+"<br>");
-                          $("#videoContent ul").append("বিষয়ঃ");
-                          $("#videoContent ul").append(" ");
-                          $("#videoContent ul").append(urltitle);
-                          $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
-                          
+                            var outerDiv = $("<div></div>");
+                            outerDiv.attr("class","embed-responsive embed-responsive-16by9");
 
+                            var innerDiv = $("<iframe src="+videoValue[i].url+"></iframe>");
+                            innerDiv.attr("class","embed-responsive-item");
 
-                        }
-                      }
-                      else{
+                            outerDiv.append(innerDiv);
 
-                       $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
-
-                     }
+                            $("#videoContent ul").append(outerDiv);
 
 
-                   },
-                   error: function(jqXhr, textStatus, errorThrown) {
+                            var urltitle = $("<a>"+videoValue[i].title+"</a>");
+
+
+                            urltitle.attr("href","/details?url="+videoValue[i].url+"&name="+videoValue[i].name+"&title="+videoValue[i].title+"&type=video");
+
+                            urltitle.attr("target","_blank");
 
 
 
-                   }
-                 })
- .done(function(reuslt) {
 
- })
- .fail(function() {
+                            $("#videoContent ul").append("বক্তাঃ&nbsp"+videoValue[i].name+"<br>");
+                            $("#videoContent ul").append("বিষয়ঃ");
+                            $("#videoContent ul").append(" ");
+                            $("#videoContent ul").append(urltitle);
+
+                            <%if(userInfo){%>
+                              $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
+                              <% }else{ %>  
+                                $("#videoContent ul").append("<br><br>"); 
+                              <%}%>
+
+
+
+
+                              }
+                            }
+                            else{
+
+                             $("#showResult").show().addClass("alert alert-info").text("Waz will be uploaded Soon");
+
+                           }
+
+
+                         },
+                         error: function(jqXhr, textStatus, errorThrown) {
+
+
+
+                         }
+                       })
+.done(function(reuslt) {
+
+})
+.fail(function() {
   console.log("error");
 })
- .always(function() {
+.always(function() {
   console.log("complete");
 });
 
@@ -381,7 +400,14 @@ function topic(){
                           $("#audioContent ul").append(" ");
 
                           $("#audioContent ul").append(urltitle_audio);
-                          $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+                          <%if(userInfo){%>
+                             $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+                              
+                              <% }else{ %>  
+                                $("#audioContent ul").append(" <br> <br>");
+                              <%}%>
+
+                          
                           $("#audioContent ul").append(audioDiv);
 
 
@@ -413,7 +439,13 @@ function topic(){
                           $("#videoContent ul").append("বিষয়ঃ");
                           $("#videoContent ul").append(" ");
                           $("#videoContent ul").append(urltitle);
-                          $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
+
+                           <%if(userInfo){%>
+                               $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
+                              <% }else{ %>  
+                                $("#videoContent ul").append("<br><br>"); 
+                              <%}%>
+                         
                           
 
 

@@ -56,7 +56,10 @@
      <br>
      বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=audio" target="_blank"><%= data[i].title %></a>
      <br>
-     ID: <%= data[i].id %>
+      <%if(userInfo){%>
+       ID: <%= data[i].id %>
+       <% }%>  
+      
      <br>
      <audio controls>
       <source src="<%= data[i].url %>" type="audio/ogg">
@@ -254,7 +257,14 @@ function topic(){
                           $("#audioContent ul").append(" ");
 
                           $("#audioContent ul").append(urltitle_audio);
-                          $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+
+                           <%if(userInfo){%>
+                              $("#audioContent ul").append(" <br> ID:"+audioValue[i]._id+" <br>");
+                              
+                              <% }else{ %>  
+                                $("#audioContent ul").append(" <br> <br>");
+                              <%}%>
+                          
                           $("#audioContent ul").append(audioDiv);
 
 

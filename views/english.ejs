@@ -19,7 +19,9 @@
        <option >Ismail Menk</option>
        <option >Dr. Zakir Naik</option>
        <option >Nouman-Ali-Khan</option>
-       <option >Fariq Naik</option>  
+       <option >Fariq Naik</option>
+       <option >Yasir Qadhi</option>  
+       <option >Others</option>  
      </select>
 
    </div>
@@ -45,7 +47,9 @@
     <br>
     Title: <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=video&wasType=english" target="_blank"><%= data[i].title %></a>
     <br>
-    ID: <%= data[i].id %>
+    <%if(userInfo){%>
+       ID: <%= data[i].id %>
+       <% }%>  
     <br>
     <br>
   </li>
@@ -208,7 +212,12 @@ $.ajax({
                           $("#wasContent ul").append("Title:");
                           $("#wasContent ul").append(" ");
                           $("#wasContent ul").append(urltitle);
-                          $("#wasContent ul").append("<br> ID:"+value[i]._id+"<br><br>"); 
+                          <%if(userInfo){%>
+                               $("#wasContent ul").append("<br> ID:"+value[i]._id+"<br><br>"); 
+                              <% }else{ %>  
+                                $("#wasContent ul").append("<br><br>"); 
+                              <%}%>
+                         
 
 
                        }
@@ -295,7 +304,12 @@ $.ajax({
                           $("#wasContent ul").append("Title:");
                           $("#wasContent ul").append(" ");
                           $("#wasContent ul").append(urltitle);
-                          $("#wasContent ul").append("<br> ID:"+value[i]._id+"<br><br>"); 
+                          <%if(userInfo){%>
+                               $("#wasContent ul").append("<br> ID:"+value[i]._id+"<br><br>"); 
+                              <% }else{ %>  
+                                $("#wasContent ul").append("<br><br>"); 
+                              <%}%>
+                          
 
 
                        }

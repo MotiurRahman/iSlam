@@ -53,7 +53,10 @@
         </h3>
         <p>by: <%= books[i].author %> </p>
         <p><%= books[i].bookInfo %></p>
-        <p>ID:<%= books[i]._id %></p>
+        <%if(userInfo){%>
+       <p>ID:<%= books[i]._id %></p>
+       <% }%>  
+        
         <a class="btn btn-primary" href="<%= books[i].bookurl %>" target="_blank">Download it <i class="fa fa-angle-right"></i></a>
     </div>
 </div>

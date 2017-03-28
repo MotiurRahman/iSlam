@@ -55,7 +55,9 @@
       <br>
       বিষয়ঃ <a href="/details?url=<%= data[i].url %>&name=<%= data[i].name %>&title=<%= data[i].title %>&type=video" target="_blank"><%= data[i].title %></a>
       <br>
-      ID: <%= data[i].id %>
+      <%if(userInfo){%>
+       ID: <%= data[i].id %>
+       <% }%>  
       <br>
 
       <br>
@@ -238,7 +240,12 @@ if(topicName==="বিষয় নির্বাচন"){
                           $("#videoContent ul").append("বিষয়ঃ");
                           $("#videoContent ul").append(" ");
                           $("#videoContent ul").append(urltitle);
-                          $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>"); 
+                           <%if(userInfo){%>
+                              $("#videoContent ul").append("<br> ID:"+videoValue[i]._id+"<br><br>");  
+                              <% }else{ %>  
+                                $("#videoContent ul").append("<br><br>"); 
+                              <%}%>
+                         
                           
 
 
