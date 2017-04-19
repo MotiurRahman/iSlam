@@ -139,7 +139,7 @@ router.get('/englishWas/:wasCatatory', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ "wasCatatory": catagory, "wasType": "video", "lecture": "english" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ "wasCatatory": catagory, "wasType": "video", "lecture": "english" }, { page: currentPage,sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
 
@@ -157,11 +157,11 @@ router.get('/englishWas/:wasCatatory', function(req, res, next) {
 
             res.json({
                 data: result.docs,
-                pageSize: result.limit,
-                totalVideoData: result.total,
-                pageCount: result.pages,
-                currentPage: currentPage,
-                userInfo: req.session.admin
+                // pageSize: result.limit,
+                // totalVideoData: result.total,
+                // pageCount: result.pages,
+                // currentPage: currentPage,
+                // userInfo: req.session.admin
             });
 
 

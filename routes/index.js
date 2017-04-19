@@ -426,7 +426,7 @@ router.get('/english', function(req, res, next) {
 
 
 
-router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
+router.get('/englishWasBySpeaker/speaker/:name', function(req, res, next) {
 
     var currentPage = 1;
     if (typeof req.query.page !== 'undefined') {
@@ -441,16 +441,27 @@ router.get('/englishVideoBySpeaker/speaker/:name', function(req, res, next) {
         } else {
 
 
-            res.json({
+            // res.json({
+
+            //     data: result.docs,
+            //     pageSize: result.limit,
+            //     totalAudioData: result.total,
+            //     pageCount: result.pages,
+            //     currentPage: currentPage,
+            //     speakerName: name,
+            //     userInfo: req.session.admin
+
+            // });
+
+             res.render('englishWasBySpeaker', {
 
                 data: result.docs,
                 pageSize: result.limit,
-                totalAudioData: result.total,
+                totalVideoData: result.total,
                 pageCount: result.pages,
                 currentPage: currentPage,
                 speakerName: name,
                 userInfo: req.session.admin
-
             });
 
 
