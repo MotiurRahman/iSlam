@@ -8,7 +8,7 @@ router.get('/:wasCatatory', function(req, res, next) {
     var catagory = req.params.wasCatatory;
     var video_Data;
 
-    was.find({ "wasCatatory": catagory, "wasType": "video", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, videoDocs) {
+    was.find({ "wasCatatory": catagory, "wasType": "video", "lecture": "bangla" }).sort({ _id: -1 }).exec(function(err, videoDocs) {
 
         if (err) {
             res.json(err)
@@ -17,7 +17,7 @@ router.get('/:wasCatatory', function(req, res, next) {
 
             video_Data = videoDocs;
 
-            was.find({ "wasCatatory": catagory, "wasType": "audio", "lecture": "bangla" }).sort({ _id: -1 }).limit(5).exec(function(err, docs) {
+            was.find({ "wasCatatory": catagory, "wasType": "audio", "lecture": "bangla" }).sort({ _id: -1 }).exec(function(err, docs) {
                 if (err) {
                     res.json(err);
 
@@ -62,7 +62,7 @@ router.get('/audio/:wasCatatory', function(req, res, next) {
         currentPage = +req.query.page;
     }
 
-    was.paginate({ "wasCatatory": catagory, "wasType": "audio", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ "wasCatatory": catagory, "wasType": "audio", "lecture": "bangla" }, { page: currentPage, sort: { _id: -1 } }, function(err, result) {
 
         if (err) {
             res.json(err)
@@ -103,7 +103,7 @@ router.get('/videoWas/:wasCatatory', function(req, res, next) {
     }
     var name = req.params.name;
 
-    was.paginate({ "wasCatatory": catagory, "wasType": "video", "lecture": "bangla" }, { page: currentPage, limit: 5, sort: { _id: -1 } }, function(err, result) {
+    was.paginate({ "wasCatatory": catagory, "wasType": "video", "lecture": "bangla" }, { page: currentPage, sort: { _id: -1 } }, function(err, result) {
         if (err) {
             res.json(err)
 
